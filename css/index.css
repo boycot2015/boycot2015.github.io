@@ -1,6 +1,7 @@
 *{
     margin: 0 ;
     padding: 0;
+    box-sizing: border-box;
 }
 ul,ol{
     list-style: none;
@@ -9,9 +10,60 @@ html,body{
     height: 100%;
 }
 body{
+    font-family: "隶书";
     background: darkgreen;
+}
+a{
+    text-decoration: none;
 }
 .w{
     width: 1200px;
     margin: 0 auto;
+}
+header {
+    width: 1349px;
+}
+header >img{
+    width: 100%;
+}
+header .topnav{
+    margin-top: 20px;
+    background: #f0f0f0;
+    height: 50px;
+    padding-left: 50px;
+    line-height: 50px;
+    font-size: 30px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #f0f0f0;
+}
+header .topnav a {
+    color: #333;
+    
+    letter-spacing: 5px;
+}
+header .navbar{
+    height: 60px;
+}
+header .navbar li{
+    text-align: center;
+    font-size: 20px;
+    float: left;
+    line-height: 60px;
+    width: 20%;
+}
+header .navbar li:nth-child(1){
+    color: red;
+}
+
+header .navbar li:nth-child(2){
+    color: greenyellow;
+}
+header .navbar li:nth-child(3){
+    color: skyblue;
+}
+header .navbar li:nth-child(4){
+    color: orange;
+}
+header .navbar li:nth-child(5){
+    color: purple;
 }
