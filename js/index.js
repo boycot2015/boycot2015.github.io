@@ -5,7 +5,6 @@ $(function(){
         var imgW = $('.main .swiper').width();
         timer =  setInterval(function(){
             index++;
-            console.log(imgW);          
             if(index>3){
                 $('.main .swiper .items').css('marginLeft',0);
                 index = 1;
