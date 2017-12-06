@@ -13,8 +13,16 @@ body{
     font-family: "隶书";
     background: darkgreen;
 }
+img{
+    vertical-align: middle;
+}
 a{
     text-decoration: none;
+}
+.clearfix::after{
+    content: "";
+    display: block;
+    clear: both;
 }
 .w{
     width: 1200px;
@@ -66,4 +74,49 @@ header .navbar li:nth-child(4){
 }
 header .navbar li:nth-child(5){
     color: purple;
+}
+
+.photowall {
+    margin: 30px auto;
+    background: lightcoral;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #f0f0f0;
+    transition: all 0.5s;
+}
+.photowall:hover{
+    box-shadow: 0 0 30px #f0f0f0;
+    transform: translateY(-10px);
+}
+.photowall .wall_a{
+    width: 1040px;
+    margin: 0 auto;
+    
+}
+.photowall li {
+    float: left; 
+    overflow: hidden;
+}
+.photowall li>a>img{
+    height: 100%;
+    transition: all 0.3s;
+}
+.photowall li img:hover{
+    transform: scale(1.2);
+}
+
+
+.main{
+    border-radius: 5px;
+    overflow: hidden;
+    background: yellowgreen;
+}
+.main .swiper{
+    width: 300px;
+    overflow: hidden;
+}
+.main .swiper .items{
+    width: 1500px;
+}
+.main .swiper .items a{
+    float: left;
 }

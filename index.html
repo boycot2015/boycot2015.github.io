@@ -1,23 +1,22 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <title>个人博客</title>
-  <link href="css/index.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./css/index.css">
+  <script src="./lib/jquery.min.js"></script>
   <script src="./js/index.js"></script>
-  <!--[if lt IE 9]>
-<script src="js/modernizr.js"></script>
-<![endif]-->
 </head>
 
 <body>
-  
-  <header >
+  <header>
     <img src="./images/bg.jpg" alt="">
-      <div class="topnav w">
-          <a href="http://www.1775817184@qq.com" target="_blank">潭@风的主页</a>
-        </div>
+    <div class="topnav w">
+      <a href="http://www.1775817184@qq.com" target="_blank">潭@风的博客</a>
+    </div>
     <ul class="navbar w">
       <li>主页</li>
       <li>个人信息</li>
@@ -25,165 +24,60 @@
       <li>设置</li>
       <li>关于</li>
     </ul>
-    
+
   </header>
   <div class="photowall w">
-    <ul class="wall_a">
+    <ul class="wall_a clearfix">
       <li>
         <a href="/">
           <img src="images/p01.jpg">
-          <figcaption>
-            <h2></h2>
-          </figcaption>
+          <h2></h2>
         </a>
       </li>
       <li>
         <a href="/">
           <img src="images/p02.jpg">
-          <figcaption>
-            <h2> </h2>
-          </figcaption>
+          <h2> </h2>
         </a>
       </li>
       <li>
         <a href="/">
           <img src="images/p03.jpg">
-          <figcaption>
-            <h2></h2>
-          </figcaption>
-        </a>
-      </li>
-      <li>
-        <p class="text_a">
-          <a href=""></a>
-        </p>
-      </li>
-      <li>
-        <a href="/">
-          <img src="images/p04.jpg">
-          <figcaption>
-            <h2></h2>
-          </figcaption>
-        </a>
-      </li>
-      <li>
-        <p class="text_b">
-          <a href=""></a>
-        </p>
-      </li>
-      <li>
-        <a href="/">
-          <img src="images/p05.jpg">
-          <figcaption>
-            <h2>Ϊ</h2>
-          </figcaption>
+          <h2></h2>
         </a>
       </li>
       <li>
         <a href="/">
-          <img src="images/p06.jpg">
-          <figcaption>
-            <h2></h2>
-          </figcaption>
+          <img src="images/p01.jpg">
+          <h2> </h2>
         </a>
       </li>
     </ul>
   </div>
-  <div class="about w">
-    <ul>
-      <div id="fountainG">
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-      </div>
-      <div class="about_girl w">
-        <span>
-          <a href="/">
-            <img src="images/girl.jpg">
+  <main class="main w">
+    <div class="swiper">
+      <div class="items clearfix">
+        <a href="#">
+          <img src="./images/t03.jpg" alt="">
+        </a>
+        <a href="#">
+            <img src="./images/t01.jpg" alt="">
           </a>
-        </span>
-        <p></p>
-      </div>
-      <div class="about_boy w">
-        <span>
-          <a href="/">
-            <img src="images/boy.jpg">
+        <a href="#">
+          <img src="./images/t02.jpg" alt="">
+        </a>
+        <a href="#">
+          <img src="./images/t03.jpg" alt="">
+        </a>
+        <a href="#">
+            <img src="./images/t01.jpg" alt="">
           </a>
-        </span>
-        <p></p>
       </div>
-    </ul>
-  </div>
-  <div class="blank w"></div>
-  <div class="blog w">
-    <figure>
-      <a href="/">
-        <img src="images/t01.jpg">
-      </a>
-      <p>
-        <a href="/"></a>
-      </p>
-      <figcaption></figcaption>
-    </figure>
-    <figure>
-      <a href="/">
-        <img src="images/t02.jpg">
-      </a>
-      <p>
-        <a href="/"></a>
-      </p>
-      <figcaption></figcaption>
-    </figure>
-    <figure>
-      <a href="/">
-        <img src="images/t03.jpg">
-      </a>
-      <p>
-        <a href="/"></a>
-      </p>
-      <figcaption></figcaption>
-    </figure>
-  </div>
-  <div class="blank w"></div>
-  <div class="text6"></div>
-  <div class="hope w">
-    <ul>
-      <div class="visitors">
-        <dl>
-          <dt>
-            <img src="images/s6.jpg"> </dt>
-          <dd>
-            <a href="/">DanceSmile</a>
-          </dd>
-          <dd></dd>
-        </dl>
-        <dl>
-          <dt>
-            <img src="images/s7.jpg"> </dt>
-          <dd>
-            <a href="/">С</a>
-          </dd>
-          <dd></dd>
-        </dl>
-        <dl>
-          <dt>
-            <img src="images/s8.jpg"> </dt>
-          <dd>
-            <a href="/">ִ֮</a>
-          </dd>
-          <dd></dd>
-        </dl>
-      </div>
-    </ul>
-  </div>
+    </div>
+  </main>
   <footer class="w">
     <p>Design by
-      <a href="/" target="_blank">DanceSmile</a>
+      <a href="/" target="_blank">tanfeng</a>
     </p>
   </footer>
 </body>
