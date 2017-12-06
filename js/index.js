@@ -1,8 +1,8 @@
 $(function(){
     var timer = null;
     var index = 0;
+    var imgW = $('.main .swiper').width();
     function play(){
-        var imgW = $('.main .swiper').width();
         timer =  setInterval(function(){
             index++;
             if(index>3){
