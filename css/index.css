@@ -108,12 +108,12 @@ header .navbar li:nth-child(5) a{
 
 .main{
     margin-top: 30px;
-    border-radius: 5px;
     overflow: hidden;
-    background: yellowgreen;
     position: relative;
 }
 .main .top-box{
+    background: yellowgreen;
+    border-radius: 5px;
     height: 256px;
 }
 .main .top-box  .swiper{
@@ -159,4 +159,23 @@ header .navbar li:nth-child(5) a{
 .main .top-box .beyouself:hover p:nth-child(2){
     transform: translateY(80px);
     opacity: 1;
+}
+.main .article{
+    border-radius: 5px;
+    margin-top: 30px;
+    overflow: hidden;
+    background:linear-gradient(to bottom ,skyblue,blue);
+}
+.main .article p{
+    font-family: "楷体";
+    padding: 20px;
+    font-size: 18px;
+    text-indent: 28px;
+}
+.main .article h2{
+    line-height: 50px;
+    font-size: 30px;
+    font-style: italic;
+    display: block;
+    background:linear-gradient(to right ,yellow,red);
 }
