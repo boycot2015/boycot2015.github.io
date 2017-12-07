@@ -77,7 +77,7 @@ header .navbar li:nth-child(5){
 }
 
 .photowall {
-    margin: 30px auto;
+    /* margin: 30px auto; */
     background: lightcoral;
     border-radius: 5px;
     box-shadow: 0 0 5px #f0f0f0;
