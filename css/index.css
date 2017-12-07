@@ -11,13 +11,19 @@ html,body{
 }
 body{
     font-family: "隶书";
-    background: darkgreen;
+    background: #215F39;
 }
 img{
     vertical-align: middle;
 }
 a{
     text-decoration: none;
+}
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
 }
 .clearfix::after{
     content: "";
@@ -27,9 +33,6 @@ a{
 .w{
     width: 1200px;
     margin: 0 auto;
-}
-header {
-    width: 1349px;
 }
 header >img{
     width: 100%;
@@ -46,7 +49,6 @@ header .topnav{
 }
 header .topnav a {
     color: #333;
-    
     letter-spacing: 5px;
 }
 header .navbar{
@@ -59,25 +61,24 @@ header .navbar li{
     line-height: 60px;
     width: 20%;
 }
-header .navbar li:nth-child(1){
+header .navbar li:nth-child(1) a{
     color: red;
 }
 
-header .navbar li:nth-child(2){
+header .navbar li:nth-child(2) a{
     color: greenyellow;
 }
-header .navbar li:nth-child(3){
+header .navbar li:nth-child(3) a{
     color: skyblue;
 }
-header .navbar li:nth-child(4){
+header .navbar li:nth-child(4) a{
     color: orange;
 }
-header .navbar li:nth-child(5){
+header .navbar li:nth-child(5) a{
     color: purple;
 }
 
 .photowall {
-    /* margin: 30px auto; */
     background: lightcoral;
     border-radius: 5px;
     box-shadow: 0 0 5px #f0f0f0;
@@ -106,17 +107,56 @@ header .navbar li:nth-child(5){
 
 
 .main{
+    margin-top: 30px;
     border-radius: 5px;
     overflow: hidden;
     background: yellowgreen;
+    position: relative;
 }
-.main .swiper{
+.main .top-box{
+    height: 256px;
+}
+.main .top-box  .swiper{
+    position: absolute;
+    left: 0;
+    top: 0;
     width: 300px;
     overflow: hidden;
 }
-.main .swiper .items{
-    width: 1500px;
+.main .top-box .swiper .items{
+    width: 2400px;
 }
-.main .swiper .items a{
+.main .top-box .swiper .items a{
     float: left;
+}
+.main .top-box .swiper .items a img{
+    width: 300px;
+    height: 256px;
+}
+.main .top-box .beyouself{
+    height: 256px;
+    position: relative;
+}
+.main .top-box .beyouself p{
+    font-size: 30px;
+    text-align: center;
+    padding-left: 300px;
+    line-height: 256px;
+    transition: all 1s;
+}
+.main .top-box .beyouself p:nth-child(2){
+    width: 30px;
+    position: absolute;
+    top: 0;
+    right: 100px;
+    line-height: 30px;
+    transform: translateY(-300px);
+    opacity: 0;
+}
+.main .top-box .beyouself:hover p:nth-child(1){
+    transform: translateX(-100px);
+}
+.main .top-box .beyouself:hover p:nth-child(2){
+    transform: translateY(80px);
+    opacity: 1;
 }
