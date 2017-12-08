@@ -207,4 +207,5 @@ header .navbar li:nth-child(5) a{
 .main .words{
     position: absolute;
     font-size: 24px;
+    transform-origin: left bottom;
 }

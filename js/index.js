@@ -6,15 +6,16 @@ $(function () {
         function Words(obj) {
             this.words = obj.words;
             this.colors = obj.colors;
-            this.directionArr = obj.directionArr;
             this.Dom = $(obj.selector);
             var that = this;
             this.click = $('body').click(function (e) {
-                var angle = Math.floor(Math.random() * 180);            
+                var angel = Math.floor(Math.random() * 360);            
                 var radom = Math.floor(Math.random() * this.words.length - 1);
                 var radomColor = this.colors[Math.floor(Math.random() * this.colors.length - 1)];
-                var direction1 = this.directionArr[Math.floor(Math.random() * 2)];
-                var direction2 = this.directionArr[Math.floor(Math.random() * 2)];
+                var direction1 = '';
+                var direction2 = '';
+                direction1 = angel>90&&angel<270?'-':0;
+                direction2 = angel>0&&angel<180?'-':0;
                 var x = e.pageX;
                 var y = e.pageY;
                 var left = direction1 >= 0 ? direction1 + (50 + x) : x - 50;
@@ -24,8 +25,7 @@ $(function () {
                     left: x,
                     top: y,
                     opacity: 1,
-                    marginLeft: 0,
-                    transform: 'rotate(' + angle + 'deg) scale(1)',
+                    transform: 'rotate(' + angel + 'deg) scale(1.5)',
                     color: radomColor
                 });
                 this.Dom.stop().animate({
