@@ -8,9 +8,9 @@ $(function () {
             this.colors = obj.colors;
             this.directionArr = obj.directionArr;
             this.Dom = $(obj.selector);
-            this.angle = Math.floor(Math.random() * 180);
             var that = this;
             this.click = $('body').click(function (e) {
+                var angle = Math.floor(Math.random() * 180);            
                 var radom = Math.floor(Math.random() * this.words.length - 1);
                 var radomColor = this.colors[Math.floor(Math.random() * this.colors.length - 1)];
                 var direction1 = this.directionArr[Math.floor(Math.random() * 2)];
@@ -25,7 +25,7 @@ $(function () {
                     top: y,
                     opacity: 1,
                     marginLeft: 0,
-                    transform: 'rotate(' + this.angle + 'deg) scale(1)',
+                    transform: 'rotate(' + angle + 'deg) scale(1)',
                     color: radomColor
                 });
                 this.Dom.stop().animate({
