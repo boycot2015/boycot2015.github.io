@@ -274,3 +274,15 @@ header .navbar li:nth-child(5) a{
     float: left;
     margin-left: 200px;
 }
+.footer{
+    height: 150px;
+    
+}
+.footer p{
+    text-align: center;
+    font-size: 30px;
+    line-height: 60px;
+}
+.footer p a{
+    color: #fff;
+}
