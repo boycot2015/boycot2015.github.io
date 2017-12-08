@@ -24,6 +24,7 @@ $(function () {
                 this.Dom.css({
                     left: x,
                     top: y,
+                    display:'block',
                     opacity: 1,
                     transform: 'rotate(' + angel + 'deg) scale(1.5)',
                     color: radomColor
@@ -32,16 +33,22 @@ $(function () {
                     'opacity': 0,
                     left: left,
                     top: top
-                }, 1000);
+                }, 1000,function(){                    
+                    $(this).css('display','none');
+                });
+                
                 // $('body').html()+=;
                 // console.log(x,y,left,top);
             }.bind(that))
         }
         var option = {
-            words: ['html', 'css', 'javascript', 'python', 'java', 'H5C3', 'angular.js', 'node.js'],
+            words: ['html', 'css', 'javascript', 'python', 
+            'java', 'H5C3', 'angular.js', 'node.js','handler',
+            'processor','desktop',' exceed',
+            ' layout',' suggest','	convenient'],
             colors: ['green', 'red', 'yellow', 'pink', 'skyblue', 'blue', 'orange', 'tomato'],
             directionArr: [0, '-'],
-            selector: '.main .words'
+            selector: '.words'
         }
         new Words(option);
     }
@@ -53,20 +60,21 @@ $(function () {
         var timer = null;
         var index = 0;
         var imgW = $('.main .swiper').width();
-        var maxindex = $('.main .swiper .items a').length - 2;
-        console.log(maxindex);
+        var maxindex = $('.main .swiper .items a').length - 4;
+        // console.log(maxindex);
 
         function play() {
             timer = setInterval(function () {
                 index++;
                 if (index > maxindex) {
-                    $('.main .swiper .items').css('marginLeft', 0);
-                    index = 1;
+                    index=0;
+                    // $('.main .swiper .items').css('marginLeft', 0);
+                    // index = 1;
                 }
                 $('.main .swiper .items').animate({
                     marginLeft: (-imgW * index)
                 }, 500);
-            }, 2000);
+            }, 3000);
         }
         play();
     }
@@ -74,6 +82,9 @@ $(function () {
     //tab栏切换变色 
     $('.navbar li a').click(function (e) {
         e.preventDefault();
+        var idx = $(this).parent().index();
+        // $('body').click(null);
         $(this).parent().addClass('active').siblings().removeClass('active');
+        $('.main .slide_box').animate({marginLeft:-idx*$('.main').width()});
     })
 })

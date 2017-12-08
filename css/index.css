@@ -100,8 +100,10 @@ header .navbar li:nth-child(4) a{
 header .navbar li:nth-child(5) a{
     color: purple;
 }
-
-.main .photowall {
+.main {
+    overflow: hidden;
+}
+.main .slide_box .section1 .photowall {
     /* position: absolute; */
     background: lightcoral;
     border-radius: 5px;
@@ -109,67 +111,73 @@ header .navbar li:nth-child(5) a{
     box-shadow: 0 0 5px #f0f0f0;
     transition: all 0.5s;
 }
-.main .photowall:hover{
+.main .slide_box {
+    width: 6740px;
+    transition: all 1s cubic-bezier(0.6, -0.28, 0.74, 0.05);;
+}
+.main .slide_box .section1 .photowall:hover{
     box-shadow: 0 0 30px #f0f0f0;
     transform: translateY(-10px);
 }
-.main .photowall .wall_a{
+.main .slide_box .section1 .photowall .wall_a{
     width: 1040px;
     margin: 0 auto;
+    margin-top: 30px;
     
 }
-.main .photowall li {
+.main .slide_box .section1 .photowall li {
     float: left; 
     overflow: hidden;
 }
-.main .photowall li>a>img{
+.main .slide_box .section1 .photowall li>a>img{
     height: 100%;
     transition: all 0.3s;
 }
-.main .photowall li img:hover{
+.main .slide_box .section1 .photowall li img:hover{
     transform: scale(1.2);
 }
 
 
-.main{
-    margin-top: 30px;
+.main .slide_box .section1{
     overflow: hidden;
 }
-.main .top-box{
+.main .slide_box .section1 .top-box{
     background: yellowgreen;
     border-radius: 5px;
     position: relative;
+    overflow: hidden;
     height: 256px;
 }
-.main .top-box  .swiper{
+.main .slide_box .section1 .top-box  .swiper{
     position: absolute;
     left: 0;
+    /* overflow: hidden; */
     top: 0;
     width: 300px;
-    overflow: hidden;
 }
-.main .top-box .swiper .items{
+.main .slide_box .section1 .top-box .swiper .items{
     width: 2400px;
+    /* transition: all 2s ease; */
 }
-.main .top-box .swiper .items a{
+.main .slide_box .section1 .top-box .swiper .items a{
     float: left;
 }
-.main .top-box .swiper .items a img{
+.main .slide_box .section1 .top-box .swiper .items a img{
     width: 300px;
     height: 256px;
 }
-.main .top-box .beyouself{
+.main .slide_box .section1 .top-box .beyouself{
     height: 256px;
     position: relative;
 }
-.main .top-box .beyouself p{
-    font-size: 30px;
+.main .slide_box .section1 .top-box .beyouself p{
+    font-size: 50px;
     text-align: center;
-    padding-left: 300px;
     line-height: 256px;
     transition: all 1s;
+    color: limegreen;
 }
-.main .top-box .beyouself p:nth-child(2){
+.main .slide_box .section1 .top-box .beyouself p:nth-child(2){
     width: 30px;
     position: absolute;
     top: 0;
@@ -178,34 +186,91 @@ header .navbar li:nth-child(5) a{
     transform: translateY(-300px);
     opacity: 0;
 }
-.main .top-box .beyouself:hover p:nth-child(1){
+.main .slide_box .section1 .top-box .beyouself:hover p:nth-child(1){
     transform: translateX(-100px);
 }
-.main .top-box .beyouself:hover p:nth-child(2){
+.main .slide_box .section1 .top-box .beyouself:hover p:nth-child(2){
     transform: translateY(80px);
     opacity: 1;
 }
-.main .article{
+.main .slide_box .section1 .article{
     border-radius: 5px;
     margin-top: 30px;
     overflow: hidden;
     background:linear-gradient(to bottom ,skyblue,blue);
 }
-.main .article p{
+.main .slide_box .section1 .article p{
     font-family: "楷体";
     padding: 20px;
     font-size: 18px;
     text-indent: 28px;
+    color: #f0f0f0;
 }
-.main .article h2{
+.main .slide_box .section1 .article h2{
     line-height: 50px;
     font-size: 30px;
     font-style: italic;
     display: block;
     background:linear-gradient(to right ,yellow,red);
 }
-.main .words{
+ .words{
     position: absolute;
     font-size: 24px;
+    z-index: 99;
     transform-origin: left bottom;
+}
+.section2{
+    background: yellowgreen;
+    height: 500px;
+    width: 1200px;
+    border-radius: 5px;
+}
+.section3{
+    background: skyblue;
+    height: 500px;
+    width: 1200px;
+    border-radius: 5px;
+}
+.section4{
+    background: orange;
+    height: 500px;
+    width: 1200px;
+    border-radius: 5px;
+}
+.section5{
+    background: purple;
+    height: 500px;
+    width: 1200px;
+    border-radius: 5px;
+}
+
+.section2 .about-me{
+   margin: 20px; 
+}
+.section2 .about-me li{
+    line-height: 50px;
+    height: 50px;
+    margin: 10px 0;
+    padding-bottom: 60px;
+    border-bottom: 2px solid darkgoldenrod;
+}
+.section2 .about-me li button{
+    width: 120px;
+    height: 50px;
+    float: left;
+    background-color: #fff;
+    border: none;
+    border-radius: 5px;
+    color: #333;
+    font-size: 16px;
+    transition: all 0.5s;
+}
+.section2 .about-me li button:hover{
+    background-color: orangered;
+    color: #fff;
+}
+.section2 .about-me li span{
+    font-size: 20px;
+    float: left;
+    margin-left: 200px;
 }
