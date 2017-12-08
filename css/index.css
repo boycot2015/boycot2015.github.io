@@ -14,7 +14,7 @@ body{
     background: #215F39;
 }
 img{
-    vertical-align: middle;
+    vertical-align: top;
 }
 a{
     text-decoration: none;
@@ -50,6 +50,9 @@ header .topnav{
 header .topnav a {
     color: #333;
     letter-spacing: 5px;
+}
+header .topnav a img{
+    width: 50px;
 }
 header .navbar{
     height: 60px;
