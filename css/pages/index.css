@@ -34,8 +34,35 @@ a{
     width: 1200px;
     margin: 0 auto;
 }
+
+/* 头部标题 */
+header .main-title {
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    text-align: center;
+}
+header .main-title .txt-title {
+    font-size: 36px;
+    color: rgba(0, 255, 42,0.8);
+    margin-bottom: 30px;
+}
+header .main-title .title-desc{
+    font-size: 20px;
+}
+header .main-title .title-desc i {
+    color: red;
+}
+header .main-title .title-desc i:nth-child(2) {
+    color: green;
+}
+header .main-title .title-desc i:nth-child(3) {
+    color: blue;
+}
+
 header >img{
     width: 100%;
+    min-width: 1200px;
 }
 header .topnav{
     margin-top: 20px;
@@ -55,16 +82,17 @@ header .topnav a img{
     width: 50px;
 }
 header .navbar{
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     height: 60px;
+    position: relative;
+    z-index: 99;
 }
 header .navbar li{
     text-align: center;
     font-size: 20px;
     float: left;
     line-height: 60px;
-    width:18%;
-    margin: 0 1%;
+    margin: 0 4%;
     border-bottom: 2px solid transparent;
     transition: all 0.5s;
 }
@@ -104,7 +132,7 @@ header .navbar li:nth-child(5) a{
     overflow: hidden;
 }
 .main .slide_box .section1 .photowall {
-    /* position: absolute; */
+    position: relative;
     background: lightcoral;
     border-radius: 5px;
     margin-bottom: 30px;
@@ -116,13 +144,12 @@ header .navbar li:nth-child(5) a{
     transition: all 1s cubic-bezier(0.6, -0.28, 0.74, 0.05);;
 }
 .main .slide_box .section1 .photowall:hover{
-    box-shadow: 0 0 30px #f0f0f0;
-    transform: translateY(-10px);
+    box-shadow: 0 0 10px #f0f0f0;
+    transform: translateY(10px);
 }
 .main .slide_box .section1 .photowall .wall_a{
     width: 1040px;
     margin: 0 auto;
-    margin-top: 30px;
     
 }
 .main .slide_box .section1 .photowall li {
@@ -180,9 +207,9 @@ header .navbar li:nth-child(5) a{
 .main .slide_box .section1 .top-box .beyouself p:nth-child(2){
     width: 30px;
     position: absolute;
-    top: 0;
+    top: -40px;
     right: 100px;
-    line-height: 30px;
+    line-height: 60px;
     transform: translateY(-300px);
     opacity: 0;
 }
@@ -273,16 +300,4 @@ header .navbar li:nth-child(5) a{
     font-size: 20px;
     float: left;
     margin-left: 200px;
-}
-.footer{
-    height: 150px;
-    
-}
-.footer p{
-    text-align: center;
-    font-size: 30px;
-    line-height: 60px;
-}
-.footer p a{
-    color: #fff;
 }

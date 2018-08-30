@@ -1,0 +1,107 @@
+@charset 'utf-8';
+html {
+    width: 100%;
+    height: 100%
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-image: -webkit-linear-gradient(90deg, #395ecb 0%, #3657be 35%, #242161 75%, #1a0531 100%);
+    background-image: -moz-linear-gradient(90deg, #395ecb 0%, #3657be 35%, #242161 75%, #1a0531 100%);
+    background-image: -ms-linear-gradient(90deg, #395ecb 0%, #3657be 35%, #242161 75%, #1a0531 100%);
+    background-image: linear-gradient(0deg, #395ecb 0%, #3657be 35%, #242161 75%, #1a0531 100%);
+    perspective: 1e3px
+}
+
+.bg0 {
+    width: 50px;
+    height: 50px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: url(../../images/bg0.png) no-repeat center center;
+    background-size: 150%
+}
+
+.bg1 {
+    width: 100%;
+    height: 100%;
+    background: url(../../images/bg1.png) no-repeat center center
+}
+.hx-box {
+    top: 20%;
+    left: 10%;
+    width: 100px;
+    height: 100px;
+    transform-style: preserve-3d;
+    transform: translate(-50%, -150%) rotateY(75deg);
+}
+
+.hx-box ul {
+    width: 100px;
+    height: 100px;
+    transform-style: preserve-3d;
+    animation: hxz 20s linear infinite;
+}
+
+@keyframes hxz {
+    0% {
+        transform: rotateX(0deg)
+    }
+    100% {
+        transform: rotateX(-360deg)
+    }
+}
+
+.hx-box ul li {
+    width: 100px;
+    height: 100px;
+}
+
+.hx-box ul li span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 4px solid #2fc271;
+    border-radius: 1e3px;
+    background: url(../../images/hx.png) no-repeat center center;
+    background-size: 100% 100%;
+    animation: hx 10s linear infinite
+}
+
+@keyframes hx {
+    0% {
+        transform: rotate(0deg);
+        border-color: #14cedb;
+    }
+    20% {
+        transform: rotate(72deg);
+        border-color: #b12fc2;
+    }
+    40% {
+        transform: rotate(144deg);
+        border-color: #f0e10f;
+    }
+    60% {
+        transform: rotate(216deg);
+        border-color: #e63d1f;
+    }
+    80% {
+        transform: rotate(288deg);
+        border-color: #2816c5;
+    }
+    100% {
+        transform: rotate(360deg);
+        border-color: #14cedb;
+    }
+}
+
+.hx-k2 {
+    transform: rotateX(60deg) rotateZ(60deg)
+}
+
+.hx-k3 {
+    transform: rotateX(-60deg) rotateZ(-60deg)
+}
