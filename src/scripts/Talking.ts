@@ -1,5 +1,5 @@
 
-import vh from 'vh-plugin'
+import { Toast } from '@/utils/Toast'
 import { fmtDate } from '@/utils/index'
 import { $GET } from '@/utils/index'
 // 图片懒加载
@@ -24,7 +24,7 @@ const TalkingInit = async (data: any, render?: (data: any) => any, staticData?: 
     // 图片懒加载
     LzImgInit();
   } catch {
-    vh.Toast('获取数据失败')
+    Toast('获取数据失败')
   }
 }
 

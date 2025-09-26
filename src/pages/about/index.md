@@ -64,7 +64,7 @@ type: "about"
 
 ## 小站点
 
-|     主&emsp;页      |       <https://nav.boycot.top>     
+|     主&emsp;页      |       <https://boycot2015.github.io>     
 | :-----------------: | :-------------------------------: |
 |   **博&emsp;客**    |    **<https://www.boycot.top>**    |
 |  **Web&emsp;API**   |    **<https://api.boycot.top>**    |

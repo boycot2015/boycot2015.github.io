@@ -25,9 +25,9 @@ const getTags = () => {
   return Object.entries(tagList).sort((a: any, b: any) => b[1] - a[1]);
 }
 
-// 获取推荐文章 (给文章添加 recommend: true 字段)
+// 获取推荐文章 (给文章添加 recommend: true && hide: false && draft: false 字段)
 const getRecommendArticles = () => {
-  const recommendList = posts.filter(i => i.data.recommend);
+  const recommendList = posts.filter(i => i.data.recommend && !i.data.hide && !i.data.draft);
   return (recommendList.length ? recommendList : posts.slice(0, 6)).map(i => ({ title: i.data.title, date: i.data.date, id: i.data.id }))
 };
 

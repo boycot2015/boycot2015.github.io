@@ -1,4 +1,4 @@
-import vh from 'vh-plugin'
+import { Toast } from '@/utils/Toast'
 import { $GET } from '@/utils/index'
 // 图片懒加载
 import LzImgInit from "@/scripts/LazyImg";
@@ -21,7 +21,7 @@ const LinksInit = async (data: any, render?: (data: any) => any, staticData?: an
     // 图片懒加载
     LzImgInit();
   } catch {
-    vh.Toast('获取数据失败')
+    Toast('获取数据失败')
   }
 }
 

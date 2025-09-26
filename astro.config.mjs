@@ -17,7 +17,10 @@ import swup from '@swup/astro';
 // https://astro.build/config
 export default defineConfig({
 	site: SITE_INFO.Site,
-	build: { assets: 'static' },
+	// base: './',
+	build: {
+		// assets: 'static'
+	},
 	integrations: [swup({
 		theme: false,
 		animationClass: "byt-animation-",
