@@ -1,0 +1,5 @@
+---
+const { slotID, className } = Astro.props;
+---
+
+<div class={`byt-ad ${className}`} set:html={slotID} />

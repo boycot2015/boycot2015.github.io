@@ -1,0 +1,23 @@
+---
+import { getDescription, fmtTime } from "@/utils/index";
+const { post } = Astro.props;
+// 获取文章的摘要
+const description = getDescription(post);
+// 获取封面图
+import getCover from "@/utils/getCover";
+const ARTICLE_COVER: string = await getCover(post.data.cover);
+// 文章Item组件样式
+import "./ArticleCard.less";
+---
+
+<article class={`byt-article-item byt-animation byt-animation-init byt-article-link${post.data.top ? " active" : ""}`}>
+	<section class="byt-article-banner"><img src="/assets/images/lazy-loading.webp" data-byt-lz-src={ARTICLE_COVER} alt={post.data.title} /></section>
+	<header>
+		<h3><a class={`byt-article-cat byt-cat-${post.data.categories}`} href={`/categories/${post.data.categories}`}>{post.data.categories}</a><time>{fmtTime(post.data.date)}</time></h3>
+		<h1 class="title"><a class="byt-ellipsis" href={`/article/${post.data.id||post.data.title}`}>{post.data.title}</a></h1>
+	</header>
+	<h2 class="byt-article-excerpt byt-ellipsis line-2">{description}</h2>
+	<h4 class="byt-article-taglist byt-ellipsis">
+		{post.data.tags?.map((tag: string) => <a href={`/tag/${tag}`}>{tag}</a>)}
+	</h4>
+</article>
