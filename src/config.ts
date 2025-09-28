@@ -85,15 +85,13 @@ export default {
   },
   // DNS预解析地址
   DNSOptimization: [
-    'https://i0.wp.com',
     'https://cn.cravatar.com',
-    'https://analytics.vvhan.com',
-    'https://vh-api.4ce.cn',
-    'https://registry.npmmirror.com',
-    'https://pagead2.googlesyndication.com'
+    'https://registry.npmmirror.com'
   ],
-  // 博客音乐组件解析接口
-  vhMusicApi: 'https://vh-api.4ce.cn/blog/meting',
+  // 博客音乐组件解析接口 metting-js https://api.i-meto.com/meting/api
+  musicApi: 'https://api.i-meto.com/meting/api',
+  // 博客音乐组件是否开启
+  musicBoxShow: true,
   // 评论组件（只允许同时开启一个）
   Comment: {
     // Twikoo 评论
@@ -109,7 +107,11 @@ export default {
     }
   },
   // Analytics 统计
-  Analytics: { enable: true, server: 'https://analytics.vvhan.com', siteId: 'Hello-boycotHexoBlog' },
+  Analytics: {
+    enable: false,
+    server: '',
+    siteId: ''
+  },
   // Google 广告
   GoogleAds: {
     ad_Client: '', //ca-pub-xxxxxx

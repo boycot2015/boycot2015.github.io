@@ -14,7 +14,7 @@ import getCover from "@/utils/getCover";
 const ARTICLE_COVER: string = await getCover(post.data.cover);
 // 页面 Info
 import SITE_CONFIG from "@/config";
-const { Site, Title, Author, GoogleAds } = SITE_CONFIG;
+const { Site, Title, Author, GoogleAds, HomeBanner } = SITE_CONFIG;
 // 处理文章内容
 const description = getDescription(post);
 const { Content, remarkPluginFrontmatter } = await render(post);
@@ -55,6 +55,8 @@ import "@/styles/ArticleBase.less";
 			</div>
 		</header>
 		<main>
+			<!-- 音乐组件 -->
+			{post.data.music && <div class="byt-node byt-music" data-config={JSON.stringify({ type: post.data.music?.type, server: post.data.music?.server, id: post.data.music?.id })}></div>}
 			<Content />
 			<section class="tag-list">
 				{

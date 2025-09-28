@@ -3,7 +3,7 @@ title: NextJS入门指南
 date: "2025-02-17"
 categories: 框架
 tags: ['NextJS', 'javascript']
-img: https://svgl.app/library/nextjs_logo_light.svg
+cover: https://svgl.app/library/nextjs_logo_light.svg
 ai: true
 ---
 > 本文由ai自动生成，仅供参考。

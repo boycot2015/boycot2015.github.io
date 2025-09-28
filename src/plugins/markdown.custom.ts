@@ -59,7 +59,7 @@ const addClassNames = () => {
         node.properties.src = '/assets/images/lazy-loading.webp';
         // 处理 section 标签
       } else if (node.tagName === 'section') {
-        if (node.properties.class && node.properties.class.includes('byt-vhVideo')) {
+        if (node.properties.class && node.properties.class.includes('byt-video')) {
           node.children = [{ type: 'element', tagName: 'section', properties: { class: 'byt-space-loading' }, children: [{ type: 'element', tagName: 'span' }, { type: 'element', tagName: 'span' }, { type: 'element', tagName: 'span' }] }];
         }
       }

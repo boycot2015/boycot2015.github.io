@@ -16,6 +16,11 @@ const blog = defineCollection({
 		recommend: z.boolean().optional(),
 		hide: z.boolean().optional(),
 		draft: z.boolean().optional(),
+		music: z.object({
+			type: z.string().optional(),
+			server: z.string().optional(),
+			id: z.union([z.string(), z.number()]).optional()
+		}).optional(),
 		top: z.boolean().optional()
 	}),
 });

@@ -2,8 +2,8 @@
 title: 断点续传与个人网盘系统的前后端设计
 date: 2020-05-05
 desc: 如何实现一个带有断点续传、秒传，文件访问鉴权功能的个人网盘系统
-img: https://images.unsplash.com/photo-1569235186275-626cb53b83ce?w=768
-thumbImg: https://images.unsplash.com/photo-1569235186275-626cb53b83ce?w=240
+cover: https://images.unsplash.com/photo-1569235186275-626cb53b83ce?w=768
+thumbcover: https://images.unsplash.com/photo-1569235186275-626cb53b83ce?w=240
 ---
 
 ## 功能设计

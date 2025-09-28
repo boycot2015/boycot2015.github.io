@@ -4,7 +4,7 @@ date: "2025-02-17"
 ai: true
 categories: 框架
 tags: ['NestJS', 'javascript']
-img: https://nestjs.com/header.e5c9eff6.webp
+cover: https://nestjs.com/header.e5c9eff6.webp
 ---
 > 本文由ai自动生成，仅供参考。
 

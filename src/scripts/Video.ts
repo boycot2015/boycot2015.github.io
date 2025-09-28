@@ -4,7 +4,7 @@ declare const DPlayer: any;
 declare const Hls: any;
 // 初始化视频播放器
 export default async (videoList: any[]) => {
-  const videoDOM: any = document.querySelectorAll(".byt-node.byt-vhVideo");
+  const videoDOM: any = document.querySelectorAll(".byt-node.byt-video");
   if (videoDOM.length === 0) return;
   // 载入依赖
   if (typeof Hls === "undefined") await LoadScript("https://registry.npmmirror.com/hls.js/1.5.20/files/dist/hls.min.js");
