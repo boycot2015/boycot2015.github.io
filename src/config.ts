@@ -63,6 +63,9 @@ export default {
     { text: '关于', link: '/about', icon: 'Nav_about' },
     { text: 'API', link: 'https://api-docs.boycot.top/', target: true, icon: 'Nav_link' },
   ],
+  NavsShow: {
+    position: 'center', // 导航栏位置 center | right, 默认 center
+  },
   // 侧边栏个人网站
   WebSites: [
     // 仅支持 SVG 且 SVG 需放在 public/assets/images/svg/ 目录下，填入文件名即可 <不需要文件后缀名>（封装了 SVG 组件 为了极致压缩 SVG）

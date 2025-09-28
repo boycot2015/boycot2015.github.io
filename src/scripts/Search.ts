@@ -44,7 +44,7 @@ const searchInputChange = (v: any) => {
 
 // 初始化搜索框
 const SearchInit = () => {
-  const searchDOM: any = document.querySelector(".byt-header>.main>nav>span.search-btn");
+  const searchDOM: any = document.querySelector(".byt-header>.main span.search-btn");
   const searchMainDOM: any = document.querySelector(".byt-header>.main>.byt-search>main");
   const searchListDOM: any = document.querySelector(".byt-header>.main>.byt-search");
   const addActive = () => setTimeout(() => {

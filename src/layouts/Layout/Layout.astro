@@ -15,9 +15,12 @@ import Aside from "@/components/Aside/Aside.astro";
 // 底部 Footer
 import Footer from "@/components/Footer/Footer.astro";
 // 返回顶部
-import BackTop from "@/components/BackTop/BackTop.astro";
+import FixBar from "@/components/FixBar/index.astro";
 // 手机端侧边栏
 import MobileSidebar from "@/components/MobileSidebar/MobileSidebar.astro";
+// 主题提供器
+import ThemeProvider from "@/components/FixBar/ThemeProvider.astro";
+
 // A Modern CSS Reset
 import "@/styles/Reset.less";
 // 全局基础样式
@@ -41,6 +44,7 @@ import "./Layout.less";
 	</Head>
 	<body>
 		<MobileSidebar />
+		<ThemeProvider />
 		<Header activeNav={activeNav} />
 		<main class="main">
 			{HomeBanner.enable && <MainHeader />}
@@ -50,7 +54,7 @@ import "./Layout.less";
 				</section>
 				<Aside />
 			</section>
-			<BackTop />
+			<FixBar />
 		</main>
 		<Footer />
 		<script>

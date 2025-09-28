@@ -14,6 +14,7 @@ import { remarkNote, addClassNames } from './src/plugins/markdown.custom'
 // Markdown 配置================
 import SITE_INFO from './src/config';
 import swup from '@swup/astro';
+import tailwind from "@tailwindcss/vite";
 // https://astro.build/config
 export default defineConfig({
 	site: SITE_INFO.Site,
@@ -47,6 +48,7 @@ export default defineConfig({
 		syntaxHighlight: 'shiki',
 		shikiConfig: { theme: 'github-light' },
 	},
+	plugins: [tailwind()],
 	vite: {
 		resolve: { alias: { "@": path.resolve(__dirname, "./src") } },
 		build: {
@@ -58,7 +60,7 @@ export default defineConfig({
 					assetFileNames: 'static/byt-[name]-[hash:8][extname]',
 				}
 			},
-		},
+		}
 	},
 	server: { host: '0.0.0.0' }
 });

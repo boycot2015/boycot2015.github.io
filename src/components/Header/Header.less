@@ -19,6 +19,7 @@ header.byt-header {
     align-items: center;
     width: 100%;
     height: 100%;
+    justify-content: space-between;
     max-width: var(--byt-main-max-width);
 
     &>.home {
@@ -60,38 +61,39 @@ header.byt-header {
       gap: 1.18rem;
       height: 100%;
 
-      &>.nav-link {
-        box-sizing: border-box;
-        padding: 0.288rem 0.36rem;
-        display: flex;
-        align-items: center;
-        gap: 0.28rem;
-        line-height: inherit;
-        height: max-content;
-        font-size: 0.98rem;
-        font-weight: 600;
-        user-select: none;
+    }
+    .nav-link {
+      box-sizing: border-box;
+      padding: 0.288rem 0.36rem;
+      display: flex;
+      align-items: center;
+      gap: 0.28rem;
+      line-height: inherit;
+      height: max-content;
+      font-size: 0.98rem;
+      font-weight: 600;
+      user-select: none;
 
-        &.search-btn,
-        &.menu-btn {
-          cursor: pointer;
-        }
+      &.search-btn,
+      &.menu-btn {
+        margin-left: 1.18rem;
+        cursor: pointer;
+      }
 
-        &.menu-btn {
-          display: none;
-
-          &>svg {
-            height: 1.28rem;
-          }
-        }
+      &.menu-btn {
+        display: none;
 
         &>svg {
-          height: 1rem;
-          width: auto;
-          object-fit: contain;
+          height: 1.28rem;
         }
-
       }
+
+      &>svg {
+        height: 1rem;
+        width: auto;
+        object-fit: contain;
+      }
+
     }
   }
 }
@@ -101,14 +103,14 @@ header.byt-header {
 @media screen and (max-width: 888px) {
   header.byt-header {
     &>section {
-      &>nav {
-        &>a.nav-link {
-          display: none;
-        }
-
-        &>.menu-btn.nav-link {
-          display: flex;
-        }
+      a.nav-link {
+        display: none;
+      }
+      .search-btn.nav-link {
+        margin-left: auto;
+      }
+      .menu-btn.nav-link {
+        display: flex;
       }
     }
   }
