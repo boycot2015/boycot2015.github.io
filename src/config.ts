@@ -6,7 +6,7 @@ export default {
   // 网站地址
   Site: 'https://astro-blog.boycot.top',
   // 网站副标题
-  Subtitle: '不曾与你分享的时间,我在进步.',
+  Subtitle: '专注于前开发与相关技术的实战分享',
   // 网站描述
   Description: 'boycot博客 专注于前开发与相关技术的实战分享，涵盖Vue框架、Node.js、Serverless等，并涉及Node、Python、Linux、Docker等领域。同时，博客也分享作者的生活、音乐和旅行的热爱。',
   // 网站作者
@@ -25,7 +25,7 @@ export default {
     "越努力越幸运.",
   ],
   // 网站创建时间
-  CreateTime: '2022-09-01',
+  CreateTime: '2022-06-04',
   // 顶部 Banner 配置
   HomeBanner: {
     enable: true,
@@ -73,12 +73,13 @@ export default {
   ],
   // 侧边栏展示
   AsideShow: {
+    position: 'right', // 侧边栏位置 left | right, 默认 right
     // 是否展示个人网站
     WebSitesShow: true,
     // 是否展示分类
-    CategoriesShow: false,
+    CategoriesShow: true,
     // 是否展示标签
-    TagsShow: false,
+    TagsShow: true,
     // 是否展示推荐文章
     recommendArticleShow: true
   },

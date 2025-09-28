@@ -10,7 +10,7 @@
     "newpost": "node ./script/newpost.js",
     "offdev": "astro preferences disable devToolbar",
     "ondev": "astro preferences enable devToolbar",
-    "deploy": "astro build && gh-pages -d dist --repo git@github.com:boycot2015/homepage.git"
+    "deploy": "astro build && gh-pages -d dist --repo git@github.com:boycot2015/boycot2015.github.io.git"
   },
   "homepage": "https://boycot2015.github.io",
   "dependencies": {

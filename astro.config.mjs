@@ -17,9 +17,10 @@ import swup from '@swup/astro';
 // https://astro.build/config
 export default defineConfig({
 	site: SITE_INFO.Site,
-	// base: './',
+	base: './',
 	build: {
-		// assets: 'static'
+		assets: 'static',
+		// outDir: 'dist',
 	},
 	integrations: [swup({
 		theme: false,
@@ -46,6 +47,18 @@ export default defineConfig({
 		syntaxHighlight: 'shiki',
 		shikiConfig: { theme: 'github-light' },
 	},
-	vite: { resolve: { alias: { "@": path.resolve(__dirname, "./src") } } },
+	vite: {
+		resolve: { alias: { "@": path.resolve(__dirname, "./src") } },
+		build: {
+			rollupOptions: {
+				output: {
+					// path names relative to `outDir`
+					entryFileNames: 'js/[name]-[hash].js',
+					// chunkFileNames: 'js/chunks/[name]-[hash].js',
+					assetFileNames: 'static/[name]-[hash:8][extname]',
+				},
+			},
+		},
+	},
 	server: { host: '0.0.0.0' }
 });

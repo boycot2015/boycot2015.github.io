@@ -4,7 +4,7 @@ import { getCollection } from "astro:content";
 // 格式化文章列表
 const fmtArticleList = (articleList: any) => {
   // 按年份分类
-  const groupedByYear = articleList.filter((i: any) => !i.data.draft).reduce((acc: any, item: any) => {
+  const groupedByYear = articleList.filter((i: any) => !i.data.draft && !i.data.hide).reduce((acc: any, item: any) => {
     const year = item.data.date.getFullYear();
     // 初始化
     !acc[year] && (acc[year] = []);
