@@ -12,7 +12,7 @@ export default {
   // 网站作者
   Author: 'boycot',
   // 作者头像
-  Avatar: `https://boycot2015.github.io/picx-images-hosting/avatar/avatar.7pnvyzg2f.webp`,
+  Avatar: `/avatar.svg`, // https://cdn.jsdelivr.net/gh/boycot2015/picx-images-hosting@master/avatar/avatar.7pnvyzg2f.webp
   // 网站座右铭
   Motto: '越努力越幸运.',
   // Cover 网站缩略图
