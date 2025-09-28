@@ -17,9 +17,9 @@ import swup from '@swup/astro';
 // https://astro.build/config
 export default defineConfig({
 	site: SITE_INFO.Site,
-	base: './',
+	// base: './',
 	build: {
-		assets: 'static',
+		// assets: 'static',
 		// outDir: 'dist',
 	},
 	integrations: [swup({
@@ -53,10 +53,10 @@ export default defineConfig({
 			rollupOptions: {
 				output: {
 					// path names relative to `outDir`
-					entryFileNames: 'js/[name]-[hash].js',
+					entryFileNames: 'js/byt-[name]-[hash].js',
 					// chunkFileNames: 'js/chunks/[name]-[hash].js',
-					assetFileNames: 'static/[name]-[hash:8][extname]',
-				},
+					assetFileNames: 'static/byt-[name]-[hash:8][extname]',
+				}
 			},
 		},
 	},
