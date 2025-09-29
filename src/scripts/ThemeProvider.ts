@@ -45,48 +45,48 @@ const ThemeProviderInit = () => {
 	document.addEventListener("theme-change", (e) => {
 		// console.log("theme-change event triggered:", e.detail);
 		setTheme((e as ThemeChangeEvent).detail.theme);
-		const x = (e as ThemeChangeEvent).detail.clientX;
-		const y = (e as ThemeChangeEvent).detail.clientY;
-		const endRadius = Math.hypot(
-			Math.max(x, window.innerWidth - x),
-			Math.max(y, window.innerHeight - y),
-		);
+		// const x = (e as ThemeChangeEvent).detail.clientX;
+		// const y = (e as ThemeChangeEvent).detail.clientY;
+		// const endRadius = Math.hypot(
+		// 	Math.max(x, window.innerWidth - x),
+		// 	Math.max(y, window.innerHeight - y),
+		// );
 
-		// 兼容性处理
-		if (!document.startViewTransition) {
-			console.warn("View Transitions API not supported. Falling back to setTheme.");
-			setTheme((e as ThemeChangeEvent).detail.theme);
-			return;
-		}
+		// // 兼容性处理
+		// if (!document.startViewTransition) {
+		// 	console.warn("View Transitions API not supported. Falling back to setTheme.");
+		// 	setTheme((e as ThemeChangeEvent).detail.theme);
+		// 	return;
+		// }
 
-		const transition = document.startViewTransition(async () => {
-			console.log("Setting theme to:", (e as ThemeChangeEvent).detail.theme);
-			setTheme((e as ThemeChangeEvent).detail.theme);
-			return endRadius;
-		});
+		// const transition = document.startViewTransition(async () => {
+		// 	console.log("Setting theme to:", (e as ThemeChangeEvent).detail.theme);
+		// 	setTheme((e as ThemeChangeEvent).detail.theme);
+		// 	return endRadius;
+		// });
 
-		transition.ready.then(() => {
-			console.log("View transition ready. Animating clipPath.");
-			const clipPath = [
-				`circle(0px at ${x}px ${y}px)`,
-				`circle(${endRadius}px at ${x}px ${y}px)`,
-			];
-			document.body.style.transition = "none";
-			document.body.animate(
-				{
-					clipPath: !rootInDarkMode() ? [...clipPath].reverse() : clipPath,
-				},
-				{
-					duration: 500,
-					easing: "ease-in",
-					pseudoElement: !rootInDarkMode()
-						? "::view-transition-old(root)"
-						: "::view-transition-new(root)",
-				},
-			);
-		}).catch((err) => {
-			console.error("Error during view transition:", err);
-		});
+		// transition.ready.then(() => {
+		// 	console.log("View transition ready. Animating clipPath.");
+		// 	const clipPath = [
+		// 		`circle(0px at ${x}px ${y}px)`,
+		// 		`circle(${endRadius}px at ${x}px ${y}px)`,
+		// 	];
+		// 	document.body.style.transition = "none";
+		// 	document.body.animate(
+		// 		{
+		// 			clipPath: !rootInDarkMode() ? [...clipPath].reverse() : clipPath,
+		// 		},
+		// 		{
+		// 			duration: 500,
+		// 			easing: "ease-in",
+		// 			pseudoElement: !rootInDarkMode()
+		// 				? "::view-transition-old(root)"
+		// 				: "::view-transition-new(root)",
+		// 		},
+		// 	);
+		// }).catch((err) => {
+		// 	console.error("Error during view transition:", err);
+		// });
 	});
 
 	// listen for prefers-color-scheme change.
