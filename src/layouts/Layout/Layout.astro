@@ -18,15 +18,13 @@ import Footer from "@/components/Footer/Footer.astro";
 import FixBar from "@/components/FixBar/index.astro";
 // 手机端侧边栏
 import MobileSidebar from "@/components/MobileSidebar/MobileSidebar.astro";
-// 主题提供器
-import ThemeProvider from "@/components/FixBar/ThemeProvider.astro";
-
 // A Modern CSS Reset
 import "@/styles/Reset.less";
 // 全局基础样式
 import "@/styles/Base.less";
 // Layout 样式
 import "./Layout.less";
+import '@/styles/global.css'
 ---
 
 <html lang="zh-CN">
@@ -39,12 +37,11 @@ import "./Layout.less";
 		<Fragment
 			set:html={`<style>:root {${Object.entries(Theme)
 				.map(([key, value]) => `${key}:${value};`)
-				.join("")}--byt-main-header-height:${Home ? HomeBanner.HomeHeight : HomeBanner.PageHeight};--byt-home-banner:${pagecover?`url(${pagecover}) center/cover no-repeat`:HomeBanner.background}}</style>`}
+				.join("")}--byt-main-header-height:${Home ? HomeBanner.HomeHeight : HomeBanner.PageHeight};--byt-home-banner:${pagecover?`url(${pagecover}) center/100% no-repeat`:HomeBanner.background}}</style>`}
 		/>
 	</Head>
 	<body>
 		<MobileSidebar />
-		<ThemeProvider />
 		<Header activeNav={activeNav} />
 		<main class="main">
 			{HomeBanner.enable && <MainHeader />}
@@ -54,8 +51,8 @@ import "./Layout.less";
 				</section>
 				<Aside />
 			</section>
-			<FixBar />
 		</main>
+		<FixBar />
 		<Footer />
 		<script>
 			import InitFn from "@/scripts/Init";

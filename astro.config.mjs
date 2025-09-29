@@ -14,53 +14,57 @@ import { remarkNote, addClassNames } from './src/plugins/markdown.custom'
 // Markdown 配置================
 import SITE_INFO from './src/config';
 import swup from '@swup/astro';
-import tailwind from "@tailwindcss/vite";
+import tailwindcss from '@tailwindcss/vite';
+// import tailwind from "@tailwindcss/vite";
 // https://astro.build/config
 export default defineConfig({
-	site: SITE_INFO.Site,
-	// base: './',
-	build: {
-		// assets: 'static',
-		// outDir: 'dist',
-	},
-	integrations: [swup({
-		theme: false,
-		animationClass: "byt-animation-",
-		containers: [".main-inner>.main-inner-content",'.byt-header>.main'],
-		smoothScrolling: true,
-		progress: true,
-		cache: true,
-		preload: true,
-		accessibility: true,
-		updateHead: true,
-		updateBodyClass: false,
-		globalInstance: true
-	}),
-	Compress({ CSS: false, Image: false, Action: { Passed: async () => true } }),
-	sitemap({
-		changefreq: 'weekly', priority: 0.7, lastmod: new Date(),
-		// 处理末尾带 / 的 url
-		serialize: (item) => ({ ...item, url: item.url.endsWith('/') ? item.url.slice(0, -1) : item.url })
-	}), mdx({ extendMarkdownConfig: false })],
-	markdown: {
-		remarkPlugins: [remarkMath, remarkDirective, remarkNote,],
-		rehypePlugins: [rehypeKatex, rehypeSlug, addClassNames],
-		syntaxHighlight: 'shiki',
-		shikiConfig: { theme: 'github-light' },
-	},
-	plugins: [tailwind()],
-	vite: {
-		resolve: { alias: { "@": path.resolve(__dirname, "./src") } },
-		build: {
-			rollupOptions: {
-				output: {
-					// path names relative to `outDir`
-					entryFileNames: 'js/byt-[name]-[hash].js',
-					// chunkFileNames: 'js/chunks/[name]-[hash].js',
-					assetFileNames: 'static/byt-[name]-[hash:8][extname]',
-				}
-			},
-		}
-	},
-	server: { host: '0.0.0.0' }
+    site: SITE_INFO.Site,
+    // base: './',
+    build: {
+        // assets: 'static',
+        // outDir: 'dist',
+    },
+    integrations: [swup({
+        theme: false,
+        animationClass: "byt-animation-",
+        containers: [".main-inner>.main-inner-content",'.byt-header>.main'],
+        smoothScrolling: true,
+        progress: true,
+        cache: true,
+        preload: true,
+        accessibility: true,
+        updateHead: true,
+        updateBodyClass: false,
+        globalInstance: true
+    }),
+    Compress({ CSS: false, Image: false, Action: { Passed: async () => true } }),
+    sitemap({
+        changefreq: 'weekly', priority: 0.7, lastmod: new Date(),
+        // 处理末尾带 / 的 url
+        serialize: (item) => ({ ...item, url: item.url.endsWith('/') ? item.url.slice(0, -1) : item.url })
+    }), mdx({ extendMarkdownConfig: true })],
+    markdown: {
+        remarkPlugins: [remarkMath, remarkDirective, remarkNote,],
+        rehypePlugins: [rehypeKatex, rehypeSlug, addClassNames],
+        // syntaxHighlight: 'shiki',
+        // shikiConfig: { theme: 'github-light' },
+    },
+    vite: {
+      resolve: { alias: { "@": path.resolve(__dirname, "./src") } },
+
+      // plugins: [tailwind()],
+      build: {
+          rollupOptions: {
+              output: {
+                  // path names relative to `outDir`
+                  entryFileNames: 'js/byt-[name]-[hash].js',
+                  // chunkFileNames: 'js/chunks/[name]-[hash].js',
+                  assetFileNames: 'static/byt-[name]-[hash:8][extname]',
+              }
+          },
+      },
+
+      plugins: [tailwindcss()],
+    },
+    server: { host: '0.0.0.0' }
 });

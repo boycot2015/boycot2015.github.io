@@ -1,8 +1,13 @@
 import SITE_INFO from '@/config';
-export default () => {
-  const writeDom = document.querySelector('.header-main>.desc');
+export default async () => {
+  const writeDom = document.querySelector('.header-main .desc');
   if (!writeDom) return;
   const TypeWriteList: any = SITE_INFO.TypeWriteList;
+  await fetch(SITE_INFO.HitokotoApi + '?c=d&encode=text')
+    .then(res => res.text())
+    .then(data => {
+      TypeWriteList.unshift(data);
+    });
   if (!Array.isArray(TypeWriteList) || !TypeWriteList.length) return writeDom.remove();
   let TypeWriteListIndex = 0;
   let index = 0;

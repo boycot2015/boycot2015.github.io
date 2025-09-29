@@ -6,6 +6,7 @@
 	// BoxShadow
 	--byt-box-shadow: 0 3px 8px 6px #07111b0d;
 	// Body 背景颜色
+	--byt-code-bg: rgb(from var(--byt-font-color) r g b / 16%);
 	--byt-body-bg: #F8F8F8;
 	// Back Top 按钮位置
 	--byt-back-top: calc((calc(100vw - 2rem) - min((100vw - 2rem), var(--byt-main-max-width))) / 2 + 1rem);
@@ -111,7 +112,22 @@ html {
 		}
 	}
 }
-
+html {
+	&[data-theme="dark"] {
+		// 白色颜色
+	--byt-white-color: #222;
+	--byt-font-color: #fff;
+	// BoxShadow
+	--byt-box-shadow: 0 3px 8px 6px #07111b0d;
+	// Body 背景颜色
+	--byt-body-bg: #111;
+	// Font 颜色
+	--byt-code-bg: #24292e;
+	}
+}
+body::before {
+	background-color: var(--byt-body-bg) !important;
+}
 pre,
 code {
 	font-family: 'SF Mono' !important;

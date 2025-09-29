@@ -40,6 +40,11 @@ import SeoPushInit from "@/scripts/SeoPush";
 // SmoothScroll 滚动优化
 import SmoothScroll from "@/scripts/Smoothscroll";
 
+// 主题切换
+import ThemeProviderInit from "@/scripts/ThemeProvider";
+
+
+
 // ============================================================
 
 // 页面初始化 Only
@@ -55,6 +60,7 @@ const indexInit = async (only: boolean = true) => {
   only && SmoothScroll();
   // 图片灯箱
   only && ViewImage();
+  only && ThemeProviderInit();
   // 初始化文章代码块
   codeInit();
   // 图片懒加载初始化

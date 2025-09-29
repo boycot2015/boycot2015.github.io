@@ -21,8 +21,6 @@ type: "about"
 
 **在后端开发和云计算领域**，我对 Node.js 生态系统非常熟悉，并积极探索 Serverless 架构。我长期使用 Cloudflare Workers、Vercel 和腾讯云 EdgeOne 等平台，优化边缘计算、KV 存储和全球 CDN 加速方案，确保应用的高可用性和低延迟。
 
-**在自托管（Homelab）和个人服务器管理方面**，我对个人服务器运维充满热情，搭建了基于 Jellyfin 的媒体中心、Home Assistant 智能家居系统，并利用 OpenWrt 优化家庭网络。在 Linux 系统管理、Docker 容器化部署和自动化脚本方面积累了丰富经验。
-
 **在人工智能与大型语言模型（LLMs）领域**，我密切关注 AI 领域的发展，尤其是 DeepSeek、Gemini 和 Claude 等大模型的应用。我尝试将 AI 能力整合到开发流程中，例如自动化文档生成、代码优化辅助，并且对 AI SDK 和相关工具保持关注。
 
 **在网络与 DevOps 方面**，我熟悉 DNS 解析、CDN 加速、SSL 证书管理，并研究 TCP/IP、HTTP/3 等协议优化。我实践 Git 工作流、CI/CD 自动化（GitHub Actions / Cloudflare Pages），并利用 Docker 实现开发环境标准化。
@@ -38,28 +36,28 @@ type: "about"
 
 - **边缘计算与全球化部署**，优化分布式应用的性能。
 - **AI 增强开发**，探索 LLM 在代码生成、调试和文档管理中的应用。
-- **智能家居与自动化**，结合 Home Assistant 打造更高效的家庭 lab。
 
 ## Languages and Tools
 
 <div class="language-tool">
-  <a href="https://www.w3.org/html/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5" /></a>
-  <a href="https://nodejs.org" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js" /></a>
-  <a href="https://www.php.net/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/php-3776AB?style=for-the-badge&logo=php&logoColor=white" alt="PHP" /></a>
-  <a href="https://www.python.org" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" /></a>
-  <a href="https://git-scm.com/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" alt="Git" /> </a>
-  <a href="https://www.linux.org/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="Linux" /></a>
-  <a href="https://www.nginx.com" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/Nginx-009639?style=for-the-badge&logo=nginx&logoColor=white" alt="Nginx" /></a>
-  <a href="https://www.docker.com/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" /></a>
-  <a href="https://vuejs.org/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/Vue.js-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white" alt="Vue.js" /></a>
-  <a href="https://vitejs.dev/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" /></a>
-  <a href="https://webpack.js.org" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/Webpack-8DD6F9?style=for-the-badge&logo=webpack&logoColor=black" alt="Webpack" /></a>
-  <a href="https://www.electronjs.org" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/Electron-47848F?style=for-the-badge&logo=electron&logoColor=white" alt="Electron" /></a>
-  <a href="https://expressjs.com" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express" /></a>
-  <a href="https://tailwindcss.com/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" /></a>
-  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" /></a>
-  <a href="https://www.sqlite.org/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white" alt="SQLite" /></a>
-  <a href="https://code.visualstudio.com/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/VS_Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white" alt="VS Code" /></a>
+  <a href="https://vuejs.org/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/Vue.js-4FC08D?logo=vue.js&logoColor=white" alt="Vue.js" /></a>
+  <a href="https://react.com/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/react.js-087ea4?logo=react&logoColor=white" alt="react.js" /></a>
+  <a href="https://astro.com/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/astro.js-000000?logo=astro&logoColor=white" alt="astro.js" /></a>
+  <a href="https://vitejs.dev/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white" alt="Vite" /></a>
+  <a href="https://www.w3.org/html/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white" alt="HTML5" /></a>
+  <a href="https://nodejs.org" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white" alt="Node.js" /></a>
+  <a href="https://www.php.net/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/php-3776AB?logo=php&logoColor=white" alt="PHP" /></a>
+  <a href="https://git-scm.com/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white" alt="Git" /> </a>
+  <a href="https://www.linux.org/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/Linux-FCC624?logo=linux&logoColor=black" alt="Linux" /></a>
+  <a href="https://www.nginx.com" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/Nginx-009639?logo=nginx&logoColor=white" alt="Nginx" /></a>
+  <a href="https://www.docker.com/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white" alt="Docker" /></a>
+  <a href="https://webpack.js.org" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/Webpack-8DD6F9?logo=webpack&logoColor=black" alt="Webpack" /></a>
+  <a href="https://www.electronjs.org" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/Electron-47848F?logo=electron&logoColor=white" alt="Electron" /></a>
+  <a href="https://expressjs.com" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/Express-000000?logo=express&logoColor=white" alt="Express" /></a>
+  <a href="https://tailwindcss.com/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?logo=tailwind-css&logoColor=white" alt="Tailwind CSS" /></a>
+  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black" alt="JavaScript" /></a>
+  <a href="https://www.mysql.com/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/mysql-003B57?logo=mysql&logoColor=white" alt="mysql" /></a>
+  <a href="https://code.visualstudio.com/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/VS_Code-007ACC?logo=visual-studio-code&logoColor=white" alt="VS Code" /></a>
 </div>
 
 ## 小站点

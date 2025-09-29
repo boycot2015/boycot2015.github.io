@@ -1,9 +1,9 @@
-<theme-toggle class="ms-2 sm:ms-4">
+<theme-toggle class="theme-toggle">
 	<button class="hover:text-accent relative h-9 w-9 cursor-pointer rounded-md p-2" type="button">
-		<span class="sr-only">Theme</span>
+		<span class="sr-only">Dark Theme</span>
 		<svg
 			aria-hidden="true"
-			class="dark-icon absolute start-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 scale-100 opacity-100 transition-all dark:scale-0 dark:opacity-0"
+			class="absolute start-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 scale-100 opacity-100 transition-all dark:scale-0 dark:opacity-0"
 			fill="none"
 			focusable="false"
 			id="sun-svg"
@@ -34,7 +34,7 @@
 		</svg>
 		<svg
 			aria-hidden="true"
-			class="light-icon absolute start-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 scale-0 opacity-0 transition-all dark:scale-100 dark:opacity-100"
+			class="absolute start-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 scale-0 opacity-0 transition-all dark:scale-100 dark:opacity-100"
 			fill="none"
 			focusable="false"
 			id="moon-svg"
@@ -61,12 +61,8 @@
 		connectedCallback() {
 			this.button = this.querySelector<HTMLButtonElement>("button")!;
 			// set aria role value
-			console.log(rootInDarkMode());
 			this.button.setAttribute("role", "switch");
-			rootInDarkMode() ? this.button.querySelector(".dark-icon").style.display = 'none' : this.button.querySelector(".light-icon").style.display = 'none';
-			// this.button.setAttribute("aria-checked", String(rootInDarkMode()));
-			// this.linkEl = document.querySelector('link[rel="icon"]') as HTMLLinkElement
-			// this.linkEl.href = !rootInDarkMode() ? '/favicon.svg' : '/favicon-dark.svg'
+			this.button.setAttribute("aria-checked", String(rootInDarkMode()));
 			// button event
 			this.button.addEventListener("click", (e:MouseEvent) => {
 				this.toggleTheme(e)
@@ -83,16 +79,9 @@
 			});
 			// dispatch event -> ThemeProvider.astro
 			document.dispatchEvent(themeChangeEvent);
-			if (rootInDarkMode()) {
-				this.button.querySelector(".dark-icon").style.display = 'none'
-				this.button.querySelector(".light-icon").style.display = 'block'
-			} else {
-				this.button.querySelector(".dark-icon").style.display = 'block'
-				this.button.querySelector(".light-icon").style.display = 'none'
-			}
 			// set the aria-checked attribute
-			// this.button.setAttribute("aria-checked", String(rootInDarkMode()));
-			// this.linkEl.href = !rootInDarkMode() ? '/favicon.svg' : '/favicon-dark.svg'
+			this.button.setAttribute("aria-checked", String(rootInDarkMode()));
+			
 		}
 	}
 
