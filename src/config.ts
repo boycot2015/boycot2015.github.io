@@ -100,14 +100,15 @@ export default {
   Comment: {
     // Twikoo 评论
     Twikoo: {
-      enable: true,
+      enable: false,
       // AhBbW9j4bNIOrrWR
+      // 替换为你自己的环境 ID
       envId: 'https://comment.boycot.top'
     },
     // Waline 评论
     Waline: {
-      enable: false,
-      serverURL: 'https://ufdaemkl.lc-cn-n1-shared.com'
+      enable: true,
+      serverURL: 'https://waline.boycot.top'
     }
   },
   // Analytics 统计

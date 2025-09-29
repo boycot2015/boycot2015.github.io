@@ -9,11 +9,11 @@
 import SITE_INFO from "@/config";
 import { LoadScript } from "@/utils/index";
 declare const twikoo: any;
-
+const cdnUrl = 'https://cdn.jsdelivr.net';
 // Twikoo 评论
 const TwikooFn = async (commentDOM: string) => {
   document.querySelector(commentDOM)!.innerHTML = '<section class="byt-space-loading"><span></span><span></span><span></span></section>'
-  await LoadScript("https://registry.npmmirror.com/twikoo/1.6.41/files/dist/twikoo.all.min.js");
+  await LoadScript(`${cdnUrl}/npm/twikoo@1.6.41/dist/twikoo.min.js`);
   twikoo.init({ envId: SITE_INFO.Comment.Twikoo.envId, el: commentDOM, onCommentLoaded: () => setTimeout(() => document.querySelectorAll('.byt-comment a[href="#"]').forEach(link => link.removeAttribute('href'))) })
 }
 
@@ -24,14 +24,22 @@ const WalineFn = async (commentDOM: string, walineInit: any) => {
   const { init } = await import('@waline/client');
   walineInit = init({
     el: commentDOM, path: window.location.pathname.replace(/\/$/, ''), serverURL: SITE_INFO.Comment.Waline.serverURL,
-    emoji: ['https://registry.npmmirror.com/@waline/emojis/1.3.0/files/alus', 'https://registry.npmmirror.com/@waline/emojis/1.3.0/files/bilibili', 'https://registry.npmmirror.com/@waline/emojis/1.3.0/files/bmoji', 'https://registry.npmmirror.com/@waline/emojis/1.3.0/files/qq', 'https://registry.npmmirror.com/@waline/emojis/1.3.0/files/tieba', 'https://registry.npmmirror.com/@waline/emojis/1.3.0/files/weibo', 'https://registry.npmmirror.com/@waline/emojis/1.3.0/files/soul-emoji'],
+    emoji: [
+      `${cdnUrl}/npm/@waline/emojis@1.3.0/alus`,
+      `${cdnUrl}/npm/@waline/emojis@1.3.0/bilibili`,
+      `${cdnUrl}/npm/@waline/emojis@1.3.0/bmoji`,
+      `${cdnUrl}/npm/@waline/emojis@1.3.0/bmoji`,
+      `${cdnUrl}/npm/@waline/emojis@1.3.0/qq`,
+      `${cdnUrl}/npm/@waline/emojis@1.3.0/tieba`,
+      `${cdnUrl}/npm/@waline/emojis@1.3.0/weibo`,
+      `${cdnUrl}/npm/@waline/emojis@1.3.0/soul-emoji`],
     reaction: [
-      "https://registry.npmmirror.com/@waline/emojis/1.3.0/files/tieba/tieba_agree.png",
-      "https://registry.npmmirror.com/@waline/emojis/1.3.0/files/tieba/tieba_look_down.png",
-      "https://registry.npmmirror.com/@waline/emojis/1.3.0/files/tieba/tieba_sunglasses.png",
-      "https://registry.npmmirror.com/@waline/emojis/1.3.0/files/tieba/tieba_pick_nose.png",
-      "https://registry.npmmirror.com/@waline/emojis/1.3.0/files/tieba/tieba_awkward.png",
-      "https://registry.npmmirror.com/@waline/emojis/1.3.0/files/tieba/tieba_sleep.png",
+      `${cdnUrl}/npm/@waline/emojis@1.3.0/tieba/tieba_agree.png`,
+      `${cdnUrl}/npm/@waline/emojis@1.3.0/tieba/tieba_look_down.png`,
+      `${cdnUrl}/npm/@waline/emojis@1.3.0/tieba/tieba_sunglasses.png`,
+      `${cdnUrl}/npm/@waline/emojis@1.3.0/tieba/tieba_pick_nose.png`,
+      `${cdnUrl}/npm/@waline/emojis@1.3.0/tieba/tieba_awkward.png`,
+      `${cdnUrl}/npm/@waline/emojis@1.3.0/tieba/tieba_sleep.png`,
     ],
     requiredMeta: ['nick', 'mail'],
     imageUploader: async (file: any) => {
