@@ -11,7 +11,7 @@ const NewsInit = async (data: any, render?: (data: any) => any, staticData?: any
 		let res = data;
 		if (typeof data === 'string') {
 			res = await $GET(api + '/v2/60s');
-			console.log(res);
+			// console.log(res);
 			// if (render && typeof render === 'function') {
 			// 	res = render(res);
 			// 	if (combine && Array.isArray(staticData)) {

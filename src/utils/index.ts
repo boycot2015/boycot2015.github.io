@@ -108,7 +108,8 @@ const getIP = async (): Promise<{ip: string, location: string}> => {
   return await fetch(`${SITE_CONFIG.Api}/ip`)
     .then(response => response.json()).then(data => data.data)
     .then(async data => {
-      let location = await fetch(`${SITE_CONFIG.mapApi.url}/location/ip?ip=${data.ip}&ak=${SITE_CONFIG.mapApi.key}`).then(response => response.json()).then(data => data)
+      // ip=${data.ip}&
+      let location = await fetch(`${SITE_CONFIG.mapApi.url}/location/ip?ak=${SITE_CONFIG.mapApi.key}`).then(response => response.json()).then(data => data)
       // console.log({
       //   id: data.ip,
       //   location: [location.content.address_detail.province, data.location.address_detail.city, data.location.address_detail.district].join(' '),
