@@ -25,6 +25,8 @@ import initWebSiteTime from "@/scripts/Footer";
 import initLinks from "@/scripts/Links";
 // 朋友圈 RSS 初始化
 import initFriends from "@/scripts/Friends";
+// 新闻 初始化
+import initNews from "@/scripts/News";
 // 动态说说初始化
 import initTalking from "@/scripts/Talking";
 // 文章评论初始化
@@ -75,6 +77,8 @@ const indexInit = async (only: boolean = true) => {
   initLinks();
   // 朋友圈 RSS 初始化
   initFriends();
+  // 新闻 初始化
+  initNews();
   // 动态说说初始化
   initTalking();
   // Google 广告

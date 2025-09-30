@@ -59,6 +59,7 @@ export default {
     { text: '友链', link: '/links', icon: 'Nav_friends' },
     { text: '圈子', link: '/friends', icon: 'Nav_rss' },
     { text: '动态', link: '/talking', icon: 'Nav_talking' },
+    { text: '新闻', link: '/news', icon: 'Nav_news' },
     { text: '时间轴', link: '/archives', icon: 'Nav_archives' },
     { text: '留言', link: '/message', icon: 'Nav_message' },
     { text: '关于', link: '/about', icon: 'Nav_about' },
@@ -77,7 +78,7 @@ export default {
   ],
   // 侧边栏展示
   AsideShow: {
-    position: 'right', // 侧边栏位置 left | right, 默认 right
+    position: 'left', // 侧边栏位置 left | right, 默认 right
     // 是否展示个人网站
     WebSitesShow: true,
     // 是否展示分类

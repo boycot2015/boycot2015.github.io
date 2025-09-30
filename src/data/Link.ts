@@ -15,25 +15,38 @@ export default {
       "name": "boycot-nuxt博客",
       "link": "https://blog-new.boycot.top",
       "avatar": "https://blog-new.boycot.top/images/logo.png",
-      "descr": "天生我材必有用，千金散尽还复来."
+      "descr": "天生我材必有用，千金散尽还复来"
     },
     {
       "name": "vhan",
       "link": "https://www.vvhan.com",
       "avatar": "https://q1.qlogo.cn/g?b=qq&nk=1655466387&s=640",
-      "descr": "不曾与你分享的时间,我在进步."
+      "descr": "不曾与你分享的时间,我在进步"
     },
     {
       "name": "boycotAPI",
       "link": "https://api.boycot.top",
       "avatar": "https://api.boycot.top/favicon.png",
-      "descr": "免费Web API数据接口调用服务平台."
+      "descr": "免费Web API数据接口调用服务平台"
     },
     {
       "name": "bytMusic",
       "link": "https://music.boycot.top",
       "avatar": "https://music.boycot.top/favicon.svg",
-      "descr": "bytMusic平台."
+      "descr": "bytMusic平台"
+    },
+    {
+      "name": "今日诗词",
+      "link": "https://www.jinrishici.com/",
+      "avatar": "https://www.jinrishici.com/img/icon-small.png",
+      "descr": "每次返回一句诗词根据时间、地点、天气、事件智能推荐,支持图片和 JSON 格式调用，一分钟快速部署"
+    },
+    {
+      "name": "张洪Heo",
+      "link": "https://blog.zhheo.com/",
+      "avatar": "https://blog.zhheo.com//img/favicon4.0.webp",
+      "descr": "分享设计与科技生活"
+
     }
   ]
 }
