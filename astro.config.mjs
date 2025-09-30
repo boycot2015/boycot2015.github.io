@@ -4,6 +4,7 @@ import sitemap from '@astrojs/sitemap';
 import Compress from "@playform/compress";
 import { defineConfig } from 'astro/config';
 import { fileURLToPath } from 'url';
+import tailwindcss from '@tailwindcss/vite';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // Markdown 配置================
 import remarkMath from "remark-math";
@@ -14,8 +15,6 @@ import { remarkNote, addClassNames } from './src/plugins/markdown.custom'
 // Markdown 配置================
 import SITE_INFO from './src/config';
 import swup from '@swup/astro';
-import tailwindcss from '@tailwindcss/vite';
-// import tailwind from "@tailwindcss/vite";
 // https://astro.build/config
 export default defineConfig({
     site: SITE_INFO.Site,
@@ -51,8 +50,6 @@ export default defineConfig({
     },
     vite: {
       resolve: { alias: { "@": path.resolve(__dirname, "./src") } },
-
-      // plugins: [tailwind()],
       build: {
           rollupOptions: {
               output: {
@@ -65,6 +62,11 @@ export default defineConfig({
       },
 
       plugins: [tailwindcss()],
+      define: {
+          __VUE_OPTIONS_API__: false,
+          __VUE_PROD_DEVTOOLS__: false,
+          __VUE_PROD_HYDRATION_MISMATCH_DETAILS__Default: false
+      },
     },
     server: { host: '0.0.0.0' }
 });

@@ -28,7 +28,6 @@ const WalineFn = async (commentDOM: string, walineInit: any) => {
       `${cdnUrl}/npm/@waline/emojis@1.3.0/alus`,
       `${cdnUrl}/npm/@waline/emojis@1.3.0/bilibili`,
       `${cdnUrl}/npm/@waline/emojis@1.3.0/bmoji`,
-      `${cdnUrl}/npm/@waline/emojis@1.3.0/bmoji`,
       `${cdnUrl}/npm/@waline/emojis@1.3.0/qq`,
       `${cdnUrl}/npm/@waline/emojis@1.3.0/tieba`,
       `${cdnUrl}/npm/@waline/emojis@1.3.0/weibo`,

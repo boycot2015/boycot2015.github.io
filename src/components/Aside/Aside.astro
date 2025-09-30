@@ -3,7 +3,7 @@
 // Svg 组件
 import Svg from "@/components/Svg/Svg.astro";
 // 时间处理
-import { fmtTime } from "@/utils/index";
+import { fmtTime, getIP, getGreat } from "@/utils/index";
 // 获取用户配置数据
 import SITE_CONFIG from "@/config";
 const { Avatar, Author, Motto, WebSites, GoogleAds, AsideShow } = SITE_CONFIG;
@@ -14,8 +14,15 @@ import { getCategories, getTags, getRecommendArticles, getCountInfo } from "@/ut
 const categories = getCategories();
 // 热门标签
 const tags = getTags();
+
 // 获取网站统计数据
 const CountInfo = getCountInfo();
+
+// 获取用户 IP 地址
+const { ip, location } = await getIP();
+// const { ip, location } = { ip: '127.0.0.1', location: '北京' }
+// 获取当前时间问候
+const great = getGreat();
 // 最新文章
 const recommendArticles = getRecommendArticles();
 // Google 广告组件
@@ -57,7 +64,24 @@ import "./Aside.less";
 			</section>
 		)
 	}
-
+	<!-- 公告块 -->
+	{
+		SITE_CONFIG.Tips && SITE_CONFIG.GreatShow && (
+			<section class="byt-aside-item tips">
+				<p class="flex items-center gap-2">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><!-- Icon from Material Symbols by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="currentColor" d="M9 21v-5q-1.55-.125-3.037-.35T3 15l.5-2q2.075.575 4.2.788T12 14q2.15 0 4.275-.213T20.5 13l.5 2q-1.5.425-2.988.65T15 16v5zm3-8q-.85 0-1.425-.575T10 11q0-.825.575-1.412T12 9q.825 0 1.413.588T14 11q0 .85-.587 1.425T12 13m-7.5-3q-.65 0-1.075-.425T3 8.5q0-.625.425-1.062T4.5 7q.625 0 1.063.438T6 8.5q0 .65-.437 1.075T4.5 10m15 0q-.65 0-1.075-.425T18 8.5q0-.625.425-1.062T19.5 7q.625 0 1.063.438T21 8.5q0 .65-.437 1.075T19.5 10M7.25 6.25q-.65 0-1.075-.425T5.75 4.75q0-.625.425-1.062T7.25 3.25q.625 0 1.063.438T8.75 4.75q0 .65-.437 1.075T7.25 6.25m9.5 0q-.65 0-1.075-.425T15.25 4.75q0-.625.425-1.062t1.075-.438q.625 0 1.063.438t.437 1.062q0 .65-.437 1.075t-1.063.425M12 5q-.65 0-1.075-.425T10.5 3.5q0-.625.425-1.062T12 2q.625 0 1.063.438T13.5 3.5q0 .65-.437 1.075T12 5"/></svg>
+					欢迎来访者!
+				</p>
+				<div class="tips-content">
+					<Fragment set:html={SITE_CONFIG.Description} />
+				</div>
+				<p>嗷嗷！热烈欢迎🤪！来自 <span class="!text-[var(--byt-main-color)] text-shadow-lg">{location}</span>的铁铁，你好呀！😝</p>
+				今天你喝奶茶了嘛~🍺
+				<p>你的网络IP为：<span class="transition-all duration-300 blur hover:!blur-none">{ip}</span></p>
+				🕞 {great}
+			</section>
+		)
+	}
 	<!-- 公告块 -->
 	{
 		SITE_CONFIG.Tips && (

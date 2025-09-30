@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc.js";
 import timezone from "dayjs/plugin/timezone.js";
+import SITE_CONFIG from "@/config";
 dayjs.extend(utc);
 dayjs.extend(timezone);
 // 设置中文语言环境
@@ -97,6 +98,45 @@ const $POST = async (url: string, data: Record<string, any>, headers: Record<str
 };
 
 
+const getIP = async (): Promise<{ip: string, location: string}> => {
+  if (!SITE_CONFIG.GreatShow) {
+    return {
+      ip: '127.0.0.1',
+      location: '北京',
+    }
+  }
+  return await fetch(`${SITE_CONFIG.Api}/ip`)
+    .then(response => response.json()).then(data => data.data)
+    .then(async data => {
+      let location = await fetch(`${SITE_CONFIG.mapApi.url}/location/ip?ip=${data.ip}&ak=${SITE_CONFIG.mapApi.key}`).then(response => response.json()).then(data => data)
+      // console.log({
+      //   id: data.ip,
+      //   location: [location.content.address_detail.province, data.location.address_detail.city, data.location.address_detail.district].join(' '),
+      // });
+      if(!location || !location.content || !location.content.address_detail) return {
+        ip: data.ip,
+        location: '北京',
+      };
+      return {
+        ip: data.ip,
+        location: [location?.content?.address_detail?.province, location?.content?.address_detail?.city, location?.content?.address_detail?.district].join(' '),
+      };
+    });
+}
 
+const getGreat = () => {
+  // + 3 * 60 * 60 * 1000
+  let time = new Date(Date.now()).toLocaleTimeString() 
+  let clock = Number(time.split(':')[0])  
+  if (((clock >= 0 && clock < 10) || clock == 12) && time.includes('AM')) {
+    return '早上好 吃早餐没啦 🥣'
+  } else if ((clock >= 10 && time.includes('AM')) || (clock >= 12 && time.includes('PM'))) {
+    return '中午好 吃午餐没啦！'
+  }  else if (clock >= 6 && clock < 12 && time.includes('PM')) {
+    return '晚上好 吃晚餐没啦！'
+  }else {
+    return '下午好 饮茶先啦！'
+  }
+}
 
-export { $GET, $POST, getDescription, fmtTime, fmtDate, fmtPage, LoadScript, LoadStyle }
+export { $GET, $POST, getDescription, fmtTime, fmtDate, fmtPage, LoadScript, LoadStyle, getIP, getGreat }

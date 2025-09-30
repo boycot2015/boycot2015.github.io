@@ -8,7 +8,7 @@ export default {
   // 网站副标题
   Subtitle: '专注于前开发与相关技术的实战分享',
   // 网站描述
-  Description: 'boycot博客 专注于前开发与相关技术的实战分享，涵盖Vue框架、Node.js、Serverless等，并涉及Node、Python、Linux、Docker等领域。同时，博客也分享作者的生活、音乐和旅行的热爱。',
+  Description: '👋🏻我是boycot 专注于前开发与相关技术的实战分享，涵盖Vue框架、Node.js、Serverless等，并涉及Node、Linux、Docker等领域。同时也分享作者的生活、音乐和旅行的热爱。',
   // 网站作者
   Author: 'boycot',
   // 作者头像
@@ -68,6 +68,7 @@ export default {
   NavsShow: {
     position: 'center', // 导航栏位置 center | right, 默认 center
   },
+  GreatShow: true,
   // 侧边栏个人网站
   WebSites: [
     // 仅支持 SVG 且 SVG 需放在 public/assets/images/svg/ 目录下，填入文件名即可 <不需要文件后缀名>（封装了 SVG 组件 为了极致压缩 SVG）
@@ -78,7 +79,7 @@ export default {
   ],
   // 侧边栏展示
   AsideShow: {
-    position: 'left', // 侧边栏位置 left | right, 默认 right
+    position: 'right', // 侧边栏位置 left | right, 默认 right
     // 是否展示个人网站
     WebSitesShow: true,
     // 是否展示分类
@@ -95,6 +96,12 @@ export default {
   ],
   // 博客音乐组件解析接口 metting-js https://api.i-meto.com/meting/api
   musicApi: 'https://api.i-meto.com/meting/api',
+  // 地图接口
+  mapApi: {
+    url: 'https://api.map.baidu.com',
+    key: 'ZOEMtLtuqvNV7uBvRUtDYiG3jBn1GD02',
+  },
+  Api: 'https://api-v2.boycot.top/v2',
   // 博客音乐组件是否开启
   musicBoxShow: true,
   // 评论组件（只允许同时开启一个）

@@ -111,8 +111,10 @@ getCurrentColor()
       // Clean up event listeners if needed 
     }
   }
-  
-  customElements.define("theme-color-toggle", ThemeColorToggle);
+  // DOMContentLoaded astro:page-load
+  document.addEventListener('DOMContentLoaded', () => {
+    customElements.define("theme-color-toggle", ThemeColorToggle);
+  })
 </script>
 
 <style is:global>
