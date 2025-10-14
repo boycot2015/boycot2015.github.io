@@ -22,8 +22,8 @@ export default {
   HitokotoApi: 'https://v1.hitokoto.cn',
   // 首页打字机文案列表
   TypeWriteList: [
-    '世上无难事，只怕有心人.',
-    "越努力越幸运.",
+    '世上无难事，只怕有心人',
+    "越努力越幸运",
   ],
   // 网站创建时间
   CreateTime: '2022-06-04',
@@ -34,14 +34,26 @@ export default {
     swiperOptions: {
       loop: true,
       autoplay: {
-       delay: 3000,
-       disableOnInteraction: true
+       delay: 5000,
+       disableOnInteraction: false
       },
       pagination: {
        el: '.swiper-pagination',
        clickable: true
-      }
-     },
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    },
+    // 首页轮播图配置 (swiper 类型时生效), 可以在文章加上recommend: true 来开启
+    list:[{
+      title: '世上无难事，只怕有心人',
+      img: 'https://bing.img.run/rand.php?t=1696428800',
+    },{
+      title: '越努力越幸运',
+      img: 'https://bing.img.run/rand.php?t=1696428801',
+    }],
     // 首页高度
     HomeHeight: '38.88rem',
     // 其他页面高度
@@ -60,7 +72,7 @@ export default {
     // 侧边栏宽度
     "--byt-aside-width": "318px",
     // 全局圆角
-    "--byt-main-radius": "0.28rem",
+    "--byt-main-radius": "0.5rem",
     // 主体内容宽度
     "--byt-main-max-width": "1200px", // 大 1458px 小 1200px
   },
@@ -72,7 +84,7 @@ export default {
     { text: '圈子', link: '/friends', icon: 'Nav_rss' },
     { text: '动态', link: '/talking', icon: 'Nav_talking' },
     { text: '新闻', link: '/news', icon: 'Nav_news' },
-    { text: '时间轴', link: '/archives', icon: 'Nav_archives' },
+    { text: '归档', link: '/archives', icon: 'Nav_archives' },
     { text: '留言', link: '/message', icon: 'Nav_message' },
     { text: '关于', link: '/about', icon: 'Nav_about' },
     { text: 'API', link: 'https://api-docs.boycot.top/', target: true, icon: 'Nav_link' },
@@ -93,6 +105,8 @@ export default {
   // 侧边栏展示
   AsideShow: {
     position: 'right', // 侧边栏位置 left | right, 默认 right
+    // 是否展示一言
+    ScentenceShow: true,
     // 是否展示欢迎语
     GreatShow: true,
     // 是否展示个人网站
@@ -111,6 +125,7 @@ export default {
     'https://cn.cravatar.com',
     'https://registry.npmmirror.com'
   ],
+  imgApi: 'https://bing.img.run/rand.php',
   // 博客音乐组件解析接口 metting-js https://api.i-meto.com/meting/api
   musicApi: 'https://api.i-meto.com/meting/api',
   // 地图接口

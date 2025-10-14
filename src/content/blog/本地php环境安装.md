@@ -9,6 +9,7 @@ music:
   type: song
   server: netease
   id: 1420706073
+recommend: true
 ---
 我们这里以apple m2 系统为例子。
 我们以https://github.com/shivammath...第三方tap源为例子，官方的brew速度太慢了。

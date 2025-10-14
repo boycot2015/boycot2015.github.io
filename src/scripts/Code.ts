@@ -15,7 +15,7 @@ export default () => {
       if (i.vhTimer) clearTimeout(i.vhTimer);
       copyText = i.parentElement.querySelector("pre.astro-code code")?.innerText;
       if (!copyText) return;
-      await navigator.clipboard.writeText(copyText);
+      await navigator.clipboard?.writeText(copyText);
       i.classList.add("success");
       i.vhTimer = setTimeout(() => {
         i.classList.remove("success");

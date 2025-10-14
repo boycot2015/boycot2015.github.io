@@ -28,7 +28,8 @@ const getTags = () => {
 // 获取推荐文章 (给文章添加 recommend: true && hide: false && draft: false 字段)
 const getRecommendArticles = () => {
   const recommendList = posts.filter(i => i.data.recommend);
-  return (recommendList.length ? recommendList : posts.slice(0, 6)).filter(i => !i.data.hide && !i.data.draft).map(i => ({ title: i.data.title, date: i.data.date, id: i.data.id || i.data.title }))
+  const convert = (item: typeof posts[0]):{title: string, date: Date, id: string|number, img?: string, url?: string, target?: string} => ({ title: item.data.title, date: item.data.date, id: item.data.id || item.data.title, img: item.data.cover});
+  return (recommendList.length ? recommendList : posts.slice(0, 6)).filter(i => !i.data.hide && !i.data.draft).map(convert)
 };
 
 export { getCategories, getTags, getRecommendArticles, getCountInfo };

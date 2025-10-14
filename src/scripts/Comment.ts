@@ -48,7 +48,7 @@ const WalineFn = async (commentDOM: string, walineInit: any) => {
       const resJson = await res.json();
       return resJson.data.link.replace('i.imgur.com', 'wp-cdn.4ce.cn/v2');
     },
-    login: 'disable',
+    // login: 'disable',
   });
 }
 

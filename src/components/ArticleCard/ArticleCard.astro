@@ -11,7 +11,7 @@ import "./ArticleCard.less";
 ---
 
 <article class={`byt-article-item byt-animation byt-animation-init byt-article-link${post.data.top ? " active" : ""}`}>
-	<section class="byt-article-banner"><img src="/assets/images/lazy-loading.webp" data-byt-lz-src={ARTICLE_COVER} alt={post.data.title} /></section>
+	<section class="byt-article-banner"><a class="byt-ellipsis" href={`/article/${post.data.id||post.data.title}`}><img src="/assets/images/lazy-loading.webp" data-byt-lz-src={ARTICLE_COVER} alt={post.data.title} /></a></section>
 	<header>
 		<h3><a class={`byt-article-cat byt-cat-${post.data.categories}`} href={`/categories/${post.data.categories}`}>{post.data.categories}</a><time>{fmtTime(post.data.date)}</time></h3>
 		<h1 class="title"><a class="byt-ellipsis" href={`/article/${post.data.id||post.data.title}`}>{post.data.title}</a></h1>

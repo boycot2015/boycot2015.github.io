@@ -3,7 +3,7 @@
 // Svg 组件
 import Svg from "@/components/Svg/Svg.astro";
 // 时间处理
-import { fmtTime, getIP, getGreat } from "@/utils/index";
+import { fmtTime, getIP, getGreat, getScentence } from "@/utils/index";
 // 获取用户配置数据
 import SITE_CONFIG from "@/config";
 const { Avatar, Author, Motto, WebSites, GoogleAds, AsideShow } = SITE_CONFIG;
@@ -23,6 +23,9 @@ const { ip, location } = await getIP();
 // const { ip, location } = { ip: '127.0.0.1', location: '北京' }
 // 获取当前时间问候
 const great = getGreat();
+
+const scentence = await getScentence();
+// console.log(scentence, 'scentence');
 // 最新文章
 const recommendArticles = getRecommendArticles();
 // Google 广告组件
@@ -64,22 +67,39 @@ import "./Aside.less";
 			</section>
 		)
 	}
+	<!-- 随机句子块 -->
+	{
+		AsideShow.ScentenceShow && (
+			<section class="w-full byt-aside-item !p-0">
+				<div class="header text-center text-xl !tracking-widest leading-[48px] text-[#fff] w-full !bg-[var(--byt-main-color)]">
+					<img src="/assets/images/lazy-loading.webp" data-byt-lz-src={SITE_CONFIG.imgApi} alt={scentence.from} />
+				</div>
+				<p class="line-clamp-2 text-left px-2">{scentence.hitokoto}</p>
+				<div class="footer w-full flex justify-between px-2 pb-2">
+					<span></span>
+					<div class="right flex items-center gap-1 text-xs">
+						<span>——《{scentence.from} · {scentence.from_who}》</span>
+					</div>
+				</div>
+			</section>
+		)
+	}
 	<!-- 博客路牌块 -->
 	{
 		AsideShow.BlogsignageShow && SITE_CONFIG.Blogsignage && (
 			<section class="w-full byt-aside-item !p-0">
-				<div class="header text-center text-xl leading-[42px] text-[#fff] w-full !bg-[var(--byt-main-color)]">
+				<div class="header text-center text-xl !tracking-widest leading-[48px] text-[#fff] w-full !bg-[var(--byt-main-color)]">
 					<p>{SITE_CONFIG.Blogsignage}</p>
 				</div>
-				<div class="footer w-full flex items-center justify-between p-2">
+				<div class="footer w-full flex items-center justify-between px-2 pb-2">
 					<div class="left flex items-center gap-1">
-						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><!-- Icon from Material Design Icons by Pictogrammers - https://github.com/Templarian/MaterialDesign/blob/master/LICENSE --><path fill="#888888" d="M20 9v6h-8v4.84L4.16 12L12 4.16V9z"/></svg>
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><!-- Icon from Material Design Icons by Pictogrammers - https://github.com/Templarian/MaterialDesign/blob/master/LICENSE --><path fill="currentColor" d="M20 9v6h-8v4.84L4.16 12L12 4.16V9z"/></svg>
 						西
 					</div>
-					<span class="text-[#888888]">{SITE_CONFIG.Author}</span>
-					<div class="left flex items-center gap-1">
+					<span>{SITE_CONFIG.Author}</span>
+					<div class="right flex items-center gap-1">
 						东
-						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><!-- Icon from Material Design Icons by Pictogrammers - https://github.com/Templarian/MaterialDesign/blob/master/LICENSE --><path fill="#888888" d="M4 15V9h8V4.16L19.84 12L12 19.84V15z"/></svg>
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><!-- Icon from Material Design Icons by Pictogrammers - https://github.com/Templarian/MaterialDesign/blob/master/LICENSE --><path fill="currentColor" d="M4 15V9h8V4.16L19.84 12L12 19.84V15z"/></svg>
 					</div>
 				</div>
 			</section>
@@ -105,7 +125,7 @@ import "./Aside.less";
 	}
 	<!-- 公告块 -->
 	{
-		SITE_CONFIG.Tips && (
+		SITE_CONFIG.Tips && !AsideShow.GreatShow && (
 			<section class="byt-aside-item tips">
 				<span>
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

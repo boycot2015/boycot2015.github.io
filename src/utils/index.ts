@@ -122,6 +122,12 @@ const getIP = async (): Promise<{ip: string, location: string}> => {
         ip: data.ip,
         location: [location?.content?.address_detail?.province, location?.content?.address_detail?.city, location?.content?.address_detail?.district].join(' '),
       };
+    }).catch(err => {
+      console.error("GET request failed:", err);
+      return {
+        ip: '127.0.0.1',
+        location: '北京',
+      };
     });
 }
 
@@ -139,5 +145,12 @@ const getGreat = () => {
     return '下午好 饮茶先啦！'
   }
 }
-
-export { $GET, $POST, getDescription, fmtTime, fmtDate, fmtPage, LoadScript, LoadStyle, getIP, getGreat }
+const getScentence = async () => {
+  return await fetch(`${SITE_CONFIG.HitokotoApi}?c=i&encode=json&r=${Math.random().toString(36).slice(-5)}`)
+    .then(response => response.json()).then(data => data)
+    .catch(err => {
+      console.error("GET request failed:", err);
+      return '未知一言';
+    });
+}
+export { $GET, $POST, getDescription, fmtTime, fmtDate, fmtPage, LoadScript, LoadStyle, getIP, getGreat, getScentence }

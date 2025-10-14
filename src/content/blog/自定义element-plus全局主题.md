@@ -4,6 +4,8 @@ description: "自定义element-plus全局主题"
 date: "2025-02-06T11:23:00Z"
 categories: element-plus主题
 tags: ['element-plus', '主题']
+recommend: true
+
 ---
 # 设置方法
 通过设置主要颜色变量实现换肤

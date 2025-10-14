@@ -46,7 +46,13 @@ export default defineConfig({
         remarkPlugins: [remarkMath, remarkDirective, remarkNote,],
         rehypePlugins: [rehypeKatex, rehypeSlug, addClassNames],
         // syntaxHighlight: 'shiki',
-        // shikiConfig: { theme: 'github-light' },
+        shikiConfig: {
+             // github min vitesse solarized everforest
+            themes: {
+              light: 'vitesse-light',
+              dark: 'vitesse-dark',
+            },
+          },
     },
     vite: {
       resolve: { alias: { "@": path.resolve(__dirname, "./src") } },

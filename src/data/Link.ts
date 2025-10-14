@@ -6,10 +6,10 @@ export default {
   // api 为空则使用 data 静态数据
   data: [
     {
-      "name": "boycot博客",
+      "name": "boycot",
       "link": "https://www.boycot.top",
       "avatar": "https://www.boycot.top/favicon.svg",
-      "descr": "越努力越幸运."
+      "descr": "专注于前开发与相关技术的实战分享"
     },
     {
       "name": "boycot-nuxt博客",
@@ -46,7 +46,24 @@ export default {
       "link": "https://blog.zhheo.com/",
       "avatar": "https://blog.zhheo.com//img/favicon4.0.webp",
       "descr": "分享设计与科技生活"
-
-    }
+    },
+    {
+      "name": "每日手记",
+      "link": "https://dailynote.boycot.top/",
+      "avatar": "https://dailynote.boycot.top/favicon.svg",
+      "descr": "记录美好生活"
+    },
+    {
+      "name": "一言",
+      "link": "https://hitokoto.cn/",
+      "avatar": "https://hitokoto.cn/favicon.ico",
+      "descr": "一言，一个在线的句子生成网站。"
+    },
+    {
+      "name": "BIIBII - 记录生活中的技术脉搏",
+      "link": "https://www.biibii.cn/",
+      "avatar": "https://www.biibii.cn/usr/themes/HarmonyHues/assets/images/favicon.webp",
+      "descr": "记录生活中的技术脉搏"
+    },
   ]
 }

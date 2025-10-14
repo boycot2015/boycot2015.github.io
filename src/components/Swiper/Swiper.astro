@@ -1,27 +1,39 @@
 ---
+import SITE_INFO from '@/config';
+import { getRecommendArticles } from '@/utils/getPostInfo';
 const { data } = Astro.props;
 let reg = /url\("?'?.*"?'?\)/g
 let regReplace = /"|'|url|\(|\)/g;
+type Banner = {title: string, url?: string, img?: string, target?: string, id: string|number}
+let list: Banner[] = []
+const getBannerList = async () => {
+    list = await Promise.all(data.map(async (el: Banner) => {
+        if (el.title) return {title: el.title, img: el.img || el, url: el.url || null, id: Math.random()}
+        let res = await fetch(SITE_INFO.HitokotoApi + '?c=j&encode=text&r=' + Math.random()).then(res => res.text())
+        return {title: res || el.title, img: el.img || el, id: Math.random()}
+    }));
+    let recommends = await getRecommendArticles()
+    list = await list.concat(...recommends.map((i: Banner) => ({...i, url: '/article/' + (i.id || i.title)}))).reverse();
 
-const getImageUrl = (item: string) => item.match(reg)?.[0].replace(regReplace, '');
+};
+await getBannerList();
+const getImageUrl = (item?: string, id?: number|string) => item?.match(reg)?.[0].replace(regReplace, '') || item || (SITE_INFO.imgApi + '?t=' + Date.now() + id);
 ---
 <!-- 轮播容器 -->
- <div class="banner-swiper w-full mb-4">
+ <div class="banner-swiper w-full mb-4 overflow-hidden max-h-[10.88rem] md:max-h-[16.88rem]">
      <div class="swiper" id="swiper">
          <div class="swiper-wrapper">
-             {data.map((item:string) => (
-                 <div class="swiper-slide overflow-hidden">
-                     <img class="rounded-md object-cover w-full h-[10.88rem] md:h-[16.88rem]" data-byt-lz-src={getImageUrl(item)} alt="" />
+             {list.map((item, index) => (
+                 <div class="swiper-slide w-full overflow-hidden">
+                    <a href={item.url || ''} target={item.target || "_self"} onclick={item.url ? '' : 'event.preventDefault()'} rel="noopener nofollow">
+                     <img class="rounded-[var(--byt-main-radius)] object-cover w-full h-[10.88rem] md:h-[16.88rem]" data-byt-lz-src={getImageUrl(item.img, item.id || index)} src="/assets/images/lazy-loading.webp" alt="" />
+                     {item.title&& <div class="text-xl text-[var(--byt-font-color)] bg-[var(--byt-white-color)] px-1 rounded-bl-[0.2rem] absolute top-0 right-0">{item.title}</div>}
+                     </a>
                  </div>
              ))}
          </div>
          <div class="swiper-pagination"></div>
+         <div class="swiper-button-prev !hidden"></div>
+         <div class="swiper-button-next !hidden"></div>
      </div>
-     <!-- <div class="swiper">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide">slider1</div>
-          <div class="swiper-slide">slider2</div>
-          <div class="swiper-slide">slider3</div>
-        </div>
-      </div> -->
  </div>
