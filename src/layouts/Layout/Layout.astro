@@ -10,6 +10,7 @@ import Head from "@/components/Head/Head.astro";
 import Header from "@/components/Header/Header.astro";
 // Main 区域 Header
 import MainHeader from "@/components/MainHeader/MainHeader.astro";
+import Swiper from "@/components/Swiper/Swiper.astro";
 // Aside组件
 import Aside from "@/components/Aside/Aside.astro";
 // 底部 Footer
@@ -37,16 +38,17 @@ import '@/styles/global.css'
 		<Fragment
 			set:html={`<style>:root {${Object.entries(Theme)
 				.map(([key, value]) => `${key}:${value};`)
-				.join("")}--byt-main-header-height:${Home ? HomeBanner.HomeHeight : HomeBanner.PageHeight};--byt-home-banner:${pagecover?`url(${pagecover}) center/100% no-repeat`:HomeBanner.background}}</style>`}
+				.join("")}--byt-main-header-height:${Home ? HomeBanner.HomeHeight : HomeBanner.PageHeight};--byt-home-banner:${pagecover?`url(${pagecover}) center/100% no-repeat`:HomeBanner.background.split(',')[0]}}</style>`}
 		/>
 	</Head>
 	<body>
 		<MobileSidebar />
 		<Header activeNav={activeNav} />
 		<main class="main">
-			{HomeBanner.enable && <MainHeader />}
-			<section class="main-inner" style={`padding-top:${HomeBanner.enable ? "0.88rem" : "calc(66px + 0.68rem)"};flex-direction:${AsideShow.position === 'left' ? 'row-reverse' : 'row'}`}>
+			{HomeBanner.enable && HomeBanner.type !== 'swiper' && <MainHeader />}
+			<section class="main-inner" style={`padding-top:${HomeBanner.enable && HomeBanner.type !== 'swiper' ? "0.88rem" : "calc(66px + 0.68rem)"};flex-direction:${AsideShow.position === 'left' ? 'row-reverse' : 'row'}`}>
 				<section class="main-inner-content">
+					{HomeBanner.enable && HomeBanner.type === 'swiper' && Home && <Swiper data={HomeBanner.background?.split(',') || []} />}
 					<slot />
 				</section>
 				<Aside />

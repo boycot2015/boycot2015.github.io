@@ -12,7 +12,7 @@
   "include": [
     ".astro/types.d.ts",
     "**/*"
-  ],
+, "public/assets/js/tiny-swiper.min.js"  ],
   "exclude": [
     "dist"
   ]

@@ -30,12 +30,24 @@ export default {
   // 顶部 Banner 配置
   HomeBanner: {
     enable: true,
+    type: 'swiper', // image | swiper, 默认 image
+    swiperOptions: {
+      loop: true,
+      autoplay: {
+       delay: 3000,
+       disableOnInteraction: true
+      },
+      pagination: {
+       el: '.swiper-pagination',
+       clickable: true
+      }
+     },
     // 首页高度
     HomeHeight: '38.88rem',
     // 其他页面高度
     PageHeight: '28.88rem',
     // 背景
-    background: "url('https://bing.img.run/rand.php') no-repeat center 60%/cover",
+    background: "url('https://bing.img.run/rand.php') no-repeat center 60%/cover,url('https://bing.img.run/rand.php?t=1696428800') no-repeat center 60%/cover,url('https://bing.img.run/rand.php?t=1696428801') no-repeat center 60%/cover", // swiper 类型时生效，多张图片时逗号隔开，例如：'url1, url2, url3'
     // background: "url('/assets/images/home-banner.webp') no-repeat center 60%/cover",
   },
   // 博客主题配置
@@ -50,7 +62,7 @@ export default {
     // 全局圆角
     "--byt-main-radius": "0.28rem",
     // 主体内容宽度
-    "--byt-main-max-width": "1458px",
+    "--byt-main-max-width": "1200px", // 大 1458px 小 1200px
   },
   // 导航栏 (新窗口打开 target: true)
   Navs: [
@@ -68,7 +80,6 @@ export default {
   NavsShow: {
     position: 'center', // 导航栏位置 center | right, 默认 center
   },
-  GreatShow: true,
   // 侧边栏个人网站
   WebSites: [
     // 仅支持 SVG 且 SVG 需放在 public/assets/images/svg/ 目录下，填入文件名即可 <不需要文件后缀名>（封装了 SVG 组件 为了极致压缩 SVG）
@@ -77,15 +88,21 @@ export default {
     { text: 'boycotAPI', link: 'https://api.boycot.top', icon: 'WebSite_api' },
     { text: '每日热榜', link: 'https://news.boycot.top', icon: 'WebSite_hot' },
   ],
+  // 博客路牌
+  Blogsignage: '我在深圳很想你',
   // 侧边栏展示
   AsideShow: {
     position: 'right', // 侧边栏位置 left | right, 默认 right
+    // 是否展示欢迎语
+    GreatShow: true,
     // 是否展示个人网站
     WebSitesShow: true,
     // 是否展示分类
-    CategoriesShow: true,
+    CategoriesShow: false,
     // 是否展示标签
     TagsShow: true,
+    // 是否展示博客路牌
+    BlogsignageShow: true,
     // 是否展示推荐文章
     recommendArticleShow: true
   },

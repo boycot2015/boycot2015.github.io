@@ -44,6 +44,7 @@ import SmoothScroll from "@/scripts/Smoothscroll";
 
 // 主题切换
 import ThemeProviderInit from "@/scripts/ThemeProvider";
+import SwiperInit from "@/scripts/Swiper";
 
 
 
@@ -63,6 +64,8 @@ const indexInit = async (only: boolean = true) => {
   // 图片灯箱
   only && ViewImage();
   only && ThemeProviderInit();
+  // Swiper 轮播插件加载
+  SwiperInit();
   // 初始化文章代码块
   codeInit();
   // 图片懒加载初始化

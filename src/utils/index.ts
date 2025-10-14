@@ -99,7 +99,7 @@ const $POST = async (url: string, data: Record<string, any>, headers: Record<str
 
 
 const getIP = async (): Promise<{ip: string, location: string}> => {
-  if (!SITE_CONFIG.GreatShow) {
+  if (!SITE_CONFIG.AsideShow?.GreatShow) {
     return {
       ip: '127.0.0.1',
       location: '北京',
