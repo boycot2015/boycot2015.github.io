@@ -20,7 +20,7 @@ await getBannerList();
 const getImageUrl = (item?: string, id?: number|string) => item?.match(reg)?.[0].replace(regReplace, '') || item || (SITE_INFO.imgApi + '?t=' + Date.now() + id);
 ---
 <!-- 轮播容器 -->
- <div class="banner-swiper w-full mb-4 overflow-hidden max-h-[10.88rem] md:max-h-[16.88rem]">
+ <div class="banner-swiper w-full mb-4 overflow-hidden shadow-[var(--byt-box-shadow)] rounded-[var(--byt-main-radius)] max-h-[10.88rem] md:max-h-[16.88rem]">
      <div class="swiper" id="swiper">
          <div class="swiper-wrapper">
              {list.map((item, index) => (

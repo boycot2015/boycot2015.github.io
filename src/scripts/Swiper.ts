@@ -7,15 +7,7 @@ export default async () => {
   if (!document.querySelector('.swiper')) return
   await LoadStyle("/assets/css/swiper.min.css");
   await LoadScript("/assets/js/swiper.min.js");
-  const mySwiper = new Swiper('.swiper', {
-      ...swiperOptions,
-    //   slidesPerView: 1,
-    //   spaceBetween: 30,
-    //   pagination: {
-    //     clickable: true,
-    //   },
-  });
-  console.dir(mySwiper);
+  const mySwiper = new Swiper('.swiper', swiperOptions);
   //鼠标移出隐藏按钮，移入显示按钮
   mySwiper.el.onmouseover = function() {
     mySwiper.navigation.nextEl.classList.remove('!hidden');

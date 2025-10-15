@@ -8,6 +8,8 @@ import Layout from "@/layouts/Layout/Layout.astro";
 // 评论组件
 import { checkComment } from "@/scripts/Comment";
 import Comment from "@/components/Comment/Comment.astro";
+// Aside组件
+import Aside from "@/components/Aside/Aside.astro";
 // ToolLayout 布局样式
 import "./ToolLayout.less";
 // 文章内容基础样式
@@ -24,4 +26,10 @@ import "@/styles/ArticleBase.less";
 		<main class={`${frontmatter.type}-main main`}><section class="byt-space-loading"><span></span><span></span><span></span></section></main>
 		{checkComment() && frontmatter.comment != false && <Comment />}
 	</section>
+	<!-- <Aside slot="aside" /> -->
+	<!-- <script>
+		import InitFn from "@/scripts/Init";
+		// 全局初始化
+		InitFn();
+	</script> -->
 </Layout>

@@ -1,15 +1,31 @@
 
 // 滚动条高度变化事件======
 const scrollChangeFn = () => {
+  // clearTimeout(timer);
   const scrollHeight = document.documentElement.scrollHeight;
   const clientHeight = window.innerHeight;
   const percentage = (window.scrollY / (scrollHeight - clientHeight)) * 100;
+  let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  if (scrollTop > lastScrollTop) {
+    // console.log('向下滚动');
+    header?.classList?.add("active");
+    aside?.classList?.remove("active");
+
+  } else {
+    // console.log('向上滚动');
+    header?.classList?.remove("active");
+    aside?.classList?.add("active");
+  }
+  lastScrollTop = scrollTop;
   // 显示隐藏
   backTop.classList[percentage <= 0 ? "remove" : "add"]("active");
   // 进度为 不在范围内
   if (percentage < 0 || percentage > 100) return;
   // 进度不为 0
   circle.style.strokeDashoffset = circumference - (percentage / 100) * circumference;
+  // timer = setTimeout(() => {
+  //   header.classList.remove("active");
+  // }, 300);
 };
 // 返回顶部事件
 const backTopFn = () => {
@@ -17,15 +33,21 @@ const backTopFn = () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
   (window as any).vhlenis && (window as any).vhlenis.start();
 };
+let timer: any = null;
+let lastScrollTop = 0;
 // 页面更新，初始化函数======
 // 回顶部DOM
 let backTop: any = document.querySelector(".byt-back-top");
+let aside: any = document.querySelector(".sticky-aside");
+let header: any = document.querySelector(".byt-header");
 // 彩虹圈圈 DOM
 let circle: any = document.querySelector(".byt-back-top>svg>circle");
 const circumference = 2 * Math.PI * 10;
 
 //  初始化
 export default () => {
+  header = document.querySelector(".byt-header");
+  aside = document.querySelector(".sticky-aside");
   // 更新 彩虹圈圈 DOM
   circle = document.querySelector(".byt-back-top>svg>circle");
   // 更新 回顶部DOM

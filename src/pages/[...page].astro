@@ -1,4 +1,5 @@
 ---
+// 网站配置
 import { getCollection } from "astro:content";
 import type { GetStaticPathsOptions } from "astro";
 import setSearchJson from "@/utils/Search";
@@ -21,7 +22,9 @@ const { page } = Astro.props;
 const { data, ...pageData } = page;
 // 页面 Info
 import SITE_CONFIG from "@/config";
-const { Description } = SITE_CONFIG;
+const { Description, HomeBanner } = SITE_CONFIG;
+
+import Swiper from "@/components/Swiper/Swiper.astro";
 // 博客列表组件
 import ArticleCard from "@/components/ArticleCard/ArticleCard.astro";
 // 公共 Layout
@@ -29,11 +32,13 @@ import Layout from "@/layouts/Layout/Layout.astro";
 // 分页组件
 import Pagination from "@/components/Pagination/Pagination.astro";
 const currentPage = pageData.url.current.replace("/", "");
+
 ---
 
-<Layout title={currentPage ? `第${currentPage}页文章` : ""} description={Description} Home={true}>
-	<section class="article-list-main">
-		<section class="article-list">
+<Layout title={currentPage ? `第${currentPage}页文章` : ""} description={Description} Home={true} activeNav={'home'}>
+	<section class="article-list-main byt-animation byt-animation-init">
+		{HomeBanner.enable && HomeBanner.type === 'swiper' && <Swiper data={HomeBanner.list || HomeBanner.background?.split(',') || []} />}
+		<section class="article-list w-full">
 			<!-- 文章列表 -->
 			{data.map((post, index) => <ArticleCard post={post} index={index} />)}
 			<!-- 分页 -->

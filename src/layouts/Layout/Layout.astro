@@ -1,5 +1,5 @@
 ---
-const { title, keywords, description, pagecover, activeNav, Home } = Astro.props;
+const { title, keywords, description, pagecover, activeNav, Home, hideAside } = Astro.props;
 // 网站配置
 import SITE_INFO from "@/config";
 const { GoogleAds, Theme, HomeBanner, AsideShow } = SITE_INFO;
@@ -10,15 +10,14 @@ import Head from "@/components/Head/Head.astro";
 import Header from "@/components/Header/Header.astro";
 // Main 区域 Header
 import MainHeader from "@/components/MainHeader/MainHeader.astro";
-import Swiper from "@/components/Swiper/Swiper.astro";
-// Aside组件
-import Aside from "@/components/Aside/Aside.astro";
 // 底部 Footer
 import Footer from "@/components/Footer/Footer.astro";
 // 返回顶部
 import FixBar from "@/components/FixBar/index.astro";
 // 手机端侧边栏
 import MobileSidebar from "@/components/MobileSidebar/MobileSidebar.astro";
+// Aside 侧边栏
+import Aside from "@/components/Aside/Aside.astro";
 // A Modern CSS Reset
 import "@/styles/Reset.less";
 // 全局基础样式
@@ -26,6 +25,8 @@ import "@/styles/Base.less";
 // Layout 样式
 import "./Layout.less";
 import '@/styles/global.css'
+console.log(Astro.url.pathname);
+
 ---
 
 <html lang="zh-CN">
@@ -48,10 +49,10 @@ import '@/styles/global.css'
 			{HomeBanner.enable && HomeBanner.type !== 'swiper' && <MainHeader />}
 			<section class="main-inner" style={`padding-top:${HomeBanner.enable && HomeBanner.type !== 'swiper' ? "0.88rem" : "calc(66px + 0.68rem)"};flex-direction:${AsideShow.position === 'left' ? 'row-reverse' : 'row'}`}>
 				<section class="main-inner-content">
-					{HomeBanner.enable && HomeBanner.type === 'swiper' && Home && <Swiper data={HomeBanner.list || HomeBanner.background?.split(',') || []} />}
 					<slot />
 				</section>
 				<Aside />
+				<slot name="aside" />
 			</section>
 		</main>
 		<FixBar />

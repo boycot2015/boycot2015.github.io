@@ -31,13 +31,18 @@ import { checkComment } from "@/scripts/Comment";
 import Comment from "@/components/Comment/Comment.astro";
 // Google 广告组件
 import GoogleAd from "@/components/GoogleAd/GoogleAd.astro";
+// Aside组件
+import Aside from "@/components/Aside/Aside.astro";
 // 文章页面样式
 import "@/styles/Article.less";
 // 文章内容基础样式
 import "@/styles/ArticleBase.less";
+const { headings } = await render(post);
+console.log(headings); // headings
+
 ---
 
-<Layout title={post.data.title} keywords={post.data.tags} description={description} pagecover={ARTICLE_COVER}>
+<Layout title={post.data.title} keywords={post.data.tags} description={description} pagecover={ARTICLE_COVER} hideAside={true}>
 	<article class="byt-article-main byt-animation byt-animation-init">
 		<header>
 			<h1>{post.data.title}</h1>
@@ -82,5 +87,33 @@ import "@/styles/ArticleBase.less";
 			{GoogleAds.ad_Client && GoogleAds.articleAD_Slot && <GoogleAd className="byt-article-ad" slotID={GoogleAds.articleAD_Slot} />}
 		</footer>
 		{checkComment() && <Comment />}
+		<!-- <astro-anchor data-post={JSON.stringify(post)}></astro-anchor> -->
 	</article>
+	<!-- <Aside slot="aside">
+		<section class="byt-aside-item anchor">
+			<ul>
+				{headings.map((i: any) => (
+					<li>
+						<a href={`#${i.slug}`}>{i.text}</a>
+					</li>
+				))}
+			</ul>
+		</section>
+	</Aside> -->
 </Layout>
+<script>
+	// import Anchor from "@/scripts/Anchor";
+	class AstroAnchor extends HTMLElement {
+	  connectedCallback() {
+		// 从 data（数据）属性中读取消息。
+		const post = this.dataset.post;
+		// console.log(JSON.parse(post as string));
+		// Anchor(post)
+		// document.addEventListener("swup:enable", (e) => {
+		// 	console.log(e, 'eeeeee');
+		// 	!post && document.querySelector('.byt-aside-item.anchor')?.classList.add('!hidden');
+		// })
+	  }
+	}
+	customElements.define('astro-anchor', AstroAnchor);
+  </script>

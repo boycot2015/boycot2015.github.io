@@ -12,7 +12,7 @@ import musicInit from "@/scripts/Music";
 // 初始化 LivePhoto
 import livePhotoInit from '@/scripts/LivePhoto'
 // 初始化BackTop组件
-import BackTopInitFn from "@/scripts/BackTop";
+import ScrollInitFn from "@/scripts/ScrollFn";
 // 搜索
 import { searchFn, SearchInit } from "@/scripts/Search";
 // 图片懒加载
@@ -44,6 +44,8 @@ import SmoothScroll from "@/scripts/Smoothscroll";
 
 // 主题切换
 import ThemeProviderInit from "@/scripts/ThemeProvider";
+
+// Swiper 轮播插件加载
 import SwiperInit from "@/scripts/Swiper";
 
 
@@ -57,8 +59,8 @@ let commentLIst: any = { walineInit: null };
 const indexInit = async (only: boolean = true) => {
   // 初始化网站运行时间
   only && initWebSiteTime();
-  // 初始化BackTop组件
-  only && BackTopInitFn();
+  // 初始化滚动组件
+  only && ScrollInitFn();
   // SmoothScroll 滚动优化
   only && SmoothScroll();
   // 图片灯箱

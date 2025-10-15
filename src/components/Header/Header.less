@@ -6,10 +6,17 @@ header.byt-header {
   width: 100vw;
   height: 66px;
   backdrop-filter: blur(2rem);
-  background-color: rgba(from var(--byt-white-color) r g b / 36%);
+  // background-color: rgba(from var(--byt-white-color) r g b / 36%);
   box-shadow: var(--byt-box-shadow);
-  transition: background-color 0.18s ease-in-out;
+  background-image: radial-gradient(transparent 1px, var(--byt-white-color) 1px);
+  background-size: 4px 4px;
+  -webkit-backdrop-filter: saturate(50%) blur(5px);
+  backdrop-filter: saturate(50%) blur(5px);
+  -webkit-box-shadow: var(--byt-box-shadow) !important;
+  box-shadow: var(--byt-box-shadow) !important;
+  transition: all 0.18s ease-in-out;
   z-index: 9;
+  transform: translateY(0);
   &>section {
     margin: 0 auto;
     box-sizing: border-box;
@@ -93,6 +100,9 @@ header.byt-header {
       }
 
     }
+  }
+  &.active {
+    transform: translateY(-66px);
   }
 }
 

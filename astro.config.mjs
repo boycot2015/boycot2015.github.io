@@ -49,8 +49,8 @@ export default defineConfig({
         shikiConfig: {
              // github min vitesse solarized everforest
             themes: {
-              light: 'vitesse-light',
-              dark: 'vitesse-dark',
+              light: 'everforest-light',
+              dark: 'everforest-dark',
             },
           },
     },

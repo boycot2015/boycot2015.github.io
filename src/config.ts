@@ -108,7 +108,7 @@ export default {
     // 是否展示一言
     ScentenceShow: true,
     // 是否展示欢迎语
-    GreatShow: true,
+    GreatShow: import.meta.env.PROD,
     // 是否展示个人网站
     WebSitesShow: true,
     // 是否展示分类
@@ -135,7 +135,7 @@ export default {
   },
   Api: 'https://api-v2.boycot.top/v2',
   // 博客音乐组件是否开启
-  musicBoxShow: true,
+  musicBoxShow: import.meta.env.PROD,
   // 评论组件（只允许同时开启一个）
   Comment: {
     // Twikoo 评论

@@ -8,16 +8,19 @@ aside.byt-aside {
   gap: 1rem;
   width: var(--byt-aside-width);
   height: auto;
-
   &>.sticky-aside {
     position: -webkit-sticky;
     position: sticky;
-    top: calc(66px + 1rem);
+    top: calc(0px + 1rem);
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     gap: 1rem;
     width: 100%;
+    transition: all 0.3s ease-in-out;
+    &.active {
+      top: calc(66px + 1rem);
+    }
   }
 
   .byt-aside-item {
