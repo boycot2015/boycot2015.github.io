@@ -38,81 +38,75 @@ import "@/styles/Article.less";
 // 文章内容基础样式
 import "@/styles/ArticleBase.less";
 const { headings } = await render(post);
-console.log(headings); // headings
 
 ---
 
-<Layout title={post.data.title} keywords={post.data.tags} description={description} pagecover={ARTICLE_COVER} hideAside={true}>
-	<article class="byt-article-main byt-animation byt-animation-init">
-		<header>
-			<h1>{post.data.title}</h1>
-			<div class="article-meta">
-				<span class="article-meta-item">
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path><path d="M12 12h3.5"></path><path d="M12 7v5"></path></svg>
-					<time>{fmtTime(post.data.date, "YYYY-MM-DD A")}</time>
-					<span class="count"><strong>{article_word_count || "一点"}</strong>字</span>
-					<span class="time"><strong>{parseFloat((Number(reading_time) || 0).toFixed(1).replace(/\.0+$/, ""))}</strong>分钟</span>
-				</span>
-				<a class="article-meta-item" href={`/categories/${post.data.categories}`}>
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M4 6h16"></path><path d="M7 12h13"></path><path d="M10 18h10"></path></svg>
-					<span>{post.data.categories}</span>
-				</a>
-			</div>
-		</header>
-		<main>
-			<!-- 音乐组件 -->
-			{post.data.music && <div class="byt-node byt-music" data-config={JSON.stringify({ type: post.data.music?.type, server: post.data.music?.server, id: post.data.music?.id })}></div>}
-			<Content />
-			<section class="tag-list">
-				{
-					(post.data.tags || []).map((i: any) => (
-						<a href={`/tag/${i}`}>
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-								<path d="M7.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-								<path d="M3 6v5.172a2 2 0 0 0 .586 1.414l7.71 7.71a2.41 2.41 0 0 0 3.408 0l5.592 -5.592a2.41 2.41 0 0 0 0 -3.408l-7.71 -7.71a2 2 0 0 0 -1.414 -.586h-5.172a3 3 0 0 0 -3 3z" />
-							</svg>
-							{i}
-						</a>
-					))
-				}
-			</section>
-		</main>
-		<footer>
-			<!-- 打赏组件 -->
-			{SITE_CONFIG.Reward && (SITE_CONFIG.Reward.AliPay || SITE_CONFIG.Reward.WeChat) && <Reward />}
-			<!-- 版权©️信息 -->
-			<Copyright site={Site} id={post.data.id} title={post.data.title} sitename={Title} time={fmtTime(post.data.date, "YYYY-MM-DD A")} auther={Author} />
-			<!-- 底部谷歌广告 -->
-			{GoogleAds.ad_Client && GoogleAds.articleAD_Slot && <GoogleAd className="byt-article-ad" slotID={GoogleAds.articleAD_Slot} />}
-		</footer>
-		{checkComment() && <Comment />}
-		<!-- <astro-anchor data-post={JSON.stringify(post)}></astro-anchor> -->
+<Layout title={post.data.title} keywords={post.data.tags} description={description} pagecover={ARTICLE_COVER} headings={headings} activeNav="article">
+	<article class="byt-article-main byt-animation byt-animation-init main-inner">
+		<div class="main-inner-content">
+			<header>
+				<h1>{post.data.title}</h1>
+				<div class="article-meta">
+					<span class="article-meta-item">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path><path d="M12 12h3.5"></path><path d="M12 7v5"></path></svg>
+						<time>{fmtTime(post.data.date, "YYYY-MM-DD A")}</time>
+						<span class="count"><strong>{article_word_count || "一点"}</strong>字</span>
+						<span class="time"><strong>{parseFloat((Number(reading_time) || 0).toFixed(1).replace(/\.0+$/, ""))}</strong>分钟</span>
+					</span>
+					<a class="article-meta-item" href={`/categories/${post.data.categories}`}>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M4 6h16"></path><path d="M7 12h13"></path><path d="M10 18h10"></path></svg>
+						<span>{post.data.categories}</span>
+					</a>
+				</div>
+			</header>
+			<main>
+				<!-- 音乐组件 -->
+				{post.data.music && <div class="byt-node byt-music" data-config={JSON.stringify({ type: post.data.music?.type, server: post.data.music?.server, id: post.data.music?.id })}></div>}
+				<Content />
+				<section class="tag-list">
+					{
+						(post.data.tags || []).map((i: any) => (
+							<a href={`/tag/${i}`}>
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+									<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+									<path d="M7.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+									<path d="M3 6v5.172a2 2 0 0 0 .586 1.414l7.71 7.71a2.41 2.41 0 0 0 3.408 0l5.592 -5.592a2.41 2.41 0 0 0 0 -3.408l-7.71 -7.71a2 2 0 0 0 -1.414 -.586h-5.172a3 3 0 0 0 -3 3z" />
+								</svg>
+								{i}
+							</a>
+						))
+					}
+				</section>
+			</main>
+			<footer>
+				<!-- 打赏组件 -->
+				{SITE_CONFIG.Reward && (SITE_CONFIG.Reward.AliPay || SITE_CONFIG.Reward.WeChat) && <Reward />}
+				<!-- 版权©️信息 -->
+				<Copyright site={Site} id={post.data.id} title={post.data.title} sitename={Title} time={fmtTime(post.data.date, "YYYY-MM-DD A")} auther={Author} />
+				<!-- 底部谷歌广告 -->
+				{GoogleAds.ad_Client && GoogleAds.articleAD_Slot && <GoogleAd className="byt-article-ad" slotID={GoogleAds.articleAD_Slot} />}
+			</footer>
+			{checkComment() && <Comment />}
+			<astro-anchor data-post={JSON.stringify(post)}></astro-anchor>
+		</div>
 	</article>
-	<!-- <Aside slot="aside">
-		<section class="byt-aside-item anchor">
-			<ul>
-				{headings.map((i: any) => (
-					<li>
-						<a href={`#${i.slug}`}>{i.text}</a>
-					</li>
-				))}
-			</ul>
-		</section>
-	</Aside> -->
 </Layout>
 <script>
-	// import Anchor from "@/scripts/Anchor";
+	import { inRouter, outRouter } from "@/utils/updateRouter";
+	import Anchor from "@/scripts/Anchor";
 	class AstroAnchor extends HTMLElement {
 	  connectedCallback() {
 		// 从 data（数据）属性中读取消息。
-		const post = this.dataset.post;
+		const post = JSON.parse(this.dataset.post as string);
 		// console.log(JSON.parse(post as string));
-		// Anchor(post)
+		Anchor(post)
 		// document.addEventListener("swup:enable", (e) => {
 		// 	console.log(e, 'eeeeee');
 		// 	!post && document.querySelector('.byt-aside-item.anchor')?.classList.add('!hidden');
 		// })
+		inRouter(() => {
+			Anchor(post)
+		})
 	  }
 	}
 	customElements.define('astro-anchor', AstroAnchor);

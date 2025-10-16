@@ -26,6 +26,7 @@ const scrollChangeFn = () => {
   // timer = setTimeout(() => {
   //   header.classList.remove("active");
   // }, 300);
+  
 };
 // 返回顶部事件
 const backTopFn = () => {
@@ -43,7 +44,6 @@ let header: any = document.querySelector(".byt-header");
 // 彩虹圈圈 DOM
 let circle: any = document.querySelector(".byt-back-top>svg>circle");
 const circumference = 2 * Math.PI * 10;
-
 //  初始化
 export default () => {
   header = document.querySelector(".byt-header");

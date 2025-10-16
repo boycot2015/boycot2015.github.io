@@ -1,5 +1,5 @@
 ---
-const { title, keywords, description, pagecover, activeNav, Home, hideAside } = Astro.props;
+const { title, keywords, description, pagecover, activeNav, Home, headings } = Astro.props;
 // 网站配置
 import SITE_INFO from "@/config";
 const { GoogleAds, Theme, HomeBanner, AsideShow } = SITE_INFO;
@@ -25,8 +25,11 @@ import "@/styles/Base.less";
 // Layout 样式
 import "./Layout.less";
 import '@/styles/global.css'
-console.log(Astro.url.pathname);
-
+let aside = '';
+if (Astro.slots.has('aside')) {
+	console.log(Astro.slots, 'Astro.slots');
+	aside = await Astro.slots.render('aside', headings);
+}
 ---
 
 <html lang="zh-CN">
@@ -52,7 +55,6 @@ console.log(Astro.url.pathname);
 					<slot />
 				</section>
 				<Aside />
-				<slot name="aside" />
 			</section>
 		</main>
 		<FixBar />

@@ -70,15 +70,15 @@ import "./Aside.less";
 	<!-- 随机句子块 -->
 	{
 		AsideShow.ScentenceShow && (
-			<section class="w-full byt-aside-item !p-0">
-				<div class="header text-center text-xl !tracking-widest leading-[48px] text-[#fff] w-full !bg-[var(--byt-main-color)]">
+			<section class="w-full byt-aside-item scentence !p-0">
+				<div class="header text-center text-xl !tracking-widest leading-[48px] text-[#fff] w-full">
 					<img src="/assets/images/lazy-loading.webp" data-byt-lz-src={SITE_CONFIG.imgApi} alt={scentence.from} />
 				</div>
 				<p class="line-clamp-2 text-left px-2">{scentence.hitokoto}</p>
 				<div class="footer w-full flex justify-between px-2 pb-2">
 					<span></span>
 					<div class="right flex items-center gap-1 text-xs">
-						<span>——《{scentence.from} · {scentence.from_who}》</span>
+						<span>《{scentence.from}》{scentence.from_who ? `— [${scentence.from_who}]` : ''}</span>
 					</div>
 				</div>
 			</section>
@@ -87,7 +87,7 @@ import "./Aside.less";
 	<!-- 博客路牌块 -->
 	{
 		AsideShow.BlogsignageShow && SITE_CONFIG.Blogsignage && (
-			<section class="w-full byt-aside-item !p-0">
+			<section class="w-full byt-aside-item blogsignage !p-0">
 				<div class="header text-center text-xl !tracking-widest leading-[48px] text-[#fff] w-full !bg-[var(--byt-main-color)]">
 					<p>{SITE_CONFIG.Blogsignage}</p>
 				</div>
@@ -146,7 +146,10 @@ import "./Aside.less";
 	{
 		AsideShow.CategoriesShow && (
 			<section class="byt-aside-item cat">
-				<h3>分类</h3>
+				<h3 class="flex items-center gap-2">
+					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><!-- Icon from Tabler Icons by Paweł Kuna - https://github.com/tabler/tabler-icons/blob/master/LICENSE --><path fill="none" stroke="#888888" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4h6v6H4zm10 0h6v6h-6zM4 14h6v6H4zm10 3a3 3 0 1 0 6 0a3 3 0 1 0-6 0"/></svg>
+					分类
+				</h3>
 				<div class="byt-aside-cat">
 					{categories
 						.sort((a: any, b: any) => b.count - a.count)
@@ -165,7 +168,10 @@ import "./Aside.less";
 	{
 		AsideShow.TagsShow && (
 			<section class="byt-aside-item tags">
-				<h3>热门标签</h3>
+				<h3 class="flex items-center gap-2">
+					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><!-- Icon from Material Symbols by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="#888888" d="M4 22V8q0-.825.588-1.412T6 6h8q.825 0 1.413.588T16 8v14l-6-3zm14-4V4H7V2h11q.825 0 1.413.588T20 4v14z"/></svg>
+					热门标签
+				</h3>
 				<div class="byt-aside-tags">
 					{tags.map(i => (
 						<a href={`/tag/${i[0]}`}>
@@ -183,7 +189,10 @@ import "./Aside.less";
 		{
 			recommendArticles.length && AsideShow.recommendArticleShow && (
 				<section class="byt-aside-item articles">
-					<h3>推荐文章</h3>
+					<h3 class="flex items-center gap-2">
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 14 14"><!-- Icon from Streamline by Streamline - https://creativecommons.org/licenses/by/4.0/ --><g fill="none" stroke="#888888" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 2.5a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-9a1 1 0 0 0-1-1h-2m-7-2v4m7-4v4m-7-2h5"/><path d="M7 7.5c1-2 3-1 3 .5c0 2-3 3-3 3s-3-1-3-3c0-1.5 2-2.5 3-.5Z"/></g></svg>
+						推荐文章
+					</h3>
 					<div class="byt-aside-articles">
 						{recommendArticles.map((i, idx) => (
 							<a href={`/article/${i.id}`}>

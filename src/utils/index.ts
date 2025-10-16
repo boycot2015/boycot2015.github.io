@@ -153,4 +153,20 @@ const getScentence = async () => {
       return '未知一言';
     });
 }
-export { $GET, $POST, getDescription, fmtTime, fmtDate, fmtPage, LoadScript, LoadStyle, getIP, getGreat, getScentence }
+function debounce(fn: { apply: (arg0: any, arg1: any[]) => void; }, delay: number | undefined, immediate = false) {
+  let timer: NodeJS.Timeout | null | undefined = null;
+  let isInvoke = false;
+  return function(this: any, ...args: any[]) {
+    if(timer) clearTimeout(timer);
+    if(immediate && !isInvoke) {
+      fn.apply(this, args);
+      isInvoke = true;
+    } else {
+      timer = setTimeout(() => {
+        fn.apply(this, args);
+        isInvoke = false;
+      }, delay);
+    }
+  }
+ }
+export { $GET, $POST, getDescription, fmtTime, fmtDate, fmtPage, LoadScript, LoadStyle, getIP, getGreat, getScentence, debounce }
