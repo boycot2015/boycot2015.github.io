@@ -4,7 +4,7 @@ export default {
   // 网站图标
   Favicon: '/favicon.svg',
   // 网站地址
-  Site: 'https://astro-blog.boycot.top',
+  Site: 'https://www.boycot.top',
   // 网站副标题
   Subtitle: '专注于前开发与相关技术的实战分享',
   // 网站描述
@@ -84,6 +84,7 @@ export default {
     { text: '圈子', link: '/friends', icon: 'Nav_rss' },
     { text: '动态', link: '/talking', icon: 'Nav_talking' },
     { text: '新闻', link: '/news', icon: 'Nav_news' },
+    { text: '书籍', link: '/eBook', icon: 'Nav_book' },
     { text: '归档', link: '/archives', icon: 'Nav_archives' },
     { text: '留言', link: '/message', icon: 'Nav_message' },
     { text: '关于', link: '/about', icon: 'Nav_about' },
@@ -179,5 +180,5 @@ export default {
     paramsName: 'url'
   },
   // 页面阻尼滚动速度
-  ScrollSpeed: 500
+  ScrollSpeed: 888
 }

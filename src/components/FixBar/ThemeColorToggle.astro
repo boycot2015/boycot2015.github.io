@@ -2,20 +2,24 @@
 interface Props {
   className?: string;
 }
-const res = await fetch('https://zhongguose.com/colors.json', {})
-const colors = await res.json()
 const { className } = Astro.props;
-colors.map((el: { value: any; hex: any; }) => {
-  el.value = el.hex
-})
-// const colors = [
-//   { name: 'red', value: '#ef4444' },
-//   { name: 'orange', value: '#f97316' },
-//   // { name: 'yellow', value: 'yellow' },
-//   { name: 'green', value: '#10b981' },
-//   { name: 'blue', value: '#3b82f6' },
-//   { name: 'purple', value: '#8b5cf6' },
-// ];
+let colors:any = [
+  { name: 'red', value: '#ef4444' },
+  { name: 'orange', value: '#f97316' },
+  // { name: 'yellow', value: 'yellow' },
+  { name: 'green', value: '#10b981' },
+  { name: 'blue', value: '#3b82f6' },
+  // { name: 'purple', value: '#8b5cf6' },
+];
+try {
+  const res = await fetch('https://zhongguose.com/colors.json', {})
+  colors = await res.json()
+  colors.map((el: { value: any; hex: any; }) => {
+    el.value = el.hex
+  })
+} catch (error) {
+  console.log(error, 'ThemeColorToggle');
+}
 
 const getCurrentColor = () => {
   if (typeof window !== 'undefined') {

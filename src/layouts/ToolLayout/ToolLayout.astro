@@ -17,11 +17,15 @@ import "@/styles/ArticleBase.less";
 <Layout title={frontmatter.title || Title} description={Description} activeNav={frontmatter.type || "-"}>
 	<section class="byt-tools-main byt-animation byt-animation-init">
 		<header class="byt-page-header">
-			<h1>{frontmatter.h1}</h1>
-			<p>{frontmatter.desc}</p>
+			<h1>{frontmatter.h1 || frontmatter.title}</h1>
+			<p>{frontmatter.desc || frontmatter.description}</p>
 		</header>
 		<main><slot /></main>
-		<main class={`${frontmatter.type}-main main`}><section class="byt-space-loading"><span></span><span></span><span></span></section></main>
+		<main class={`${frontmatter.type}-main main`}>
+			{
+				frontmatter.type == 'eBook' ? null : <section class="byt-space-loading"><span></span><span></span><span></span></section>
+			}
+		</main>
 		{checkComment() && frontmatter.comment != false && <Comment />}
 	</section>
 </Layout>

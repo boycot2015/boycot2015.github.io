@@ -1,0 +1,405 @@
+---
+import Layout from "@/layouts/Layout/Layout.astro";
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+import { getAllbooks } from "@/data/ebook";
+export const getStaticPaths = (async () => {
+	const allbooks = await getAllbooks()
+	return allbooks.map((book) => ({
+		params: { slug: book.data.title },
+		props: { book, allbooks },
+	}));
+}) satisfies GetStaticPaths;
+export type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { book, allbooks } = Astro.props;
+const meta = {
+	description: book.data.description,
+	title: book.data.title,
+};
+// console.log(book, 'book');
+
+---
+<Layout Title={meta.title} Keywords={'eBook'} Description={meta.description} PageCover={book.data.img} activeNav="eBook">
+	<!-- 将消息存储为数据属性。 -->
+	<book-component data-book={JSON.stringify(book)}>
+		<div class="relative flex flex-col">
+			<div transition:name={`title-${book.data.title}`} class="flex flex-col">
+				<div class="flex justify-between items-center pb-2 border-b mb-4 border-b-[var(--byt-main-color)]">
+					<select id="books">
+						{allbooks.map(item => <option label={item.data.title} value={item.id}></option>)}
+					</select>
+					<h3 class="text-center flex-1 text-xl">{book.data.title}</h3>
+					<div class="cursor-pointer add-label-btn">+加入书签</div>
+				</div>
+				<div class="flex justify-between">
+					<select class="w-[40%]" id="columns">
+						<option label="请选择"></option>
+					</select>
+					<div>跳转第
+						<input class="border pager rounded-md mx-2 text-center w-[60px]" type="text" />页
+					</div>
+				</div>
+			</div>
+			<div transition:name={`img-${book.data.title}-${book.data.author}`} class="flex justify-center items-center my-4">
+				<div class="w-full !text-[var(--byt-font-color)] h-[300vh] overflow-hidden" id="book">
+					<!-- <div class="text-center my-20">资源加载中，请稍后...</div> -->
+					<section class="byt-space-loading"><span></span><span></span><span></span></section>
+				</div>
+			</div>
+			<div class="page flex justify-between">
+				<div class="btn-prev cursor-pointer hover:text-[var(--byt-font-color)]">← 上一页</div>
+				<div class="flex w-[60%] md:w-[auto] min-w-[80px] md:absolute right-[80px] top-[4px] items-center">
+					<select id="marks" class="max-w-[150px]">
+						<option label="请选择"></option>
+					</select>
+					<span class="ml-2 manager-btn relative">
+						<svg class="cursor-pointer hover:text-[var(--byt-font-color)]" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h8.925l-2 2H5v14h14v-6.95l2-2V19q0 .825-.587 1.413T19 21zm4-6v-4.25l9.175-9.175q.3-.3.675-.45t.75-.15q.4 0 .763.15t.662.45L22.425 3q.275.3.425.663T23 4.4t-.137.738t-.438.662L13.25 15zM21.025 4.4l-1.4-1.4zM11 13h1.4l5.8-5.8l-.7-.7l-.725-.7L11 11.575zm6.5-6.5l-.725-.7zl.7.7z"/></svg>
+						<div class="booksmarks-panel flex flex-col hidden absolute right-[-100%] bottom-[120%] md:bottom-[-140px] w-60 rounded-md bg-[var(--color-global-bg)] shadow-2xl">
+						</div>
+					</span>
+				</div>
+				<div class="btn-next cursor-pointer hover:text-[var(--byt-font-color)]">下一页 →</div>
+			</div>
+		</div>
+	</book-component>
+	<script>
+		import { rootInDarkMode } from "@/utils/domElement";
+		import Epub from 'epubjs'
+		import localforage from 'localforage'
+		import * as $api from '@/api/book'
+		import { showLoading, hideLoading } from '@/utils/Loading'
+		// import Message from '@/utils/Message'
+		// const message = new Message()
+		interface TreeObj  {
+			href: string
+			id: string
+			parent: string
+			label: string
+		}
+		interface Tree extends TreeObj {
+			subitems: Tree[]
+		}
+		class BookComponent extends HTMLElement {
+			data: any
+			book: any
+			themes: any
+			fontSize: number = 16
+			rendition: any
+			bookmarks: any[] = []
+			columns: any[] = []
+			columnsEl!: HTMLSelectElement
+			marksEl!: HTMLSelectElement
+			actionEl!: HTMLDivElement | null
+			booksmarksPanel!: HTMLDivElement | null
+			connectedCallback() {
+				this.init()
+			}
+			async init () {
+				// 从 data（数据）属性中读取消息。
+				const bookContainer = document.getElementById('book') as HTMLDivElement;
+				const booksSelect = document.getElementById('books') as HTMLSelectElement;
+				bookContainer && showLoading({container: bookContainer, text: '正在载入资源，请稍后...', fullscreen: false})
+				const data = JSON.parse(this.dataset.book as string);
+				booksSelect && (booksSelect.value = data.id)
+				let bookdata:any = await localforage.getItem('book_' + data.data.title)
+				let bookmarks = await localforage.getItem('book_marks_' + data.data.title) as any || []
+				if (!bookdata) {
+					let file = await fetch(data.data.file).then((res) => res.arrayBuffer())
+					localforage.setItem('book_' + data.data.title, file)
+					bookdata = file
+				}
+				let book:any = Epub(bookdata);
+				// 读取EPUB文件
+				// await book.loaded;
+				book.ready.then(() => {
+					bookContainer.innerHTML = ''
+					// 创建一个 Rendition，并指定要渲染 EPUB 的 HTML 元素
+					const rendition = book.renderTo(bookContainer, {
+						flow: "paginated", // paginated、scrolled-doc
+						width: '100%',
+						height: '100%',
+						stylesheet: '../../../assets/css/global.css',
+						spread: true,
+						// defaultDirection: '',
+						minSpreadWidth: 1200,
+						allowScriptedContent: true
+					});
+					this.data = data
+					this.book = book
+					this.rendition = rendition
+					this.bookmarks = bookmarks
+					this.themes = rendition.themes
+					// console.log(book, rendition, 'rendition')
+					
+					// 配置主题
+					this.registerTheme()
+	
+					// 加载目录
+					this.loadColumns()
+	
+					// 加载书签
+					this.loadMarks()
+	
+					// 加载页面
+					this.jumpTo((bookmarks[0]?.start?.cfi)|| 2)
+	
+					// 事件处理
+					let prevBtn = this.querySelector('.btn-prev') as HTMLDivElement
+					let nextBtn = this.querySelector('.btn-next') as HTMLDivElement
+					let pager = this.querySelector('.pager') as HTMLInputElement
+					let addLabel = this.querySelector('.add-label-btn') as HTMLInputElement
+	
+					prevBtn.onclick = () => this.pageChange()
+					nextBtn.onclick = () => this.pageChange('next')
+					pager.onblur = () => this.pageChange('pager')
+	
+					// 加入书签
+					addLabel.onclick = () => this.addMark()
+	
+					// 切换目录
+					this.columnsEl.onchange = (e) => this.columnsChange(e)
+	
+					// 切换书签
+					this.marksEl.onchange = (e) => this.changeMark(e.target)
+	
+					bookContainer && hideLoading()
+	
+				})
+				booksSelect && (booksSelect.onchange = (e:any) => {
+					window.location.href = '/eBook/' + e.target.value
+				})
+			}
+			getThemeList () {
+				return [
+					{
+						name: "default", // 主题名字
+						style: { // 主题样式
+							body: {
+								// '--byt-font-color': rootInDarkMode() ? '#fff !important' : '#333 !important',
+								padding: '0 !important',
+								background: 'transparent !important',
+								// color: 'var(--byt-font-color)',
+								// color: rootInDarkMode()?"var(--color-global-text) !important":"var(--color-global-text) !important", // 文字颜色
+								// background: rootInDarkMode()?"var(--color-global-bg)":"var(--color-global-bg)", // 背景颜色
+								lineColor: "#E4E3DF", // 主题中并无该属性，该属性为自定义目录下划线颜色
+							},
+							'.logo': {
+								display: 'none'
+							}
+						},
+					},
+					{
+						name: "twoTheme",
+						style: {
+							body: {
+							color: "#39342B",
+							background: "#D5C6A9",
+							lineColor: "#C6B89B",
+							},
+						},
+					},
+					{
+						name: "threeTheme",
+						style: {
+							body: {
+							color: "#94938F",
+							background: "#3A3031",
+							lineColor: "#3F3939",
+							},
+						},
+					},
+					{
+						name: "fourTheme",
+						style: {
+							body: {
+							color: "#313635",
+							background: "#CCE8D1",
+							lineColor: "#BCD8C1",
+							},
+						},
+					},
+					{
+						name: "fiveTheme",
+						style: {
+							body: {
+							color: "rgb(100,110,119)",
+							background: "#051827",
+							lineColor: "#0C1E2D",
+							},
+						},
+					},
+				]
+			}
+			loadColumns () {
+				let columnsEl = this.querySelector('#columns') as HTMLSelectElement
+				let columns = this.book.navigation.toc
+				const covert = (item: { href: string | number; id: any; parent: string; label: string }) => {
+					return {
+						...item,
+						href: ('' + item.href).replace(/(?!^)#.*/, ''),
+						label: item.label?.replace(/\n/g, '').split(' ').filter((el: any) => el).slice(-2).join(' ')
+					}
+				}
+				const travel = (arr:Tree[], temp: TreeObj[]) => {
+					arr.map(({ subitems, ...el }) => {
+						temp.push(covert({ ...el }))
+						subitems?.length && temp.concat(travel(subitems, temp))
+					})
+					return temp
+				}
+				columns = travel(columns, [])
+				columns.filter((el: { href: string }) => el.href).map((el: { label: string; href: string }) => {
+					let optionEl = document.createElement('option') as HTMLOptionElement
+					optionEl.label = el.label
+					optionEl.value = el.href
+					columnsEl.appendChild(optionEl)
+				})
+				columnsEl.value = this.bookmarks[0]?.start.href || ''
+				this.columns = columns
+				// console.log("locations:", columns, this.book.navigation)
+				this.columnsEl = columnsEl
+			}
+			loadMarks () {
+				let marksEl = this.querySelector('#marks') as HTMLSelectElement
+				marksEl.innerHTML = '<option label="请选择"></option>'
+				this.bookmarks.filter(el => el.label).map(el => {
+					let optionEl = document.createElement('option') as HTMLOptionElement
+					optionEl.label = el.label
+					optionEl.value = el.start.cfi
+					marksEl.appendChild(optionEl)
+				})
+				if (this.bookmarks.length && marksEl.value) this.changeMark(marksEl)
+				marksEl.value = this.bookmarks[0]?.start.cfi || ''
+				this.marksEl = marksEl
+				// 书签管理
+				this.renderBookMarksPanel()
+			}
+			// 渲染电子书后调用
+			registerTheme () {
+				// console.dir(this, 'this.themeList');
+				this.getThemeList().map((item) => {
+					this.themes.register(item.name, item.style);
+				});
+			}
+			// 触发改变电子书背景主题时调用
+			setTheme(index: number) {
+				this.themes.fontSize(this.fontSize + "px")
+				this.themes.select(this.getThemeList()[index]?.name);
+			}
+			addMark () {
+				let mark = {
+					...this.rendition.location,
+					label: this.columns.find(el => el.href.split('#')[0] === this.rendition.location.start?.href)?.label + '_' + this.rendition.location.start?.displayed.page
+				}
+				// console.log(this.columns, this.rendition.location.start, mark, 'rendition.location.start');
+				let has = this.bookmarks.find(el => el.label === mark.label)
+				if (!has) {
+					this.bookmarks.unshift(mark)
+					let optionEl = document.createElement('option') as HTMLOptionElement
+					optionEl.label = mark.label
+					optionEl.value = mark.start.cfi
+					this.marksEl.appendChild(optionEl)
+					// console.log(this.data, 'data');
+					localforage.setItem('book_marks_' + this.data.data.title, this.bookmarks)
+					this.data.objectId && $api.book.saveMark(this.data.objectId, this.bookmarks)
+					this.renderBookMarksPanel()
+				}
+				alert(has ? '书签已存在' : '添加成功')
+				// message.show({ text: has ? '书签已存在' : '添加成功' , type: has ? 'warning' : 'success' })
+			}
+			changeMark (target: any) {
+				if (!target.value) return
+				this.jumpTo(target.value || '')
+				let has = this.bookmarks.find(el => el.start.cfi === target.value)
+				let hasIndex = this.bookmarks.findIndex(el => el.start.cfi === target.value)
+				let old = this.bookmarks[0]
+				if (has) {
+					this.bookmarks.splice(0, 1, has)
+					this.bookmarks.splice(hasIndex, 1, old)
+					localforage.setItem('book_marks_' + this.data.data.title, this.bookmarks)
+					this.columnsEl.value = has.start.href || ''
+					this.toTop()
+				}
+			}
+			pageChange (type = 'prev') {
+				let pager = this.querySelector('.pager') as HTMLInputElement
+				if (type === 'pager') {
+					if (pager.value) {
+						this.jumpTo(pager.value)
+						this.toTop()
+					}
+					pager.value = ''
+					return
+				}
+				this.jumpTo('', type)
+				this.toTop()
+			}
+			columnsChange (e: Event) {
+				let target = e.target as any
+				this.jumpTo(target.value || '')
+				this.toTop()
+			}
+			toTop () {
+				document.body.scrollIntoView({ behavior: 'smooth' })
+			}
+			jumpTo (value: string, type = 'display') {
+				this.rendition[type](value || '').then((section: { href: string }) => {
+					let location = this.rendition.currentLocation()
+					this.columnsEl.value = section?.href || location.start?.href
+				})
+			}
+			deleteBookmark(index: number) {
+				this.bookmarks.splice(index, 1);
+				localforage.setItem('book_marks_' + this.data.data.title, this.bookmarks);
+				this.data.objectId && $api.book.saveMark(this.data.objectId, this.bookmarks);
+				this.loadMarks();
+			}
+			clearBookmarks() {
+				this.bookmarks = [];
+				localforage.setItem('book_marks_' + this.data.data.title, this.bookmarks);
+				this.data.objectId && $api.book.saveMark(this.data.objectId, this.bookmarks);
+				this.loadMarks();
+			}
+			renderBookMarksPanel () {
+				this.actionEl = document.querySelector('.manager-btn')
+				this.booksmarksPanel = document.querySelector('.booksmarks-panel')
+				this.actionEl?.addEventListener('click', (e) => {
+					e.preventDefault()
+					this.booksmarksPanel?.classList.remove('hidden')
+				})
+				if (this.booksmarksPanel) {
+					let container = `<div class="pb-1"><div class="flex border-b !bg-[var(--byt-white-color)] border-[var(--byt-main-color)] p-2 mb-2">
+							<span class="flex-2">书签管理</span>
+							<span class="flex cursor-pointer hover:text-[var(--byt-main-color)] clear-btn">
+								清空
+								<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z"/></svg>
+							</span>
+						</div><div class="max-h-30 overflow-y-auto mb-2 px-2 space-y-2 !bg-[var(--byt-white-color)]">`
+					this.booksmarksPanel.innerHTML = container + this.bookmarks.map((el:any, index: number) => `<div class="flex items-center">
+						<span class="flex-2 line-clamp-1">${el.label}</span>
+						<svg class="del-btn cursor-pointer hover:text-[var(--byt-main-color)]" data-index="${index}" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><!-- Icon from Material Symbols by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="currentColor" d="M6.4 19L5 17.6l5.6-5.6L5 6.4L6.4 5l5.6 5.6L17.6 5L19 6.4L13.4 12l5.6 5.6l-1.4 1.4l-5.6-5.6z"/></svg>
+					</div>`).join('') + '</div></div>'
+				}
+				this.actionEl?.classList[this.bookmarks.length?'remove':'add']('hidden')
+				document.addEventListener('click', (e) => {
+					if (!this.actionEl?.contains(e.target as Node)) {
+						this.booksmarksPanel?.classList.add('hidden');
+					}
+				});
+				let panelmarks = this.booksmarksPanel?.querySelectorAll('.del-btn') || []
+				let panelmarksClearEl = this.booksmarksPanel?.querySelector('.clear-btn')
+				for (let index = 0; index < panelmarks.length; index++) {
+					panelmarks[index]?.addEventListener('click', (e) => {
+						let target = e.target as HTMLElement
+						let index = target.getAttribute('data-index') || '0'
+						this.deleteBookmark(parseInt(index))
+					});
+				}
+				panelmarksClearEl?.addEventListener('click', () => {
+					this.clearBookmarks()
+				});
+			}
+		}
+		customElements.define('book-component', BookComponent)
+	</script>
+</Layout>

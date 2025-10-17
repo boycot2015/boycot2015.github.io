@@ -169,4 +169,17 @@ function debounce(fn: { apply: (arg0: any, arg1: any[]) => void; }, delay: numbe
     }
   }
  }
-export { $GET, $POST, getDescription, fmtTime, fmtDate, fmtPage, LoadScript, LoadStyle, getIP, getGreat, getScentence, debounce }
+function throttle(fn: { apply: (arg0: any, arg1: IArguments) => void; }, delay: number | undefined) {
+  let timer: NodeJS.Timeout | null = null;
+  return function (this:any) {
+    const context = this;
+    const args = arguments;
+    if (!timer) {
+      timer = setTimeout(() => {
+        fn.apply(context, args);
+        timer = null;
+      }, delay);
+    }
+  };
+}
+export { $GET, $POST, getDescription, fmtTime, fmtDate, fmtPage, LoadScript, LoadStyle, getIP, getGreat, getScentence, debounce, throttle }

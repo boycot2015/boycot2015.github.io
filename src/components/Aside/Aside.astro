@@ -70,15 +70,15 @@ import "./Aside.less";
 	<!-- 随机句子块 -->
 	{
 		AsideShow.ScentenceShow && (
-			<section class="w-full byt-aside-item scentence !p-0">
+			<section class="w-full byt-aside-item !items-start scentence !p-0">
 				<div class="header text-center text-xl !tracking-widest leading-[48px] text-[#fff] w-full">
 					<img src="/assets/images/lazy-loading.webp" data-byt-lz-src={SITE_CONFIG.imgApi} alt={scentence.from} />
 				</div>
-				<p class="line-clamp-2 text-left px-2">{scentence.hitokoto}</p>
+				<p class="line-clamp-2 px-2 text-justify">{scentence.hitokoto}</p>
 				<div class="footer w-full flex justify-between px-2 pb-2">
 					<span></span>
 					<div class="right flex items-center gap-1 text-xs">
-						<span>《{scentence.from}》{scentence.from_who ? `— [${scentence.from_who}]` : ''}</span>
+						<span>【{scentence.from}】{scentence.from_who ? `— ${scentence.from_who}` : ''}</span>
 					</div>
 				</div>
 			</section>
@@ -142,6 +142,7 @@ import "./Aside.less";
 		)
 	}
 
+
 	<!-- 分类块 -->
 	{
 		AsideShow.CategoriesShow && (
@@ -163,28 +164,27 @@ import "./Aside.less";
 			</section>
 		)
 	}
-
-	<!-- 标签块 -->
-	{
-		AsideShow.TagsShow && (
-			<section class="byt-aside-item tags">
-				<h3 class="flex items-center gap-2">
-					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><!-- Icon from Material Symbols by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="#888888" d="M4 22V8q0-.825.588-1.412T6 6h8q.825 0 1.413.588T16 8v14l-6-3zm14-4V4H7V2h11q.825 0 1.413.588T20 4v14z"/></svg>
-					热门标签
-				</h3>
-				<div class="byt-aside-tags">
-					{tags.map(i => (
-						<a href={`/tag/${i[0]}`}>
-							<span>{i[0]}</span>
-							<em>{i[1]}</em>
-						</a>
-					))}
-				</div>
-			</section>
-		)
-	}
-
 	<section class="sticky-aside">
+
+		<!-- 标签块 -->
+		{
+			AsideShow.TagsShow && (
+				<section class="byt-aside-item tags">
+					<h3 class="flex items-center gap-2">
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><!-- Icon from Material Symbols by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="#888888" d="M4 22V8q0-.825.588-1.412T6 6h8q.825 0 1.413.588T16 8v14l-6-3zm14-4V4H7V2h11q.825 0 1.413.588T20 4v14z"/></svg>
+						热门标签
+					</h3>
+					<div class="byt-aside-tags">
+						{tags.map(i => (
+							<a href={`/tag/${i[0]}`}>
+								<span>{i[0]}</span>
+								<em>{i[1]}</em>
+							</a>
+						))}
+					</div>
+				</section>
+			)
+		}
 		<!-- 最新文章块 -->
 		{
 			recommendArticles.length && AsideShow.recommendArticleShow && (

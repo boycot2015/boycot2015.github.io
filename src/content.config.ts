@@ -24,5 +24,15 @@ const blog = defineCollection({
 		top: z.boolean().optional()
 	}),
 });
-
-export const collections = { blog };
+const ebook = defineCollection({
+	loader: glob({ base: "./src/content/ebook", pattern: "**/*.{md,mdx}" }),
+	schema: z.object({
+	  title: z.string(),
+	  author: z.string(),
+	  img: z.string(),
+	  objectId: z.string().optional(), // 书籍id
+	  file: z.string(), // EPUB文件路径
+	  description: z.string().optional(),
+	}),
+});
+export const collections = { blog, ebook };

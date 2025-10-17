@@ -1,3 +1,4 @@
 @import "tailwindcss";
 /* use a selector-based strategy for dark mode */
-@variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+/* @variant dark (&:where([data-theme="dark"], [data-theme="dark"] *)); */
+@import '../../public/assets/css/global.css'

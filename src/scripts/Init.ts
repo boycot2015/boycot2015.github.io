@@ -47,7 +47,7 @@ import ThemeProviderInit from "@/scripts/ThemeProvider";
 
 // Swiper 轮播插件加载
 import SwiperInit from "@/scripts/Swiper";
-
+import Anchor from "@/scripts/Anchor";
 // ============================================================
 
 // 页面初始化 Only
@@ -102,6 +102,7 @@ const indexInit = async (only: boolean = true) => {
   SearchInit();
   // 移动端侧边栏初始化
   initMobileSidebar();
+  Anchor('');
 };
 
 export default () => {
@@ -120,6 +121,7 @@ export default () => {
     // 销毁音乐
     MusicList.forEach((i: any) => i.destroy());
     MusicList.length = 0;
+    Anchor('');
   });
   console.log("%c🌻 程序：Astro | 主题：bytAstro-Theme | 作者：Boycot | Github：https://github.com/boycot2015/byt.blog-template-astro 🌻", "color:#fff; background: linear-gradient(270deg, #18d7d3, #68b7dd, #8695e6, #986fee); padding: 8px 15px; border-radius: 8px");
   console.log("%c\u521D\u59CB\u5316\u5B8C\u6BD5.", "color: #ffffff; background: #000; padding:5px");

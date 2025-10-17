@@ -1,23 +1,32 @@
 import { debounce } from "@/utils/index";
-export default (post:any) => {
+export default (post?:any) => {
     let sticky:any = document.querySelector('.main-inner>.byt-aside .sticky-aside');
     let anchor:any = document.querySelector('.main-inner>.byt-aside .sticky-aside .anchor');
     let url = location.pathname;
-    if (!sticky) return;
+    if (url.includes('/article/')) {
+      document.querySelectorAll('.main-inner>.byt-aside >.byt-aside-item:not(.user)').forEach((i:any) => i.classList.add('!hidden'));
+      document.querySelector('.main-inner>.byt-aside .sticky-aside .tags')?.classList.add('!hidden');
+    } else {
+      if (anchor) sticky.removeChild(anchor)
+      document.querySelectorAll('.main-inner>.byt-aside >.byt-aside-item:not(.user)').forEach((i:any) => i.classList.remove('!hidden'));
+      document.querySelector('.main-inner>.byt-aside .sticky-aside .tags')?.classList.remove('!hidden');
+    }
+    if (!sticky || !post) return;
     let dom = document.createElement('div');
     dom.className = 'byt-aside-item !items-start anchor';
     // console.log(post.rendered.metadata, 'post');
     const { frontmatter = {} } = post.rendered.metadata;
     let headings = post.rendered.metadata.headings;
+    const hasDep2 = headings.find((i:any) => i.depth === 2);
     !headings.find((i:any) => i.depth === 1) && headings.unshift({
       text: frontmatter.title,
       slug: frontmatter.title,
       depth: 1,
     })
     let styles: Record<number, string> = {
-      1: 'pl-0',
+      1: 'pl-2',
       2: 'pl-4',
-      3: 'pl-6',
+      3: hasDep2 ? 'pl-8' : 'pl-4',
     }
     const slug = decodeURIComponent(location.hash || '');
     // console.log(slug, 'slug');
@@ -32,11 +41,8 @@ export default (post:any) => {
     ))}</ul>`.replace(/\,/g, '');
     if (anchor) sticky.removeChild(anchor)
     if (url.includes('/article/')) sticky.prepend(dom)
-    if (url.includes('/article/')) {
-      document.querySelectorAll('.main-inner>.byt-aside >.byt-aside-item').forEach((i:any) => i.classList.add('!hidden'));
-    } else {
-      document.querySelectorAll('.main-inner>.byt-aside >.byt-aside-item').forEach((i:any) => i.classList.remove('!hidden'));
-    }
+    dom.querySelectorAll('li')[0].classList.add('active')
+    dom.querySelectorAll('li')[0].querySelector('a')?.classList.add('!text-[var(--byt-main-color)]')
     sticky.addEventListener('click', function (event:any){
       let target = event.target
       if(target.tagName === 'A'){
@@ -49,6 +55,8 @@ export default (post:any) => {
       }
     });
     let offsetTops:any = []
+    let columnOffsetTops:any = []
+    let timer:any = null
     function getOffsetTop(el:any):number {
       let offset = el.offsetTop;
       if(el.offsetParent != null) {
@@ -59,8 +67,14 @@ export default (post:any) => {
     document.querySelectorAll('.main-inner-content h2, .main-inner-content h3').forEach((item:any) => {
       offsetTops.push(getOffsetTop(item))
     })
-    console.log(offsetTops, 'offsetTops');
-    document.addEventListener('scroll', debounce(() => {
+    dom.querySelectorAll('li').forEach((item:any) => {
+      columnOffsetTops.push(item.offsetTop)
+    })
+    let isColumnScroll = false
+    window.addEventListener('scroll', debounce(() => {
+      // console.log(offsetTops, 'offsetTops');
+      clearTimeout(timer)
+      if (isColumnScroll) return
       let scrollTop = window.scrollY;
       let flag = true
       const len = offsetTops.length
@@ -76,6 +90,18 @@ export default (post:any) => {
           dom.querySelectorAll('a')[i + 1].classList.add('!text-[var(--byt-main-color)]');
         }
       }
+      if (scrollTop == 0) {
+        dom.querySelectorAll('li').forEach((i:any) => {
+          i.classList.remove('active')
+          i.querySelector('a').classList.remove('!text-[var(--byt-main-color)]')
+        });
+        dom.querySelectorAll('li')[0].classList.add('active')
+        dom.querySelectorAll('li')[0].querySelector('a')?.classList.add('!text-[var(--byt-main-color)]')
+      }
+      dom.querySelector('li.active')?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'nearest',
+      })
     }, 100))
-    
 }

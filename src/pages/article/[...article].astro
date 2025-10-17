@@ -90,24 +90,15 @@ const { headings } = await render(post);
 			<astro-anchor data-post={JSON.stringify(post)}></astro-anchor>
 		</div>
 	</article>
-</Layout>
-<script>
-	import { inRouter, outRouter } from "@/utils/updateRouter";
-	import Anchor from "@/scripts/Anchor";
-	class AstroAnchor extends HTMLElement {
-	  connectedCallback() {
-		// 从 data（数据）属性中读取消息。
-		const post = JSON.parse(this.dataset.post as string);
-		// console.log(JSON.parse(post as string));
-		Anchor(post)
-		// document.addEventListener("swup:enable", (e) => {
-		// 	console.log(e, 'eeeeee');
-		// 	!post && document.querySelector('.byt-aside-item.anchor')?.classList.add('!hidden');
-		// })
-		inRouter(() => {
+	<script>
+		import Anchor from "@/scripts/Anchor";
+		class AstroAnchor extends HTMLElement {
+		  connectedCallback() {
+			// 从 data（数据）属性中读取消息。
+			const post = JSON.parse(this.dataset.post as string);
 			Anchor(post)
-		})
-	  }
-	}
-	customElements.define('astro-anchor', AstroAnchor);
-  </script>
+		  }
+		}
+		customElements.define('astro-anchor', AstroAnchor);
+	</script>
+</Layout>

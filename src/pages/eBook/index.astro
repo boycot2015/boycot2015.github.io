@@ -1,0 +1,123 @@
+---
+import Layout from "@/layouts/ToolLayout/ToolLayout.astro";
+import { getAllbooks } from "@/data/ebook";
+const allbooks = await getAllbooks()
+
+const meta = {
+    type: 'eBook',
+	description: "我最近在阅读的电子书，感兴趣的朋友可以与我一起分享",
+	title: "电子书 📖",
+};
+// console.log(allbooks, 'allbooks');
+const data = allbooks.map(el => el.data)
+const isPro = import.meta.env.PROD
+---
+
+<Layout frontmatter={meta}>
+    {data.length === 0 ? <section class="byt-space-loading"><span></span><span></span><span></span></section> : null}
+    <!-- <h1 transition:name={`title`} transition:animate={`slide`} class="title mb-6 flex items-center gap-3">电子书</h1> -->
+    <div id="books" class="books grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 2xl:grid-cols-8 gap-4">
+        {
+            !isPro ? <div class="add-btn cursor-pointer border border-[var(--color-accent)] px-10 text-[40px] w-[auto] justify-center items-center flex flex-col h-[230px] sm:h-[260px] lg:h-[160px] text-[var(--color-accent)]">
+                +
+                <span class="text-xl">上传</span>
+                <input type="file" accept=".epub" hidden />
+            </div> : null
+        }
+        {
+            data.map((item, index) => <div id={`book${index+1}`} data-id={item.objectId} class="book-item rounded overflow-hidden"><a href={'/eBook/'+item.title}><div class={`w-full  overflow-hidden`}  title={`${item.title}-${item.author}`}>
+            <img transition:name={`img-${item.title}-${item.author}`} data-byt-lz-src={item.img} class="h-[230px] sm:h-[260px] lg:h-[160px] w-full" alt={item.title} />
+            <h3 transition:name={`title-${item.title}`} class="text-center !text-sm !line-clamp-1 mt-2">{item.title}-{item.author}</h3></div></a>
+            {!isPro ? <div class="flex justify-center my-1"><button class="remove-btn border px-1 rounded-md text-[var(--color-accent)] border-[var(--color-accent)] cursor-pointer" data-object-id={item.objectId} data-id={`book${index+1}`}>删除</button></div> : null}
+            </div>)
+        }
+    </div>
+    <script>
+        import { inRouter, outRouter } from '@/utils/updateRouter'
+        import { get, handleDelete, upload } from '@/api/book'
+        import localforage from 'localforage'
+        import Epub from 'epubjs'
+        import { showLoading, hideLoading } from '@/utils/Loading'
+        import { Toast } from '@/utils/Toast'
+        import Sortable from 'sortablejs'
+        document.addEventListener('astro:page-load', () => {
+            let targetEl = document.querySelector('.add-btn') as HTMLDivElement
+            let fileEl = document.querySelector('input') as HTMLInputElement
+            let bookEl = document.querySelector('#books') as HTMLDivElement
+    
+            // 初始化 SortableJS
+            if (!import.meta.env.PROD && bookEl) {
+                Sortable.create(bookEl, {
+                    animation: 150,
+                    draggable: ".book-item",
+                    onEnd: async () => {
+                        const items = Array.from(bookEl.children).map((el: any) => el.getAttribute('data-id')).filter(el => !!el);
+                        try {
+                            await Promise.all(items.map((el, index) => get.update(el, { order: index + 1 })));
+                            Toast('排序已保存！');
+                        } catch (error) {
+                            Toast('保存排序失败，请重试！');
+                        }
+                    }
+                });
+            }
+    
+            targetEl && (targetEl.onclick = () => {
+                fileEl.click()
+            })
+            bookEl && bookEl.addEventListener('click', (e:any) => {
+                // console.log(e.target.tagName, 'e.target.tagName');
+                if (e.target.tagName === 'BUTTON') {
+                    let target = e.target
+                    let id = target.getAttribute('data-id')
+                    let objectId = target.getAttribute('data-object-id')
+                    showLoading({text: '正在删除，请稍后...', fullscreen: true })
+                    if (objectId) handleDelete(objectId).then(() => {
+                        hideLoading()
+                        Toast('删除成功！')
+                        document.querySelector(`#${id}`)?.remove()
+                    })
+                }
+            })
+            fileEl && (fileEl.onchange = (e: Event) => {
+                let target = e.target as any
+                let files = [...target.files]
+                files.map(async el => {
+                    let book:any = Epub(el);
+                    book.ready.then(async () => {
+                        showLoading()
+                        let coverUrl = await book.coverUrl()
+                        let result = await fetch(coverUrl).then(res => res.blob())
+                        let reader = new FileReader()
+                        reader.readAsDataURL(result)
+                        reader.onload = () => {
+                            upload(el.name, el, {cover: { base64: reader.result }, onprogress: (data:any) => {
+                                // loading.onprogress(data)
+                            }}).then((data:any) => {
+                                const { attributes, id } = data
+                                // console.log(attributes, 'data');
+                                localforage.setItem('book_' + el.name, el.arrayBuffer())
+                                let alink = document.createElement('div') as HTMLDivElement
+                                let removeBtnEl = bookEl.querySelectorAll('.remove-btn')
+                                alink.id = `book${removeBtnEl.length+1}`
+                                alink.setAttribute('class', 'w-full overflow-hidden')
+                                alink.innerHTML = `<a href='/eBook/${el.name.split('_')[0]}'><div class='w-full  overflow-hidden'  title='${attributes.title}'>
+                                <img data-byt-lz-src='${attributes.img}' class="h-[230px] sm:h-[260px] lg:h-[160px] w-full" alt={item.title} />
+                                <h3 class="text-center line-clamp-1 mt-2">${el.name.split('_')[0]}-${el.name.split('_')[1]}</h3></div></a><div class="flex justify-center my-1"><button class="remove-btn border px-1 rounded-md text-[var(--color-accent)] border-[var(--color-accent)] cursor-pointer" data-object-id=${id} data-id="book${removeBtnEl.length+1}">删除</button></div>`
+                                bookEl.prepend(alink)
+                                Toast('上传成功！')
+                                hideLoading()
+                                fileEl.value = ''
+                            })
+                        }
+                    })
+                })
+            })
+        })
+        const ebookMainEl = document.querySelector('.main-inner-content>.byt-tools-main>main.ebook-main')
+        if (ebookMainEl) ebookMainEl.innerHTML = ''
+        inRouter(() => {
+            if (ebookMainEl) ebookMainEl.innerHTML = ''
+        })
+    </script>
+</Layout>

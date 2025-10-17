@@ -1,0 +1,94 @@
+@import '../font/index.css';
+/* use a selector-based strategy for dark mode */
+@variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+:root {
+	/* // 白色颜色 */
+	--byt-white-color: #fff;
+	/* // BoxShadow */
+	--byt-box-shadow: 0 3px 8px 6px #07111b0d;
+	/* // Body 背景颜色 */
+	--byt-code-bg: rgb(from var(--byt-font-color) r g b / 16%);
+	--byt-body-bg: #F8F8F8;
+	/* // Back Top 按钮位置 */
+	--byt-back-top: calc((calc(100vw - 2rem) - min((100vw - 2rem), var(--byt-main-max-width))) / 2 + 1rem);
+	/* // 字体颜色 */
+	--byt-font-88: rgb(from var(--byt-font-color) r g b / 88%);
+	--byt-font-66: rgb(from var(--byt-font-color) r g b / 66%);
+	--byt-font-56: rgb(from var(--byt-font-color) r g b / 56%);
+	--byt-font-28: rgb(from var(--byt-font-color) r g b / 28%);
+	--byt-font-16: rgb(from var(--byt-font-color) r g b / 16%);
+	--byt-font-6: rgb(from var(--byt-font-color) r g b / 6%);
+	/* // 主题色 */
+	--byt-main-color-88: rgb(from var(--byt-main-color) r g b / 88%);
+	--byt-main-color-66: rgb(from var(--byt-main-color) r g b / 66%);
+	--byt-main-color-56: rgb(from var(--byt-main-color) r g b / 56%);
+	--byt-main-color-28: rgb(from var(--byt-main-color) r g b / 28%);
+	--byt-main-color-16: rgb(from var(--byt-main-color) r g b / 16%);
+	--byt-main-color-6: rgb(from var(--byt-main-color) r g b / 6%);
+
+	/* // Default  */
+	--byt-default: #BEC4CC;
+	--byt-default-hover: #BEC4CC18;
+	/* // Info  */
+	--byt-info: #3253b4;
+	--byt-info-hover: #3253b418;
+	/* // Success */
+	--byt-success: #01C4B6;
+	--byt-success-hover: #01C4B618;
+	/* // Warning */
+	--byt-warning: #DD8636;
+	--byt-warning-hover: #DD863618;
+	/* // Error */
+	--byt-error: #DE3C3D;
+	--byt-error-hover: #DE3C3D18;
+	/* // Import */
+	--byt-import: #B984DF;
+	--byt-import-hover: #B984DF18;
+	--swiper-theme-color: var(--byt-main-color) !important;
+	--swiper-navigation-size: 1.8rem !important;
+}
+
+* {
+	/* // IOS 点击阴影 */
+	-webkit-tap-highlight-color: transparent;
+	/* // 隐藏滚动条 */
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+	/* // 去除下划线 */
+	text-decoration: none;
+	/* // 消除边框 */
+	outline: none;
+
+	/* // 隐藏滚动条 */
+	::-webkit-scrollbar {
+		display: none;
+	}
+}
+
+/* // 设置文本选中颜色 */
+::selection,
+::-webkit-selection {
+	color: #fff;
+	background: var(--byt-main-color-88);
+}
+html[data-theme="dark"]{
+	/* // 白色颜色 */
+	--byt-white-color: #222;
+	--byt-font-color: #fff;
+	/* // BoxShadow */
+	--byt-box-shadow: 0 3px 8px 6px #07111b0d;
+	/* // Body 背景颜色 */
+	--byt-body-bg: #111;
+	/* // Font 颜色 */
+	--byt-code-bg: #24292e;
+}
+html[data-theme="dark"] .astro-code,
+html[data-theme="dark"] .astro-code span {
+	color: var(--shiki-dark) !important;
+	background-color: var(--shiki-dark-bg) !important;
+	/* 可选，如果你还需要字体样式 */
+	font-style: var(--shiki-dark-font-style) !important;
+	font-weight: var(--shiki-dark-font-weight) !important;
+	text-decoration: var(--shiki-dark-text-decoration) !important;
+}

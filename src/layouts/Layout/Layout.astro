@@ -19,12 +19,12 @@ import MobileSidebar from "@/components/MobileSidebar/MobileSidebar.astro";
 // Aside 侧边栏
 import Aside from "@/components/Aside/Aside.astro";
 // A Modern CSS Reset
+import '@/styles/global.css'
 import "@/styles/Reset.less";
 // 全局基础样式
 import "@/styles/Base.less";
 // Layout 样式
 import "./Layout.less";
-import '@/styles/global.css'
 let aside = '';
 if (Astro.slots.has('aside')) {
 	console.log(Astro.slots, 'Astro.slots');

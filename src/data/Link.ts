@@ -65,5 +65,11 @@ export default {
       "avatar": "https://www.biibii.cn/usr/themes/HarmonyHues/assets/images/favicon.webp",
       "descr": "记录生活中的技术脉搏"
     },
+    {
+      "name": "小林の木屋",
+      "link": "https://www.wjlin0.com/",
+      "avatar": "https://www.wjlin0.com/upload/log.svg",
+      "descr": "一个黑客小子！"
+    }
   ]
 }
