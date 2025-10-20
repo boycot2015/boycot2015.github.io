@@ -8,9 +8,13 @@ export async function GET(context: APIContext) {
     let list:any = []
     await Promise.all(Link.data.filter((i: any) => i.link).map(async (i: any) => {
         try {
-            i.content = await fetch((i.link + '/rss.xml').replace(/\/\/+/g, '/')).then(res => res?.text());
-            if (!i.content) 
-            i.content = await fetch((i.link + '/feed/').replace(/\/\/+/g, '/')).then(res => res?.text());
+            if (i.rss) {
+                i.content = await fetch((i.link + i.rss).replace(/\/\/+/g, '/')).then(res => res?.text());
+            } else {
+                i.content = await fetch((i.link + '/rss.xml').replace(/\/\/+/g, '/')).then(res => res?.text());
+                if (!i.content)
+                i.content = await fetch((i.link + '/feed/').replace(/\/\/+/g, '/')).then(res => res?.text());
+            }
             // console.log(i.link, i.content);
         } catch (error) {
             // console.log(error);

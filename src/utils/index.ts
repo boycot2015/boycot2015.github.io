@@ -105,36 +105,52 @@ const getIP = async (): Promise<{ip: string, location: string, province?: string
       location: '北京',
     }
   }
-  let url = `${SITE_CONFIG.Api.replace(/api-v2|v2/g, 'api')}/cors?url=https://api.ipify.org/?format=json`
-  return await fetch(url)
-  .then(response => response.json()).then(data => {
-      return data
+  // let url = `${SITE_CONFIG.Api.replace(/api-v2|v2/g, 'api')}/cors?url=http://ip-api.com/json/?lang=zh-CN`
+  // let url = 'https://ipapi.co/json?lang=zh-CN'
+  let url = 'http://ip-api.com/json'
+  let params = '?lang=zh-CN'
+  // console.log(url, 'ip')
+  try {
+    return await fetch(url + params)
+    .then(response => response && response.json()).then(data => data)
+    .then(data => {
+      return {
+        ip: data.query,
+        province: data?.province || data?.regionName,
+        city: data?.city,
+        district: data?.district,
+        location: [data?.province || data?.regionName, data?.city, data?.district].filter(el => el).join(' '),
+      };
     })
-    .then(async data => {
-      console.log(data.ip, 'ip')
-      let location = await fetch(`${SITE_CONFIG.mapApi.url}/location/ip?ak=${SITE_CONFIG.mapApi.key}`).then(response => response.json()).then(data => data)
-      // console.log({
-      //   id: data.ip,
-      //   location: [location.content.address_detail.province, data.location.address_detail.city, data.location.address_detail.district].join(' '),
+      // .then(async data => {
+      //   let localUrl = `${url}/${data.query}${params}`
+      //   console.log(localUrl, 'localUrl');
+        
+      //   let location = await fetch(localUrl).then(response => response.json()).then(data => data)
+      //   if(!location || !location.content || !location.content.address_detail) return {
+      //     ip: data.ip,
+      //     location: '北京',
+      //   };
+      //   return {
+      //     ip: data.ip,
+      //     province: location?.province,
+      //     city: location?.city,
+      //     district: location?.district,
+      //     location: [location?.province, location?.city, location?.district].filter(el => el).join(' '),
+      //   };
+      // }).catch(err => {
+      //   console.error("GET request failed:", err);
+      //   return {
+      //     ip: '127.0.0.1',
+      //     location: '北京',
+      //   };
       // });
-      if(!location || !location.content || !location.content.address_detail) return {
-        ip: data.ip,
-        location: '北京',
-      };
-      return {
-        ip: data.ip,
-        province: location?.content?.address_detail?.province,
-        city: location?.content?.address_detail?.city,
-        district: location?.content?.address_detail?.district,
-        location: [location?.content?.address_detail?.province, location?.content?.address_detail?.city, location?.content?.address_detail?.district].join(' '),
-      };
-    }).catch(err => {
-      console.error("GET request failed:", err);
-      return {
-        ip: '127.0.0.1',
-        location: '北京',
-      };
-    });
+  } catch (error) {
+    return {
+      ip: '127.0.0.1',
+      location: '北京',
+    }
+  }
 }
 const getWeather = async (city?: string) => {
   return await $GET(`${SITE_CONFIG.Api}/weather?query=${city || '深圳'}`).then((res:any) => {

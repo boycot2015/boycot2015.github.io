@@ -66,7 +66,7 @@ const meta = {
 		import { rootInDarkMode } from "@/utils/domElement";
 		import Epub from 'epubjs'
 		import localforage from 'localforage'
-		import * as $api from '@/api/book'
+		import $api from '@/api/index'
 		import { showLoading, hideLoading } from '@/utils/Loading'
 		// import Message from '@/utils/Message'
 		// const message = new Message()
@@ -98,7 +98,7 @@ const meta = {
 				// 从 data（数据）属性中读取消息。
 				const bookContainer = document.getElementById('book') as HTMLDivElement;
 				const booksSelect = document.getElementById('books') as HTMLSelectElement;
-				bookContainer && showLoading({container: bookContainer, text: '正在载入资源，请稍后...', fullscreen: false})
+				bookContainer && showLoading()
 				const data = JSON.parse(this.dataset.book as string);
 				booksSelect && (booksSelect.value = data.id)
 				let bookdata:any = await localforage.getItem('book_' + data.data.title)

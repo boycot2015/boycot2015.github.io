@@ -62,14 +62,16 @@ export default {
     {
       "name": "BIIBII - 记录生活中的技术脉搏",
       "link": "https://www.biibii.cn/",
+      rss: "/feed",
       "avatar": "https://www.biibii.cn/usr/themes/HarmonyHues/assets/images/favicon.webp",
       "descr": "记录生活中的技术脉搏"
     },
     {
-      "name": "小林の木屋",
-      "link": "https://www.wjlin0.com/",
-      "avatar": "https://www.wjlin0.com/upload/log.svg",
-      "descr": "一个黑客小子！"
+      "name": "唯知笔记",
+      "link": "https://note.weizwz.com/",
+      "avatar": "https://note.weizwz.com/favicon.ico",
+      rss: "/feed.xml",
+      "descr": "探索知识的无限可能"
     }
   ]
 }

@@ -25,7 +25,7 @@ const { ip, location, city } = await getIP();
 // 获取天气信息
 const weather = await getWeather(city);
 
-console.log(city, 'city');
+// console.log(city, 'city');
 
 // 获取当前时间问候
 const great = getGreat();
@@ -38,6 +38,7 @@ const recommendArticles = getRecommendArticles();
 import GoogleAd from "@/components/GoogleAd/GoogleAd.astro";
 // 侧边栏样式
 import "./Aside.less";
+export const prerender = false
 ---
 
 <aside class="byt-aside">
@@ -105,7 +106,7 @@ import "./Aside.less";
 						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><!-- Icon from Material Design Icons by Pictogrammers - https://github.com/Templarian/MaterialDesign/blob/master/LICENSE --><path fill="currentColor" d="M4 15V9h8V4.16L19.84 12L12 19.84V15z"/></svg>
 					</div>
 				</div>
-				<div class="footer w-full flex items-center justify-between px-2 pb-2">
+				<div class="footer weather w-full flex items-center justify-between px-2 pb-2">
 					<span>{weather?.air_quality?.aqi || '-'}&nbsp;{weather?.air_quality?.quality || '-'}</span>
 					<span>{weather?.location?.city || '-'}&nbsp;{weather?.weather?.condition || '-'}&nbsp;{weather?.weather?.temp || '25'}℃ {!weather ? SITE_CONFIG.Author: ''}</span>
 					<span class="flex items-center gap-1">
