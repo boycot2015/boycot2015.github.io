@@ -1,4 +1,5 @@
 import { getCollection } from "astro:content";
+import { getDescription } from "@/utils/index";
 const posts = (await getCollection("blog")).filter(i => !i.data.hide && !i.data.draft).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 // 获取文章分类
 const getCategories = () => {
@@ -28,7 +29,7 @@ const getTags = () => {
 // 获取推荐文章 (给文章添加 recommend: true && hide: false && draft: false 字段)
 const getRecommendArticles = () => {
   const recommendList = posts.filter(i => i.data.recommend);
-  const convert = (item: typeof posts[0]):{title: string, date: Date, id: string|number, img?: string, url?: string, target?: string} => ({ title: item.data.title, date: item.data.date, id: item.data.id || item.data.title, img: item.data.cover});
+  const convert = (item: typeof posts[0]):{title: string, date: Date, id: string|number, img?: string, url?: string, target?: string, desc?: string} => ({ title: item.data.title, date: item.data.date, id: item.data.id || item.data.title, img: item.data.cover, desc: getDescription(item)});
   return (recommendList.length ? recommendList : posts.slice(0, 6)).filter(i => !i.data.hide && !i.data.draft).map(convert)
 };
 

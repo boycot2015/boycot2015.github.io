@@ -1,7 +1,6 @@
 import type { APIContext } from "astro";
 import Link from '@/data/Link';
 import xml2js from 'xml2js'
-import { $GET } from '@/utils/index'
 export async function GET(context: APIContext) {
 //   const { request } = context;
   if (Link.data && Array.isArray(Link.data) && Link.data.length > 0) {

@@ -98,7 +98,7 @@ const $POST = async (url: string, data: Record<string, any>, headers: Record<str
 };
 
 
-const getIP = async (): Promise<{ip: string, location: string}> => {
+const getIP = async (): Promise<{ip: string, location: string, province?: string, city?: string, district?: string}> => {
   if (!SITE_CONFIG.AsideShow?.GreatShow) {
     return {
       ip: '127.0.0.1',
@@ -120,6 +120,9 @@ const getIP = async (): Promise<{ip: string, location: string}> => {
       };
       return {
         ip: data.ip,
+        province: location?.content?.address_detail?.province,
+        city: location?.content?.address_detail?.city,
+        district: location?.content?.address_detail?.district,
         location: [location?.content?.address_detail?.province, location?.content?.address_detail?.city, location?.content?.address_detail?.district].join(' '),
       };
     }).catch(err => {
@@ -130,7 +133,14 @@ const getIP = async (): Promise<{ip: string, location: string}> => {
       };
     });
 }
-
+const getWeather = async (city?: string) => {
+  return await $GET(`${SITE_CONFIG.Api}/weather?query=${city || '深圳'}`).then((res:any) => {
+    return res.data
+  }).catch(err => {
+    console.log(err);
+    return err
+  })
+}
 const getGreat = () => {
   // + 3 * 60 * 60 * 1000
   let time = new Date(Date.now()).toLocaleTimeString() 
@@ -168,7 +178,7 @@ function debounce(fn: { apply: (arg0: any, arg1: any[]) => void; }, delay: numbe
       }, delay);
     }
   }
- }
+}
 function throttle(fn: { apply: (arg0: any, arg1: IArguments) => void; }, delay: number | undefined) {
   let timer: NodeJS.Timeout | null = null;
   return function (this:any) {
@@ -182,4 +192,4 @@ function throttle(fn: { apply: (arg0: any, arg1: IArguments) => void; }, delay: 
     }
   };
 }
-export { $GET, $POST, getDescription, fmtTime, fmtDate, fmtPage, LoadScript, LoadStyle, getIP, getGreat, getScentence, debounce, throttle }
+export { $GET, $POST, getDescription, fmtTime, fmtDate, fmtPage, LoadScript, LoadStyle, getIP, getGreat, getScentence, debounce, throttle, getWeather }

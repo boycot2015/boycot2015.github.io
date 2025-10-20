@@ -52,7 +52,9 @@ if (Astro.slots.has('aside')) {
 			{HomeBanner.enable && HomeBanner.type !== 'swiper' && <MainHeader />}
 			<section class="main-inner" style={`padding-top:${HomeBanner.enable && HomeBanner.type !== 'swiper' ? "0.88rem" : "calc(66px + 0.68rem)"};flex-direction:${AsideShow.position === 'left' ? 'row-reverse' : 'row'}`}>
 				<section class="main-inner-content">
-					<slot />
+					<slot>
+						<section class="byt-space-loading"><span></span><span></span><span></span></section>
+					</slot>
 				</section>
 				<Aside />
 			</section>

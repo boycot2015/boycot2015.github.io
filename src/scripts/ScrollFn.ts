@@ -6,7 +6,7 @@ const scrollChangeFn = () => {
   const clientHeight = window.innerHeight;
   const percentage = (window.scrollY / (scrollHeight - clientHeight)) * 100;
   let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-  if (scrollTop > lastScrollTop) {
+  if (scrollTop > lastScrollTop && scrollTop > 66) {
     // console.log('向下滚动');
     header?.classList?.add("active");
     aside?.classList?.remove("active");

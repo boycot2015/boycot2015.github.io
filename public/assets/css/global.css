@@ -47,6 +47,8 @@
 	--byt-import-hover: #B984DF18;
 	--swiper-theme-color: var(--byt-main-color) !important;
 	--swiper-navigation-size: 1.8rem !important;
+    --waline-theme-color: var(--byt-main-color) !important;
+	--waline-active-color: var(--byt-main-color-88) !important;
 }
 
 * {
@@ -82,6 +84,23 @@ html[data-theme="dark"]{
 	--byt-body-bg: #111;
 	/* // Font 颜色 */
 	--byt-code-bg: #24292e;
+
+    --waline-white: var(--byt-font-color);
+    --waline-light-grey: var(--byt-font-66);
+    --waline-dark-grey: var(--byt-font-56);
+    --waline-active-color: var(--byt-main-color-88);
+    --waline-color: var(--byt-font-color);
+    --waline-bg-color: var(--byt-body-bg);
+    --waline-bg-color-light: var(--byt-body-bg);
+    --waline-bg-color-hover: var(--byt-body-bg) !important;
+    --waline-border-color: #ddd;
+    --waline-disable-bg-color: var(--byt-body-bg);
+    --waline-disable-color: var(--byt-font-66);
+    --waline-code-bg-color: var(--byt-code-bg);
+    --waline-bq-color: var(--byt-font-66);
+    --waline-m-avatar-size: calc(var(--waline-avatar-size) * 9 / 13);
+    --waline-badge-color: #3498db;
+    --waline-border: 1px solid var(--waline-border-color);
 }
 html[data-theme="dark"] .astro-code,
 html[data-theme="dark"] .astro-code span {

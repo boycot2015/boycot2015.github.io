@@ -12,6 +12,7 @@ export default (post?:any) => {
       document.querySelector('.main-inner>.byt-aside .sticky-aside .tags')?.classList.remove('!hidden');
     }
     if (!sticky || !post) return;
+    if (window.innerWidth < 768) return;
     let dom = document.createElement('div');
     dom.className = 'byt-aside-item !items-start anchor';
     // console.log(post.rendered.metadata, 'post');

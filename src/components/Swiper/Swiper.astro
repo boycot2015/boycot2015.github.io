@@ -4,13 +4,13 @@ import { getRecommendArticles } from '@/utils/getPostInfo';
 const { data } = Astro.props;
 let reg = /url\("?'?.*"?'?\)/g
 let regReplace = /"|'|url|\(|\)/g;
-type Banner = {title: string, url?: string, img?: string, target?: string, id: string|number}
+type Banner = {title: string, desc ?: string, url?: string, img?: string, target?: string, id: string|number}
 let list: Banner[] = []
 const getBannerList = async () => {
     list = await Promise.all(data.map(async (el: Banner) => {
         if (el.title) return {title: el.title, img: el.img || el, url: el.url || null, id: Math.random()}
         let res = await fetch(SITE_INFO.HitokotoApi + '?c=j&encode=text&r=' + Math.random()).then(res => res.text())
-        return {title: res || el.title, img: el.img || el, id: Math.random()}
+        return {title: res || el.title, desc: el.desc || '', img: el.img || el, id: Math.random()}
     }));
     let recommends = await getRecommendArticles()
     list = await list.concat(...recommends.map((i: Banner) => ({...i, url: '/article/' + (i.id || i.title)}))).reverse();
@@ -28,11 +28,12 @@ const getImageUrl = (item?: string, id?: number|string) => item?.match(reg)?.[0]
                     <a href={item.url || ''} target={item.target || "_self"} onclick={item.url ? '' : 'event.preventDefault()'} rel="noopener nofollow">
                      <img class="rounded-[var(--byt-main-radius)] object-cover w-full h-[10.88rem] md:h-[16.88rem]" data-byt-lz-src={getImageUrl(item.img, item.id || index)} src="/assets/images/lazy-loading.webp" alt="" />
                      {item.title&& <div class="text-xl text-[var(--byt-font-color)] bg-[var(--byt-white-color)] px-1 rounded-bl-[0.2rem] absolute top-0 right-0">{item.title}</div>}
+                     {item.desc && <div class="text-xl max-w-[80%] text-[#fff] line-clamp-1 px-1 rounded-bl-[0.2rem] absolute left-1 bottom-1">{item.desc}</div>}
                      </a>
                  </div>
              ))}
          </div>
-         <div class="swiper-pagination"></div>
+         <div class="swiper-pagination !text-right !pr-3"></div>
          <div class="swiper-button-prev !hidden"></div>
          <div class="swiper-button-next !hidden"></div>
      </div>
