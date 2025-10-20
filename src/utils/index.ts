@@ -105,10 +105,13 @@ const getIP = async (): Promise<{ip: string, location: string, province?: string
       location: '北京',
     }
   }
-  return await fetch(`${SITE_CONFIG.Api}/ip`)
-    .then(response => response.json()).then(data => data.data)
+  let url = `${SITE_CONFIG.Api.replace(/api-v2|v2/g, 'api')}/cors?url=https://api.ipify.org/?format=json`
+  return await fetch(url)
+  .then(response => response.json()).then(data => {
+      return data
+    })
     .then(async data => {
-      // ip=${data.ip}&
+      console.log(data.ip, 'ip')
       let location = await fetch(`${SITE_CONFIG.mapApi.url}/location/ip?ak=${SITE_CONFIG.mapApi.key}`).then(response => response.json()).then(data => data)
       // console.log({
       //   id: data.ip,
