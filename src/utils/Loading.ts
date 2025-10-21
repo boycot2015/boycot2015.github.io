@@ -57,6 +57,36 @@ const _loadingInit = (status: boolean, opacity: number = 0.6, color: string = "#
   const hideLoading = (): void => {
     _loadingInit(false);
   };
+
+const loadingService = (el = document.body) => {
+    return {
+        show ({precent = 0} = {}) {
+            let loading = el.querySelector('.byt-space-loading')
+            if (loading) {
+                let per = loading.querySelector('.percent')
+                if (per) {
+                    per.innerHTML = `${precent}%`
+                }
+                return
+            }
+            loading = document.createElement('div') as HTMLDivElement
+            loading.classList.add('byt-space-loading', '!h-[100vh]', 'w-full', 'absolute', 'backdrop-blur-sm')
+            loading.appendChild(document.createElement('span'))
+            loading.appendChild(document.createElement('span'))
+            loading.appendChild(document.createElement('span'))
+            if (precent !== undefined) {
+              let per = document.createElement('div')
+              per.classList.add('text-[var(--byt-main-color)]', 'percent','ml-2')
+              loading.appendChild(per)
+            }
+            el.appendChild(loading)
+        },
+        hide () {
+            el.querySelector('.byt-space-loading')?.remove()
+        }
+    }
+}
   
-  export { showLoading, hideLoading };
+  // export { showLoading, hideLoading };
+export default loadingService;
   

@@ -15,6 +15,7 @@ const ThemeProviderInit = () => {
 		}
 
 		const root = document.documentElement;
+		const root2 = document.documentElement.querySelector("html");
 
 		// root already set to newTheme, exit early
 		if (newTheme === root.getAttribute("data-theme")) {
@@ -22,7 +23,7 @@ const ThemeProviderInit = () => {
 		}
 
 		root.setAttribute("data-theme", newTheme);
-
+		root2?.setAttribute("data-theme", newTheme);
 		if (typeof localStorage !== "undefined") {
 			localStorage.setItem("theme", newTheme);
 		}

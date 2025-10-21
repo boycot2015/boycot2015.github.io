@@ -105,14 +105,16 @@ const getIP = async (req?: Request): Promise<{ip: string, location: string, prov
       location: '北京',
     }
   }
-  // let url = `${SITE_CONFIG.Api.replace(/api-v2|v2/g, 'api')}/cors?url=http://ip-api.com/json/?lang=zh-CN`
-  // let url = 'https://ipapi.co/json?lang=zh-CN'
-  let url = 'http://ip-api.com/json'
+  let url = `${SITE_CONFIG.Api.replace(/api-v2|v2/g, 'api')}/cors?url=`
+  // let url2 = url + 'https://api.ipify.org?format=json'
+  let url2 = 'https://ipapi.co/json'
+  let url3 = 'http://ip-api.com/json/'
   let params = '?lang=zh-CN'
-  console.log(url, req, 'ip')
   try {
-    return await fetch(url + params)
-    .then(response => response && response.json()).then(data => data)
+    let ipdata = await fetch(url2).then(response => response.json()).then(data => data.data || data)
+    console.log(ipdata, url + url3 + ipdata.ip + params, ipdata, 'ip')
+    return await fetch(url + decodeURI(url3 + ipdata.ip + params))
+    .then(response => response && response.json()).then(data => data.data)
     .then(data => {
       return {
         ip: data.query,

@@ -41,7 +41,7 @@ const meta = {
 				</div>
 			</div>
 			<div transition:name={`img-${book.data.title}-${book.data.author}`} class="flex justify-center items-center my-4">
-				<div class="w-full !text-[var(--byt-font-color)] h-[300vh] overflow-hidden" id="book">
+				<div class="w-full !text-[var(--byt-font-color)] h-[100vh] md:h-[300vh] overflow-hidden" id="book">
 					<!-- <div class="text-center my-20">资源加载中，请稍后...</div> -->
 					<section class="byt-space-loading"><span></span><span></span><span></span></section>
 				</div>
@@ -63,11 +63,10 @@ const meta = {
 		</div>
 	</book-component>
 	<script>
-		import { rootInDarkMode } from "@/utils/domElement";
 		import Epub from 'epubjs'
 		import localforage from 'localforage'
 		import $api from '@/api/index'
-		import { showLoading, hideLoading } from '@/utils/Loading'
+		import loadingService from '@/utils/Loading'
 		// import Message from '@/utils/Message'
 		// const message = new Message()
 		interface TreeObj  {
@@ -98,7 +97,8 @@ const meta = {
 				// 从 data（数据）属性中读取消息。
 				const bookContainer = document.getElementById('book') as HTMLDivElement;
 				const booksSelect = document.getElementById('books') as HTMLSelectElement;
-				bookContainer && showLoading()
+				let loading = loadingService(bookContainer)
+				bookContainer && loading.show()
 				const data = JSON.parse(this.dataset.book as string);
 				booksSelect && (booksSelect.value = data.id)
 				let bookdata:any = await localforage.getItem('book_' + data.data.title)
@@ -162,7 +162,7 @@ const meta = {
 					// 切换书签
 					this.marksEl.onchange = (e) => this.changeMark(e.target)
 	
-					bookContainer && hideLoading()
+					bookContainer && loading.hide()
 	
 				})
 				booksSelect && (booksSelect.onchange = (e:any) => {
@@ -178,10 +178,20 @@ const meta = {
 								// '--byt-font-color': rootInDarkMode() ? '#fff !important' : '#333 !important',
 								padding: '0 !important',
 								background: 'transparent !important',
+								// 'font-size': '1.68rem !important',
+								// 'line-height': '2.88rem !important',
+								// 'font-family': 'KaiTi, Song,CangErYuYang !important',
 								// color: 'var(--byt-font-color)',
 								// color: rootInDarkMode()?"var(--color-global-text) !important":"var(--color-global-text) !important", // 文字颜色
 								// background: rootInDarkMode()?"var(--color-global-bg)":"var(--color-global-bg)", // 背景颜色
+								// background: "rgba(255, 255, 255, 0.5)", // 背景颜色
 								lineColor: "#E4E3DF", // 主题中并无该属性，该属性为自定义目录下划线颜色
+							},
+							'body, p, h1, h2, h3, h4, h5, h6, b': {
+								'line-height': '2.28rem !important',
+								'font-size': '1.28rem !important',
+								'color': 'var(--byt-font-color) !important',
+								'font-family': 'CangErYuYang !important',
 							},
 							'.logo': {
 								display: 'none'

@@ -3,6 +3,11 @@ export default (post?:any) => {
     let sticky:any = document.querySelector('.main-inner>.byt-aside .sticky-aside');
     let anchor:any = document.querySelector('.main-inner>.byt-aside .sticky-aside .anchor');
     let url = location.pathname;
+    if (url.includes('/eBook/') && window.innerWidth < 768) {
+        document.querySelector('.main-inner>.byt-aside')?.classList.add('!hidden');
+        return
+    }
+    document.querySelector('.main-inner>.byt-aside')?.classList.remove('!hidden');
     if (url.includes('/article/')) {
       document.querySelectorAll('.main-inner>.byt-aside >.byt-aside-item:not(.user)').forEach((i:any) => i.classList.add('!hidden'));
       document.querySelector('.main-inner>.byt-aside .sticky-aside .tags')?.classList.add('!hidden');

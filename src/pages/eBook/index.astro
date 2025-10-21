@@ -38,7 +38,7 @@ const isPro = import.meta.env.PROD
     import { get, handleDelete, upload, update } from '@/api/book'
     import localforage from 'localforage'
     import Epub from 'epubjs'
-    import { showLoading, hideLoading } from '@/utils/Loading'
+    import loadingService from '@/utils/Loading'
     import { Toast } from '@/utils/Toast'
     import Sortable from 'sortablejs'
     // 图片懒加载
@@ -46,32 +46,6 @@ const isPro = import.meta.env.PROD
     let targetEl = document.querySelector('.add-btn') as HTMLDivElement
     let fileEl = document.querySelector('#books input') as HTMLInputElement
     let bookEl = document.querySelector('#books') as HTMLDivElement
-    const loadingService = (el = document.body) => {
-        return {
-            show ({precent = 0}) {
-                let loading = el.querySelector('.byt-space-loading')
-                if (loading) {
-                    let per = loading.querySelector('.percent')
-                    if (per) {
-                        per.innerHTML = `${precent}%`
-                    }
-                    return
-                }
-                loading = document.createElement('div') as HTMLDivElement
-                loading.classList.add('byt-space-loading', '!h-[100vh]', 'w-full', 'absolute', 'backdrop-blur-sm')
-                loading.appendChild(document.createElement('span'))
-                loading.appendChild(document.createElement('span'))
-                loading.appendChild(document.createElement('span'))
-                let per = document.createElement('div')
-                per.classList.add('text-[var(--byt-main-color)]', 'percent','ml-2')
-                loading.appendChild(per)
-                el.appendChild(loading)
-            },
-            hide () {
-                el.querySelector('.byt-space-loading')?.remove()
-            }
-        }
-    }
     // 初始化 SortableJS
     if (!import.meta.env.PROD && bookEl) {
         Sortable.create(bookEl, {
@@ -92,7 +66,7 @@ const isPro = import.meta.env.PROD
     targetEl && (targetEl.onclick = () => {
         fileEl.click()
     })
-    // let loading = loadingService(bookEl)
+    let loading = loadingService(bookEl)
     // loading.show({precent: 0})
     bookEl && bookEl.addEventListener('click', (e:any) => {
         // console.log(e.target.tagName, 'e.target.tagName');
@@ -100,9 +74,9 @@ const isPro = import.meta.env.PROD
             let target = e.target
             let id = target.getAttribute('data-id')
             let objectId = target.getAttribute('data-object-id')
-            showLoading()
+            loading.show({})
             if (objectId) handleDelete(objectId).then(() => {
-                hideLoading()
+                loading.hide()
                 Toast('删除成功！')
                 document.querySelector(`#${id}`)?.remove()
             })
@@ -114,13 +88,12 @@ const isPro = import.meta.env.PROD
         files.map(async el => {
             let book:any = Epub(el);
             book.ready.then(async () => {
-                showLoading()
+                loading.show({})
                 let coverUrl = await book.coverUrl()
                 let result = await fetch(coverUrl).then(res => res.blob())
                 let reader = new FileReader()
                 reader.readAsDataURL(result)
                 reader.onload = () => {
-                    let loading = loadingService(bookEl)
                     loading.show({precent: 0})
                     upload(el.name, el, {cover: { base64: reader.result }, onprogress: (data:any) => {
                         // loading.onprogress(data)
@@ -138,7 +111,6 @@ const isPro = import.meta.env.PROD
                         bookEl.prepend(alink)
                         localforage.setItem('book_' + el.name, el.arrayBuffer())
                         Toast('上传成功！')
-                        hideLoading()
                         fileEl.value = ''
                         loading.hide()
                         LzImgInit()
