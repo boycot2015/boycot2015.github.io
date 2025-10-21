@@ -48,6 +48,7 @@ import ThemeProviderInit from "@/scripts/ThemeProvider";
 // Swiper 轮播插件加载
 import SwiperInit from "@/scripts/Swiper";
 import Anchor from "@/scripts/Anchor";
+import AsideInit from "@/scripts/Aside";
 // ============================================================
 
 // 页面初始化 Only
@@ -103,6 +104,7 @@ const indexInit = async (only: boolean = true) => {
   // 移动端侧边栏初始化
   initMobileSidebar();
   Anchor('');
+  only && AsideInit();
 };
 
 export default () => {

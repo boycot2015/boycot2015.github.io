@@ -2,7 +2,7 @@ import AV from 'leancloud-storage';
 AV.init({
     appId: "UFDAemKla2uvRCDNCBEGsVnA-gzGzoHsz",
     appKey: "mbNoKxkqSI3raGFUKAR1acV6",
-    serverURL: "cloud.boycot.top",
+    serverURL: "https://cloud.boycot.top",
 });
 type Book = {
     title: string;

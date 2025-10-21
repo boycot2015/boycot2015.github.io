@@ -98,7 +98,7 @@ const $POST = async (url: string, data: Record<string, any>, headers: Record<str
 };
 
 
-const getIP = async (): Promise<{ip: string, location: string, province?: string, city?: string, district?: string}> => {
+const getIP = async (req?: Request): Promise<{ip: string, location: string, province?: string, city?: string, district?: string}> => {
   if (!SITE_CONFIG.AsideShow?.GreatShow) {
     return {
       ip: '127.0.0.1',
@@ -109,7 +109,7 @@ const getIP = async (): Promise<{ip: string, location: string, province?: string
   // let url = 'https://ipapi.co/json?lang=zh-CN'
   let url = 'http://ip-api.com/json'
   let params = '?lang=zh-CN'
-  // console.log(url, 'ip')
+  console.log(url, req, 'ip')
   try {
     return await fetch(url + params)
     .then(response => response && response.json()).then(data => data)

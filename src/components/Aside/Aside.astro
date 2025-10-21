@@ -3,7 +3,7 @@
 // Svg 组件
 import Svg from "@/components/Svg/Svg.astro";
 // 时间处理
-import { fmtTime, getIP, getGreat, getScentence, getWeather } from "@/utils/index";
+import { fmtTime, getGreat } from "@/utils/index";
 // 获取用户配置数据
 import SITE_CONFIG from "@/config";
 const { Avatar, Author, Motto, WebSites, GoogleAds, AsideShow } = SITE_CONFIG;
@@ -18,19 +18,11 @@ const tags = getTags();
 // 获取网站统计数据
 const CountInfo = getCountInfo();
 
-// 获取用户 IP 地址
-const { ip, location, city } = await getIP();
-// const { ip, location } = { ip: '127.0.0.1', location: '北京' }
-
-// 获取天气信息
-const weather = await getWeather();
-
 // console.log(city, 'city');
 
 // 获取当前时间问候
 const great = getGreat();
 
-const scentence = await getScentence();
 // console.log(scentence, 'scentence');
 // 最新文章
 const recommendArticles = getRecommendArticles();
@@ -38,7 +30,8 @@ const recommendArticles = getRecommendArticles();
 import GoogleAd from "@/components/GoogleAd/GoogleAd.astro";
 // 侧边栏样式
 import "./Aside.less";
-export const prerender = false
+// console.log(Astro.clientAddress, 'clientAddress');
+
 ---
 
 <aside class="byt-aside">
@@ -79,14 +72,10 @@ export const prerender = false
 		AsideShow.ScentenceShow && (
 			<section class="w-full byt-aside-item !items-start scentence !p-0">
 				<div class="header text-center text-xl !tracking-widest leading-[48px] text-[#fff] w-full">
-					<img src="/assets/images/lazy-loading.webp" data-byt-lz-src={SITE_CONFIG.imgApi} alt={scentence.from} />
+					<img src="/assets/images/lazy-loading.webp" data-byt-lz-src={SITE_CONFIG.imgApi} />
 				</div>
-				<p class="line-clamp-2 px-2 text-justify">{scentence.hitokoto}</p>
-				<div class="footer w-full flex justify-between px-2 pb-2">
-					<span></span>
-					<div class="right flex items-center gap-1 text-xs">
-						<span>【{scentence.from}】{scentence.from_who ? `— ${scentence.from_who}` : ''}</span>
-					</div>
+				<div class="footer w-full">
+					<section class="byt-space-loading !h-[40px]"><span></span><span></span><span></span></section>
 				</div>
 			</section>
 		)
@@ -107,12 +96,7 @@ export const prerender = false
 					</div>
 				</div>
 				<div class="footer weather w-full flex items-center justify-between px-2 pb-2">
-					<span>{weather?.air_quality?.aqi || '-'}&nbsp;{weather?.air_quality?.quality || '-'}</span>
-					<span>{weather?.location?.city || '-'}&nbsp;{weather?.weather?.condition || '-'}&nbsp;{weather?.weather?.temp || '25'}℃ {!weather ? SITE_CONFIG.Author: ''}</span>
-					<span class="flex items-center gap-1">
-						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><!-- Icon from Material Symbols by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="currentColor" d="M11.5 20q-1.25 0-2.125-.875T8.5 17h2q0 .425.288.713T11.5 18t.713-.288T12.5 17t-.288-.712T11.5 16H2v-2h9.5q1.25 0 2.125.875T14.5 17t-.875 2.125T11.5 20M2 10V8h13.5q.65 0 1.075-.425T17 6.5t-.425-1.075T15.5 5t-1.075.425T14 6.5h-2q0-1.475 1.013-2.488T15.5 3t2.488 1.013T19 6.5t-1.012 2.488T15.5 10zm16.5 8v-2q.65 0 1.075-.425T20 14.5t-.425-1.075T18.5 13H2v-2h16.5q1.475 0 2.488 1.013T22 14.5t-1.012 2.488T18.5 18"/></svg>
-						{weather?.weather?.wind_direction || '-'}
-					</span>
+					<section class="byt-space-loading !h-[30px]"><span></span><span></span><span></span></section>
 				</div>
 			</section>
 		)
@@ -128,9 +112,9 @@ export const prerender = false
 				<div class="tips-content">
 					<Fragment set:html={SITE_CONFIG.Description} />
 				</div>
-				<p>嗷嗷！热烈欢迎🤪！来自 <span class="!text-[var(--byt-main-color)] text-shadow-lg">{location}</span>的铁铁，你好呀！😝</p>
+				<p>嗷嗷！热烈欢迎🤪！来自 <span class="!text-[var(--byt-main-color)] location text-shadow-lg"></span>的铁铁，你好呀！😝</p>
 				今天你喝奶茶了嘛~🍺
-				<p>你的网络IP为：<span class="transition-all duration-300 blur hover:!blur-none">{ip}</span></p>
+				<p>你的网络IP为：<span class="transition-all ip-text duration-300 blur hover:!blur-none"></span></p>
 				🕞 {great}
 			</section>
 		)
