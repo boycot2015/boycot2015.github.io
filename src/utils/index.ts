@@ -133,18 +133,32 @@ const getIP = async (req?: Request): Promise<{ip: string, location: string, prov
     }
   }
 }
-const getWeather = async (city?: string) => {
-  return await $GET(`${SITE_CONFIG.Api}/weather?query=${city || '深圳'}`).then((res:any) => {
+const getWeather = async (location?: string) => {
+  return await $GET(`${SITE_CONFIG.Api}/weather?query=${location || '深圳'}`).then((res:any) => {
     return res.data
   }).catch(err => {
     console.log(err);
     return err
   })
 }
+
+const getBeijingTime = () => {
+  const beijing = new Date().toLocaleString('en-US', {
+      timeZone: 'Asia/Shanghai',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true
+    });
+    return beijing;
+}
+   
 const getGreat = () => {
-  // + 3 * 60 * 60 * 1000
-  let time = new Date(Date.now()).toLocaleTimeString() 
-  let clock = Number(time.split(':')[0])  
+  let time = getBeijingTime().split(',')[1].trim()
+  let clock = Number(time.split(':')[0])
   if (((clock >= 0 && clock < 10) || clock == 12) && time.includes('AM')) {
     return '早上好 吃早餐没啦 🥣'
   } else if ((clock >= 10 && time.includes('AM')) || (clock >= 12 && time.includes('PM'))) {

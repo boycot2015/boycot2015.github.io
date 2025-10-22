@@ -12,6 +12,7 @@ import rehypeSlug from "rehype-slug";
 import rehypeKatex from "rehype-katex";
 import remarkDirective from "remark-directive";
 import { remarkNote, addClassNames } from './src/plugins/markdown.custom'
+import { visualizer } from "rollup-plugin-visualizer";
 // Markdown 配置================
 import SITE_INFO from './src/config';
 import swup from '@swup/astro';
@@ -55,24 +56,46 @@ export default defineConfig({
           },
     },
     vite: {
-      resolve: { alias: { "@": path.resolve(__dirname, "./src") } },
-      build: {
-          rollupOptions: {
-              output: {
-                  // path names relative to `outDir`
-                  entryFileNames: 'js/byt-[name]-[hash].js',
-                  // chunkFileNames: 'js/chunks/[name]-[hash].js',
-                  assetFileNames: 'static/byt-[name]-[hash:8][extname]',
-              }
-          },
-      },
+        resolve: { alias: { "@": path.resolve(__dirname, "./src") } },
+        build: {
+            rollupOptions: {
+                output: {
+                    // path names relative to `outDir`
+                    entryFileNames: 'js/byt-[name]-[hash].js',
+                    // chunkFileNames: 'js/chunks/[name]-[hash].js',
+                    assetFileNames: 'static/byt-[name]-[hash:8][extname]',
+                    manualChunks(id) {
+                        if (id.includes("src/scripts")) {
+                            return "scripts";
+                        }
+                        if (id.includes("node_modules")) {
+                            // 将第三方依赖单独打包到 [name]-[hash].js 文件中
+                            let pkgs =['aplayer', 'epubjs', 'localforage', 'sortablejs', 'xml2js', 'lodash', 'dayjs', 'astro', 'waline', 'leancloud-storage', 'vanilla-lazyload', 'jszip']
+                            let index = pkgs.findIndex(name => id.includes(name));
+                            if (index !== -1) {
+                                return pkgs[index];
+                            }
+                            return "vendor";
+                        }
+                    }
+                }
+            },
+        },
 
-      plugins: [tailwindcss()],
-      define: {
-          __VUE_OPTIONS_API__: false,
-          __VUE_PROD_DEVTOOLS__: false,
-          __VUE_PROD_HYDRATION_MISMATCH_DETAILS__Default: false
-      },
+        plugins: [
+            tailwindcss(),
+            visualizer({  
+                open: false, // 注意这里要设置为true，否则无效  
+                gzipSize: true, // 分析图生成的文件名  
+                brotliSize: true, // 收集 brotli 大小并将其显示  
+                filename: "visualizer.html", // 分析图生成的文件名  
+            }),
+        ],
+        define: {
+            __VUE_OPTIONS_API__: false,
+            __VUE_PROD_DEVTOOLS__: false,
+            __VUE_PROD_HYDRATION_MISMATCH_DETAILS__Default: false
+        },
     },
     server: { host: '0.0.0.0' }
 });
