@@ -8,7 +8,7 @@ export default (element, options) => {
   const initCanvas = () => {
     width = element.offsetWidth;
     height = element.offsetHeight;
-    Object.assign(canvas.style, { top: '0', zIndex: '0', position: 'absolute', 'pointer-events': 'none' });
+    Object.assign(canvas.style, { top: '0', zIndex: '999', position: 'absolute', 'pointer-events': 'none' });
     element.append(canvas);
     element.parentElement.style.overflow = 'hidden';
     canvas.width = width;

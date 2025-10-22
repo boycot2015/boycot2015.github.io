@@ -72,7 +72,7 @@ import "./Aside.less";
 		AsideShow.ScentenceShow && (
 			<section class="w-full byt-aside-item !items-start scentence !p-0">
 				<div class="header text-center text-xl !tracking-widest leading-[48px] text-[#fff] w-full">
-					<img src="/assets/images/lazy-loading.webp" data-byt-lz-src={SITE_CONFIG.imgApi} />
+					<img src="/assets/images/lazy-loading.webp" data-byt-lz-src={SITE_CONFIG.imgApi+ '?t='+ new Date().getTime()} />
 				</div>
 				<div class="footer w-full">
 					<section class="byt-space-loading !h-[40px]"><span></span><span></span><span></span></section>

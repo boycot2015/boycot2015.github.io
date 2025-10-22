@@ -1,6 +1,6 @@
 ---
 // 当前路由
-const { activeNav } = Astro.props;
+const { activeNav, bgType } = Astro.props;
 // 站点配置
 import SITE_CONFIG from "@/config";
 const { Navs, NavsShow, Title } = SITE_CONFIG;
@@ -12,7 +12,7 @@ import Search from "@/components/Search/Search.astro";
 import "./Header.less";
 ---
 
-<header class="byt-header">
+<header class="byt-header" class:list={`${bgType === 'swiper' ? '' : 'image-banner'}`} >
 	<section class="main">
 		<a href="/" class="home byt-hover items-center flex">
 			<Svg src={'logo'} />

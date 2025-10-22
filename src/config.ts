@@ -105,7 +105,7 @@ export default {
   Blogsignage: '我在深圳很想你',
   // 侧边栏展示
   AsideShow: {
-    position: 'right', // 侧边栏位置 left | right, 默认 right
+    position: 'left', // 侧边栏位置 left | right, 默认 right
     // 是否展示一言
     ScentenceShow: true,
     // 是否展示欢迎语

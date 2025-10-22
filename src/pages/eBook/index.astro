@@ -18,24 +18,24 @@ const isPro = import.meta.env.PROD
     <!-- <h1 transition:name={`title`} transition:animate={`slide`} class="title mb-6 flex items-center gap-3">电子书</h1> -->
     <div id="books" class="books grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {
-            data.map((item, index) => <div id={`book${index+1}`} data-id={item.objectId} class="book-item rounded overflow-hidden shadow-[var(--byt-box-shadow)]"><a href={'/eBook/'+item.title}><div class={`w-full  overflow-hidden`}  title={`${item.title}-${item.author}`}>
+            data.map((item, index) => <div id={`book${index+1}`} data-id={item.objectId} class="book-item rounded overflow-hidden bg-[var(--byt-white-color)] shadow-[var(--byt-box-shadow)]"><a href={'/eBook/'+item.title}><div class={`w-full  overflow-hidden`}  title={`${item.title}-${item.author}`}>
             <img transition:name={`img-${item.title}-${item.author}`} data-byt-lz-src={item.img} class="h-[230px] sm:h-[260px] w-full" alt={item.title} />
-            <h3 transition:name={`title-${item.title}`} class="text-center !text-sm !line-clamp-1 mt-2">{item.title}-{item.author}</h3></div></a>
+            <h3 transition:name={`title-${item.title}`} class="text-center !text-sm !line-clamp-1 mt-2">{item.title}-{item.author.split('.')[0]}</h3></div></a>
             {!isPro ? <div class="flex justify-center my-1"><button class="remove-btn border px-1 rounded-md text-[var(--byt-main-color)] border-[var(--byt-main-color)] cursor-pointer" data-object-id={item.objectId} data-id={`book${index+1}`}>删除</button></div> : null}
             </div>)
         }
         {
-            !isPro ? <div class="add-btn cursor-pointer border border-[var(--byt-main-color)] px-10 text-[40px] w-[auto] justify-center items-center flex flex-col h-[320px] sm:h-[360px] text-[var(--byt-main-color)]">
+            !isPro ? <div class="add-btn cursor-pointer border rounded-md bg-[var(--byt-white-color)] border-[var(--byt-main-color)] px-10 text-[40px] w-[auto] justify-center items-center flex flex-col h-[320px] sm:h-[360px] text-[var(--byt-main-color)]">
                 +
                 <span class="text-xl">上传</span>
-                <input type="file" accept=".epub" hidden />
+                <input type="file" accept=".epub,.txt" hidden />
             </div> : null
         }
     </div>
 </Layout>
 <script>
-    import { inRouter, outRouter } from '@/utils/updateRouter'
-    import { get, handleDelete, upload, update } from '@/api/book'
+    import { inRouter } from '@/utils/updateRouter'
+    import { handleDelete, upload, update } from '@/api/book'
     import localforage from 'localforage'
     import Epub from 'epubjs'
     import loadingService from '@/utils/Loading'
@@ -104,7 +104,7 @@ const isPro = import.meta.env.PROD
                         let alink = document.createElement('div') as HTMLDivElement
                         let removeBtnEl = bookEl.querySelectorAll('.remove-btn')
                         alink.id = `book${removeBtnEl.length+1}`
-                        alink.setAttribute('class', 'book-item kw-full overflow-hidden rounded shadow-[var(--byt-box-shadow)]')
+                        alink.setAttribute('class', 'book-item bg-[var(--byt-white-color)] w-full overflow-hidden rounded shadow-[var(--byt-box-shadow)]')
                         alink.innerHTML = `<a href='/eBook/${el.name.split('_')[0]}'><div class='w-full  overflow-hidden'  title='${attributes.title}'>
                         <img data-byt-lz-src='${attributes.img.replace('dailynote', 'blog-cloud')}' class="h-[230px] sm:h-[260px] w-full" alt={item.title} />
                         <h3 class="text-center !text-sm !line-clamp-1 mt-2">${el.name.split('_')[0]}-${el.name.split('_')[1]}</h3></div></a><div class="flex justify-center my-1"><button class="remove-btn border px-1 rounded-md text-[var(--byt-main-color)] border-[var(--byt-main-color)] cursor-pointer" data-object-id=${id} data-id="book${removeBtnEl.length+1}">删除</button></div>`

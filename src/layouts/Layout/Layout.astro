@@ -47,7 +47,7 @@ if (Astro.slots.has('aside')) {
 	</Head>
 	<body>
 		<MobileSidebar />
-		<Header activeNav={activeNav} />
+		<Header activeNav={activeNav} bgType={HomeBanner.type} />
 		<main class="main">
 			{HomeBanner.enable && HomeBanner.type !== 'swiper' && <MainHeader />}
 			<section class="main-inner" style={`padding-top:${HomeBanner.enable && HomeBanner.type !== 'swiper' ? "0.88rem" : "calc(66px + 0.68rem)"};flex-direction:${AsideShow.position === 'left' ? 'row-reverse' : 'row'}`}>
