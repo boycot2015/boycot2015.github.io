@@ -106,47 +106,26 @@ const getIP = async (req?: Request): Promise<{ip: string, location: string, prov
     }
   }
   let url = `${SITE_CONFIG.Api.replace(/api-v2|v2/g, 'api')}/cors?url=`
-  // let url2 = url + 'https://api.ipify.org?format=json'
-  let url2 = 'https://ipapi.co/json'
-  let url3 = 'http://ip-api.com/json/'
-  let params = '?lang=zh-CN'
+  // let url2 = 'https://api.ipify.org?format=json'
+  // let url2 = 'https://ipapi.co/json'
+  let url2 = 'https://my.ip.cn/json/?ticket=04d1918fd09958b43360f5b9c5bc4bb41761057765'
+  // let url3 = 'http://ip-api.com/json/'
+  // let params = '?lang=zh-CN'
   try {
-    let ipdata = await fetch(url2).then(response => response.json()).then(data => data.data || data)
-    console.log(ipdata, url + url3 + ipdata.ip + params, ipdata, 'ip')
-    return await fetch(url + decodeURI(url3 + ipdata.ip + params))
-    .then(response => response && response.json()).then(data => data.data)
+    return fetch(url2).then(response => response.json()).then(data => data.data || data)
+    // let ipdata = await fetch(url2).then(response => response.json()).then(data => data.data || data)
+    // console.log(ipdata, url + url3 + ipdata.ip + params, ipdata, 'ip')
+    // return await fetch(url + decodeURI(url3 + ipdata.ip + params))
+    // .then(response => response && response.json()).then(data => data.data)
     .then(data => {
       return {
-        ip: data.query,
+        ip: data.query || data.ip,
         province: data?.province || data?.regionName,
         city: data?.city,
         district: data?.district,
         location: [data?.province || data?.regionName, data?.city, data?.district].filter(el => el).join(' '),
       };
     })
-      // .then(async data => {
-      //   let localUrl = `${url}/${data.query}${params}`
-      //   console.log(localUrl, 'localUrl');
-        
-      //   let location = await fetch(localUrl).then(response => response.json()).then(data => data)
-      //   if(!location || !location.content || !location.content.address_detail) return {
-      //     ip: data.ip,
-      //     location: '北京',
-      //   };
-      //   return {
-      //     ip: data.ip,
-      //     province: location?.province,
-      //     city: location?.city,
-      //     district: location?.district,
-      //     location: [location?.province, location?.city, location?.district].filter(el => el).join(' '),
-      //   };
-      // }).catch(err => {
-      //   console.error("GET request failed:", err);
-      //   return {
-      //     ip: '127.0.0.1',
-      //     location: '北京',
-      //   };
-      // });
   } catch (error) {
     return {
       ip: '127.0.0.1',
