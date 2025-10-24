@@ -105,18 +105,14 @@ const getIP = async (req?: Request): Promise<{ip: string, location: string, prov
       location: '北京',
     }
   }
-  let url = `${SITE_CONFIG.Api.replace(/api-v2|v2/g, 'api')}/cors?url=`
+  let proxyUrl = `${SITE_CONFIG.Api.replace(/api-v2|v2/g, 'api')}/cors?url=`
+  let body = await fetch(proxyUrl + 'https://www.ip.cn/').then(response => response.json()).then(data => data.data || data)
+  let ticket = body.match(/\_ticket = ([^&]+)/)?.[1]?.split(';')[0].replace(/"/g, '')
+  let url = 'https://my.ip.cn/json/?ticket=' + ticket
   // let url2 = 'https://api.ipify.org?format=json'
-  // let url2 = 'https://ipapi.co/json'
-  let url2 = 'https://my.ip.cn/json/?ticket=04d1918fd09958b43360f5b9c5bc4bb41761057765'
-  // let url3 = 'http://ip-api.com/json/'
-  // let params = '?lang=zh-CN'
+  // console.log(ticket, 'ticket');
   try {
-    return fetch(url2).then(response => response.json()).then(data => data.data || data)
-    // let ipdata = await fetch(url2).then(response => response.json()).then(data => data.data || data)
-    // console.log(ipdata, url + url3 + ipdata.ip + params, ipdata, 'ip')
-    // return await fetch(url + decodeURI(url3 + ipdata.ip + params))
-    // .then(response => response && response.json()).then(data => data.data)
+    return fetch(url).then(response => response.json()).then(data => data.data || data)
     .then(data => {
       return {
         ip: data.query || data.ip,
@@ -133,8 +129,8 @@ const getIP = async (req?: Request): Promise<{ip: string, location: string, prov
     }
   }
 }
-const getWeather = async (location?: string) => {
-  return await $GET(`${SITE_CONFIG.Api}/weather?query=${location || '深圳'}`).then((res:any) => {
+const getWeather = async (location?: string, params?:string) => {
+  return await $GET(`${SITE_CONFIG.Api}/weather/${params||''}?query=${location || '深圳'}`).then((res:any) => {
     return res.data
   }).catch(err => {
     console.log(err);

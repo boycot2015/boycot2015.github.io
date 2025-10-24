@@ -109,7 +109,7 @@ export default {
     // 是否展示一言
     ScentenceShow: true,
     // 是否展示欢迎语
-    GreatShow: import.meta.env.PROD || true,
+    GreatShow: import.meta.env.PROD || false,
     // 是否展示个人网站
     WebSitesShow: true,
     // 是否展示分类
