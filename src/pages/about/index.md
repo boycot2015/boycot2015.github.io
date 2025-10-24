@@ -65,7 +65,9 @@ type: "about"
 |     主&emsp;页      |       <https://boycot2015.github.io>     
 | :-----------------: | :-------------------------------: |
 |   **博&emsp;客**    |    **<https://www.boycot.top>**    |
-|  **Web&emsp;API**   |    **<https://api.boycot.top>**    |
+|   **另一个博客**    |    **<https://blog-new.boycot.top>**    |
+|   **每日手记**    |    **<https://dailynote.boycot.top>**    |
+|  **Web&emsp;API**   |    **<https://doc-api.boycot.top>**    |
 |  **API示例**  | **<https://group.boycot.top>** |
 | **bytMusic** |    **<https://music.boycot.top>**     |
 
