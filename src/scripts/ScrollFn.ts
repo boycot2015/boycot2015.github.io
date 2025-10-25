@@ -19,6 +19,7 @@ const scrollChangeFn = () => {
   lastScrollTop = scrollTop;
   // 显示隐藏
   backTop.classList[percentage <= 0 ? "remove" : "add"]("active");
+  fixBar.classList[percentage <= 0 ? "remove" : "add"]("active");
   // 进度为 不在范围内
   if (percentage < 0 || percentage > 100) return;
   // 进度不为 0
@@ -39,6 +40,7 @@ let lastScrollTop = 0;
 // 页面更新，初始化函数======
 // 回顶部DOM
 let backTop: any = document.querySelector(".byt-back-top");
+let fixBar: any = document.querySelector(".fix-bar");
 let aside: any = document.querySelector(".sticky-aside");
 let header: any = document.querySelector(".byt-header");
 // 彩虹圈圈 DOM
@@ -52,6 +54,7 @@ export default () => {
   circle = document.querySelector(".byt-back-top>svg>circle");
   // 更新 回顶部DOM
   backTop = document.querySelector(".byt-back-top");
+  fixBar = document.querySelector(".fix-bar");
   // BackTop 圈圈初始化
   circle.style.strokeDasharray = circumference;
   circle.style.strokeDashoffset = circumference;

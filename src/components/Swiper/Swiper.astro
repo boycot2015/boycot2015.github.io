@@ -1,6 +1,7 @@
 ---
 import SITE_INFO from '@/config';
 import { getRecommendArticles } from '@/utils/getPostInfo';
+import './style.less'
 const { data } = Astro.props;
 let reg = /url\("?'?.*"?'?\)/g
 let regReplace = /"|'|url|\(|\)/g;

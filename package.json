@@ -21,6 +21,7 @@
     "@tailwindcss/vite": "^4.1.13",
     "aplayer": "^1.10.1",
     "astro": "^5.7.12",
+    "echarts": "^6.0.0",
     "epubjs": "^0.3.93",
     "leancloud-storage": "^4.15.2",
     "localforage": "^1.10.0",

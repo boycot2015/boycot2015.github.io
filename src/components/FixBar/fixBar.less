@@ -8,4 +8,16 @@
     justify-content: center;
     gap: .38rem;
     flex-direction: column;
+    transform: translateX(1rem);
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: transform .188s, opacity .18s;
+    z-index: 9;
+  
+    &.active {
+      transform: translateX(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
 }

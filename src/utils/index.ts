@@ -151,7 +151,12 @@ const getBeijingTime = () => {
     });
     return beijing;
 }
-   
+const getWeek = (time?: string) => {
+  const week = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
+  console.log(new Date(time || getBeijingTime()).getDay(), 'week');
+  
+  return week[new Date(time || getBeijingTime()).getDay()];
+}
 const getGreat = () => {
   let time = getBeijingTime().split(',')[1].trim()
   let clock = Number(time.split(':')[0])
@@ -202,4 +207,4 @@ function throttle(fn: { apply: (arg0: any, arg1: IArguments) => void; }, delay: 
     }
   };
 }
-export { $GET, $POST, getDescription, fmtTime, fmtDate, fmtPage, LoadScript, LoadStyle, getIP, getGreat, getScentence, debounce, throttle, getWeather }
+export { $GET, $POST, getDescription, fmtTime, fmtDate, fmtPage, LoadScript, LoadStyle, getIP, getGreat, getScentence, debounce, throttle, getWeather, getWeek, getBeijingTime }
