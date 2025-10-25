@@ -21,7 +21,7 @@ export default async () => {
         scentenceEl.innerHTML = `<p class="line-clamp-2 px-2 text-justify">${scentence.hitokoto}</p>
         <div class="footer w-full flex justify-between px-2 pb-2 mt-2">
             <span></span>
-            <div class="right flex items-center gap-1 text-xs">
+            <div class="right flex items-center gap-1 text-sm">
                 <span>【${scentence.from}】${scentence.from_who ? `— ${scentence.from_who}` : ''}</span>
             </div>
         </div>`;
@@ -43,7 +43,7 @@ export default async () => {
         html += `<div class="flex items-center justify-between gap-1 w-full pb-2 ${showMore ? 'border-b' : ''} border-[var(--byt-font-16)]">
                 <span>${weather?.air_quality?.aqi || '-'}&nbsp;${weather?.air_quality?.quality || '-'}</span>
                 <span>
-                <span class="flex items-center justify-between">
+                <span class="flex items-center justify-between gap-1">
                     ${weather?.location?.county || weather?.location?.city || '-'}&nbsp;
                     <img data-byt-lz-src="https://d.scggqx.com/forecast/img/${weather?.weather?.condition || '-'}.png" alt="${weather?.weather?.condition || '-'} " class="w-8 h-8">
                     ${weather?.weather?.temperature || '25'}℃ ${!weather || ''}</span>

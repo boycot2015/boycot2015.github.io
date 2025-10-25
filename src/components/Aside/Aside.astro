@@ -152,7 +152,7 @@ import "./Aside.less";
 						.sort((a: any, b: any) => b.count - a.count)
 						.map(i => (
 							<a href={`/categories/${i.title}`}>
-								<span>{i.title}</span>
+								<span class="!text-lg md:!text-sm">{i.title}</span>
 								<i>{i.count}</i>
 							</a>
 						))}
@@ -173,7 +173,7 @@ import "./Aside.less";
 					<div class="byt-aside-tags">
 						{tags.map(i => (
 							<a href={`/tag/${i[0]}`}>
-								<span>{i[0]}</span>
+								<span class="!text-lg md:!text-sm">{i[0]}</span>
 								<em>{i[1]}</em>
 							</a>
 						))}
@@ -194,9 +194,9 @@ import "./Aside.less";
 							<a href={`/article/${i.id}`}>
 								<span>
 									{idx < 3 ? <i>{idx + 1}</i> : <em>{idx + 1}.</em>}
-									<cite class="byt-ellipsis">{i.title}</cite>
+									<cite class="byt-ellipsis !text-lg md:!text-sm">{i.title}</cite>
 								</span>
-								<time>{fmtTime(i.date, "YYYY-MM-DD A")}</time>
+								<time class="!text-xs">{fmtTime(i.date, "YYYY-MM-DD A")}</time>
 							</a>
 						))}
 					</div>
