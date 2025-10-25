@@ -85,9 +85,9 @@ export default defineConfig({
         plugins: [
             tailwindcss(),
             visualizer({  
-                open: false, // 注意这里要设置为true，否则无效  
-                gzipSize: true, // 分析图生成的文件名  
-                brotliSize: true, // 收集 brotli 大小并将其显示  
+                open: true, // 注意这里要设置为true，否则无效
+                gzipSize: true, // 分析图生成的文件名
+                brotliSize: true, // 收集 brotli 大小并将其显示
                 filename: "visualizer.html", // 分析图生成的文件名  
             }),
         ],
