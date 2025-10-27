@@ -10,7 +10,7 @@ const ARTICLE_COVER: string = await getCover(post.data.cover);
 import "./ArticleCard.less";
 ---
 
-<article class={`byt-article-item byt-animation byt-animation-init byt-article-link${post.data.top ? " active" : ""}`}>
+<article class={`byt-article-item byt-article-link${post.data.top ? " active" : ""}`}>
 	<section class="byt-article-banner"><a class="byt-ellipsis" href={`/article/${post.data.id||post.data.title}`}><img src="/assets/images/lazy-loading.webp" data-byt-lz-src={ARTICLE_COVER} alt={post.data.title} /></a></section>
 	<header>
 		<h3><a class={`byt-article-cat byt-cat-${post.data.categories}`} href={`/categories/${post.data.categories}`}>{post.data.categories}</a><time>{fmtTime(post.data.date)}</time></h3>

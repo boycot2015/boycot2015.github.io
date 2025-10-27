@@ -8,7 +8,7 @@ export default {
   // 网站副标题
   Subtitle: '专注于前开发与相关技术的实战分享',
   // 网站描述
-  Description: '👋🏻我是boycot 专注于前开发与相关技术的实战分享，涵盖Vue框架、Node.js、Serverless等，并涉及Node、Linux、Docker等领域。同时也分享作者的生活、音乐和旅行的热爱。',
+  Description: '👋🏻我是boycot 专注于前端开发与相关技术的实战分享，涵盖Vue框架、React框架、Astro框架、Node.js、Serverless等，并涉及Node、Linux、Docker等领域。同时也分享作者的生活、音乐和数码的热爱。',
   // 网站作者
   Author: 'boycot',
   // 作者头像

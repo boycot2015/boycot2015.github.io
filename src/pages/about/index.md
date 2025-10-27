@@ -41,12 +41,12 @@ type: "about"
 
 <div class="language-tool">
   <a href="https://vuejs.org/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/Vue.js-4FC08D?logo=vue.js&logoColor=white" alt="Vue.js" /></a>
-  <a href="https://react.com/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/react.js-087ea4?logo=react&logoColor=white" alt="react.js" /></a>
-  <a href="https://astro.com/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/astro.js-000000?logo=astro&logoColor=white" alt="astro.js" /></a>
+  <a href="https://react.com/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/React.js-087ea4?logo=react&logoColor=white" alt="react.js" /></a>
+  <a href="https://astro.com/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/Astro.js-000000?logo=astro&logoColor=white" alt="astro.js" /></a>
   <a href="https://vitejs.dev/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white" alt="Vite" /></a>
   <a href="https://www.w3.org/html/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white" alt="HTML5" /></a>
   <a href="https://nodejs.org" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white" alt="Node.js" /></a>
-  <a href="https://www.php.net/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/php-3776AB?logo=php&logoColor=white" alt="PHP" /></a>
+  <a href="https://www.php.net/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/Php-3776AB?logo=php&logoColor=white" alt="PHP" /></a>
   <a href="https://git-scm.com/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white" alt="Git" /> </a>
   <a href="https://www.linux.org/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/Linux-FCC624?logo=linux&logoColor=black" alt="Linux" /></a>
   <a href="https://www.nginx.com" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/Nginx-009639?logo=nginx&logoColor=white" alt="Nginx" /></a>
@@ -56,7 +56,7 @@ type: "about"
   <a href="https://expressjs.com" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/Express-000000?logo=express&logoColor=white" alt="Express" /></a>
   <a href="https://tailwindcss.com/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?logo=tailwind-css&logoColor=white" alt="Tailwind CSS" /></a>
   <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black" alt="JavaScript" /></a>
-  <a href="https://www.mysql.com/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/mysql-003B57?logo=mysql&logoColor=white" alt="mysql" /></a>
+  <a href="https://www.mysql.com/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/Mysql-003B57?logo=mysql&logoColor=white" alt="mysql" /></a>
   <a href="https://code.visualstudio.com/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/VS_Code-007ACC?logo=visual-studio-code&logoColor=white" alt="VS Code" /></a>
 </div>
 
