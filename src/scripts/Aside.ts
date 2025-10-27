@@ -88,8 +88,8 @@ export default async () => {
                 </span>
                 </span>
             </h3>
-            <div class="w-full overflow-x-auto">
-                <div id="weather-echarts" class="w-[600px] md:w-full h-[260px] overflow-x-auto overflow-x-auto rounded-md border border-[var(--byt-font-16)] overflow-hidden">
+            <div class="w-full border border-[var(--byt-font-16)] overflow-hidden overflow-x-auto rounded-md">
+                <div id="weather-echarts" class="w-[560px] md:w-full h-[260px]">
                 </div>
             </div>`
         }
@@ -113,7 +113,7 @@ export default async () => {
             </div>`
         }
         weatherEl.innerHTML = html += '</div>'
-        weather_echarts_options.xAxis[0].data = forecast.daily_forecast.map((item: any) => new Date(item.date).getDate()+1 +'日');
+        weather_echarts_options.xAxis[0].data = forecast.daily_forecast.map((item: any) => new Date(item.date).getDate() +'日');
         weather_echarts_options.xAxis[1].data = forecast.daily_forecast.map((item: any) => getWeek(item.date));
         forecast.daily_forecast.forEach((item: any, index: number) => {
             const rich2 = weather_echarts_options.xAxis[2].axisLabel.rich as Record<number, any>;

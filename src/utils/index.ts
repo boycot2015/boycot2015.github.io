@@ -152,9 +152,7 @@ const getBeijingTime = () => {
     return beijing;
 }
 const getWeek = (time?: string) => {
-  const week = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
-  console.log(new Date(time || getBeijingTime()).getDay(), 'week');
-  
+  const week = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
   return week[new Date(time || getBeijingTime()).getDay()];
 }
 const getGreat = () => {
