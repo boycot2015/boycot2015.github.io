@@ -9,7 +9,7 @@ export default {
       "name": "boycot",
       "link": "https://www.boycot.top",
       "avatar": "https://www.boycot.top/favicon.svg",
-      "descr": "专注于前开发与相关技术的实战分享"
+      "descr": "专注于前端开发与相关技术的实战分享"
     },
     {
       "name": "boycot-nuxt博客",
