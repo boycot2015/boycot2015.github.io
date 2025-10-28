@@ -31,9 +31,9 @@ const scrollChangeFn = () => {
 };
 // 返回顶部事件
 const backTopFn = () => {
-  (window as any).vhlenis && (window as any).vhlenis.stop();
+  (window as any).lenis && (window as any).lenis.stop();
   window.scrollTo({ top: 0, behavior: "smooth" });
-  (window as any).vhlenis && (window as any).vhlenis.start();
+  (window as any).lenis && (window as any).lenis.start();
 };
 let timer: any = null;
 let lastScrollTop = 0;

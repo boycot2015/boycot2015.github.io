@@ -1,5 +1,5 @@
 
-// Han Analytics 统计
+// Analytics 统计
 import SITE_INFO from "@/config";
 import { LoadScript } from "@/utils/index";
 

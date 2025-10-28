@@ -160,9 +160,9 @@ export default {
   },
   // Analytics 统计
   Analytics: {
-    enable: false,
-    server: '',
-    siteId: ''
+    enable: true,
+    server: 'https://boycot.top',
+    siteId: 'boycot'
   },
   // Google 广告
   GoogleAds: {

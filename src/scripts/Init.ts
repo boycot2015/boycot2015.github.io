@@ -35,7 +35,7 @@ import { checkComment, commentInit } from "@/scripts/Comment";
 import initMobileSidebar from "@/scripts/MobileSidebar";
 // Google 广告
 import GoogleAdInit from "@/scripts/GoogleAd";
-// Han Analytics 统计
+// Analytics 统计
 // import AnalyticsInit from "@/scripts/Analytics";
 //  谷歌 SEO 推送
 import SeoPushInit from "@/scripts/SeoPush";
@@ -91,7 +91,7 @@ const indexInit = async (only: boolean = true) => {
   SeoPushInit();
   // 文章评论初始化
   checkComment() && commentInit(checkComment(), commentLIst)
-  // Han Analytics 统计
+  // Analytics 统计
   // AnalyticsInit();
   // 打字效果
   only && TypeWriteInit();

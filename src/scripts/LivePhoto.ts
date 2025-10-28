@@ -2,7 +2,7 @@
 import { LoadScript } from "@/utils/index";
 declare const LivePhotosKit: any;
 export default async () => {
-  const livePhotoList = document.querySelectorAll('.byt-node.byt-vhLivePhoto');
+  const livePhotoList = document.querySelectorAll('.byt-node.byt-LivePhoto');
   if (!livePhotoList.length) return;
   await LoadScript("/assets/js/livephotoskit.js");
   livePhotoList.forEach((i: any) => {

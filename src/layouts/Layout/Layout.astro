@@ -18,6 +18,8 @@ import FixBar from "@/components/FixBar/index.astro";
 import MobileSidebar from "@/components/MobileSidebar/MobileSidebar.astro";
 // Aside 侧边栏
 import Aside from "@/components/Aside/Aside.astro";
+// 分析统计
+import Analytics from '@vercel/analytics/astro'
 // A Modern CSS Reset
 import '@/styles/global.css'
 import "@/styles/Reset.less";
@@ -59,6 +61,7 @@ if (Astro.slots.has('aside')) {
 		</main>
 		<FixBar />
 		<Footer />
+		<Analytics />
 		<script>
 			import InitFn from "@/scripts/Init";
 			// 全局初始化
