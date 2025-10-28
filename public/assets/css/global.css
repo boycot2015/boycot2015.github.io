@@ -2,7 +2,7 @@
 /* use a selector-based strategy for dark mode */
 @variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
-@theme {
+:root {
 	/* // 白色颜色 */
 	--byt-white-color: #fff;
 	/* // BoxShadow */
@@ -54,8 +54,6 @@
 @layer base {
 	html {
 		color-scheme: light dark;
-		accent-color: var(--byt-font-color);
-		--byt-main-color: #ff9900;
 		&[data-theme="light"] {
 			color-scheme: light;
 		}
