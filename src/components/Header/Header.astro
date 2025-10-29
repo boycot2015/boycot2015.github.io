@@ -22,10 +22,20 @@ import "./Header.less";
 		<nav style={`margin-left: ${!NavsShow.position || NavsShow.position === 'right' ? 'auto' : '0'}`}>
 			{
 				Navs.map(i => (
-					<a class={`nav-link byt-hover${i.link.includes(activeNav) ? " active" : ""}`} href={i.link} target={i.target ? "_blank" : "_self"}>
+					i.link?<a class={`nav-link byt-hover${i.link?.includes(activeNav) ? " active" : ""}`} href={i.link} target={i.target ? "_blank" : "_self"}>
 						{i.text}
 						<Svg src={i.icon} />
-					</a>
+					</a>:
+					i.children?<div class="nav-link byt-hover">
+						<b-dropdown placement="bottomLeft" class="byt-dropdown">
+							<span class="flex gap-2 items-center hover:text-[var(--byt-white-color)] h-full">{i.text}<Svg src={i.icon} /></span>
+							<b-menu slot="drop" style="max-width: 200px;">
+								{i.children.map(j => (
+									<b-menu-item><span class="flex items-center gap-2 hover:text-[var(--byt-font-color)]">{j.text}<Svg src={j.icon} /></span></b-menu-item>
+								))}
+							</b-menu>
+						</b-dropdown>
+					</div>:null
 				))
 			}
 		</nav>

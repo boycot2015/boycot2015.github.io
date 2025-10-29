@@ -49,6 +49,8 @@ import ThemeProviderInit from "@/scripts/ThemeProvider";
 import SwiperInit from "@/scripts/Swiper";
 import Anchor from "@/scripts/Anchor";
 import AsideInit from "@/scripts/Aside";
+
+import WebUi from "@/scripts/WebUi";
 // ============================================================
 
 // 页面初始化 Only
@@ -105,6 +107,7 @@ const indexInit = async (only: boolean = true) => {
   initMobileSidebar();
   Anchor('');
   only && AsideInit();
+  only && WebUi();
 };
 
 export default () => {

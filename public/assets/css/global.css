@@ -45,10 +45,24 @@
 	/* // Import */
 	--byt-import: #B984DF;
 	--byt-import-hover: #B984DF18;
+
 	--swiper-theme-color: var(--byt-main-color) !important;
 	--swiper-navigation-size: 1.8rem !important;
+
     --waline-theme-color: var(--byt-main-color) !important;
 	--waline-active-color: var(--byt-main-color-88) !important;
+
+	--banana-color-primary: var(--byt-main-color);
+	--banana-color-primary-hover: var(--byt-main-color-88);
+	--banana-color-primary-active: var(--byt-main-color-66);
+	--banana-modal-background-color: var(--byt-body-bg);
+	--banana-modal-border-radius: var(--byt-box-radius);
+	--banana-color-text: var(--byt-font-color) !important;
+	--banana-modal-close-color: var(--byt-font-66);
+	--banana-modal-close-hover-color: var(--byt-font-56);
+	--banana-button-border-color-default: var(--byt-font-66);
+	--banana-input-background-color: var(--byt-white-color);
+	--banana-input-border-hover-color: var(--byt-main-color-66);
 }
 
 @layer base {

@@ -88,7 +88,15 @@ export default {
     { text: '归档', link: '/archives', icon: 'Nav_archives' },
     { text: '留言', link: '/message', icon: 'Nav_message' },
     { text: '关于', link: '/about', icon: 'Nav_about' },
-    { text: 'API', link: 'https://doc-api.boycot.top', target: true, icon: 'Nav_link' },
+    { text: '音乐', link: 'https://music.boycot.top', icon: 'Nav_music', target: true },
+    {
+      text: 'API',
+      icon: 'Nav_link',
+      children: [
+        { text: 'API文档', icon: 'Nav_link', link: 'https://doc-api.boycot.top', target: true },
+        { text: 'API文档_v2', icon: 'Nav_link', link: 'https://api-v2.boycot.top', target: true },
+      ]
+    },
   ],
   NavsShow: {
     position: 'center', // 导航栏位置 center | right, 默认 center

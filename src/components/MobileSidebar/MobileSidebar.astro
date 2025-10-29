@@ -17,7 +17,7 @@ import "./MobileSidebar.less";
 		<div class="byt-sidebar-list byt-link-list">
 			{
 				Navs.map(i => (
-					<a class={i.link.replace("/", "")} href={i.link} target={i.target ? "_blank" : "_self"}>
+					<a class={i.link?.replace("/", "")} href={i.link} target={i.target ? "_blank" : "_self"}>
 						<Svg src={i.icon} />
 						{i.text}
 					</a>

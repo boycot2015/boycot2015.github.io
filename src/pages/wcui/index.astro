@@ -1,0 +1,204 @@
+---
+// 公共 Layout
+import Layout from "@/layouts/Layout/Layout.astro";
+---
+<Layout title="组件库">
+    <h1 class="text-3xl font-bold text-center !my-4">wcui-组件库</h1>
+    <style>
+        .countdown::part(separate-item) {
+        color: #fff;
+        background: var(--byt-main-color);
+        padding: 0 8px;
+        border-radius: 4px;
+        text-align: right;
+        }
+    
+        .countdown::part(separator) {
+        margin: 0 4px;
+        color: var(--byt-main-color);
+        }
+    </style>
+    <div class="flex justify-between items-center">
+        <h3>距离活动结束还有：</h3>
+        <b-countdown class="countdown" style="--banana-countdown-color:var(--byt-font-color);" format="D 天 HH 小时 mm 分钟 ss 秒 SSS" time={new Date().getDate() * 24 * 60 * 60 * 1000}>
+            <!-- <span class="separator" slot="separator">:</span> -->
+        </b-countdown>
+    </div>
+    <b-carousel indicator navigation autoplay loop autoplay-delay={5000}>
+        <div class="demo-slide">1</div>
+        <div class="demo-slide">2</div>
+        <div class="demo-slide">3</div>
+        <div class="demo-slide">4</div>
+        <div class="demo-slide">5</div>
+    </b-carousel>
+    <b-carousel indicator autoplay loop vertical class="my-2" style="--banana-carousel-vertical-height: 300px;">
+        <div class="demo-slide">1</div>
+        <div class="demo-slide">2</div>
+        <div class="demo-slide">3</div>
+        <div class="demo-slide">4</div>
+        <div class="demo-slide">5</div>
+    </b-carousel>
+    <style>
+        .demo-slide {
+        height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(to bottom right, var(--byt-main-color-66), var(--byt-main-color));
+        color: #fff;
+        font-size: 48px;
+        }
+    </style>
+    <p class="!my-2">跑马灯</p>
+    <b-marquee color="orange"
+    content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."></b-marquee>
+    <b-marquee color="#BB4430"
+    content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."></b-marquee>
+    <b-marquee color="rgba(0,0,0,.5)" duration="40"
+    content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."></b-marquee>
+    <p class="!my-2">按钮</p>
+    <div class="flex gap-2 items-end">
+        <b-button>我是按钮</b-button>
+        <b-button type="primary">我是按钮</b-button>
+        <b-button type="danger">我是按钮</b-button>
+        <b-button type="warning">我是按钮</b-button>
+        <b-button type="warning" size="small">我是按钮</b-button>
+        <b-button type="warning" size="large">我是按钮</b-button>
+    </div>
+    <p class="!my-2">下拉、复选框、单选</p>
+    <div class="flex items-center gap-5 flex-wrap">
+        <b-input class="w-[200px]" type="search" />
+        <b-stepper value="1"></b-stepper>
+        <b-select>
+            <b-select-option value="1">选项1</b-select-option>
+            <b-select-option value="2">选项2</b-select-option>
+            <b-select-option value="3">选项3</b-select-option>
+        </b-select>
+        <b-checkbox>复选框</b-checkbox>
+        <b-radio-group>
+            <b-radio value="banana">Banana 🍌</b-radio>
+            <b-radio value="apple">Apple 🍎</b-radio>
+        </b-radio-group>
+    </div>
+    <p class="!my-2">折叠面板</p> 
+    <b-collapse title="折叠面板1">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </b-collapse>
+    <b-collapse title="折叠面板2">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </b-collapse>
+    <b-collapse title="折叠面板3">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </b-collapse>
+    <script>
+        const collapses:any = document.querySelectorAll('b-collapse');
+
+        const handleShow = (index: number) => {
+            collapses.forEach((collapse:any, i:number) => {
+            collapse.open = i === index;
+            });
+        };
+        collapses.forEach((collapse:any, index:number) => {
+            collapse.addEventListener('show', () => handleShow(index));
+        });
+    </script>
+    <p class="!my-2">提示</p> 
+    <b-button type="primary" class="message-btn">显示一个全局提示</b-button>
+
+    <script>
+    const button = document.querySelector('.message-btn');
+
+    button?.addEventListener('click', () => {
+        window.BMessage.open({ content: 'Say hi~' });
+    });
+    </script>
+    <p class="!my-2">文字提示</p> 
+    <b-tooltip content="This is a tooltip." style="--banana-tooltip-background-color: #015ae0">
+        <b-button>Hover</b-button>
+    </b-tooltip>
+    <b-tooltip content="This is a tooltip." trigger-action="click">
+        <b-button style="margin-left: 16px">Click</b-button>
+    </b-tooltip>
+    <!-- <p class="!my-2">标签页</p> 
+    <b-tabs>
+        <b-tab-item slot="nav" panel="1">
+        Tab1
+        </b-tab-item>
+        <b-tab-item  slot="nav" panel="2" disabled>
+        LongContentTabItem(disabled)
+        </a-tab-item>
+        <b-tab-item  slot="body" name="1">
+        <img
+            src="https://cdn.shopify.com/s/files/1/2710/8782/files/RMLdaYQf_paEjC8LTWqDx.jpg?v=1728612875"
+            width="100%"
+        />
+        </b-tab-item>
+        <b-tab-item  slot="body" name="2">
+        Tab Content 2
+        </b-tab-item>
+    </b-tabs> -->
+    <p class="!my-2">进度条</p> 
+    <b-progress percent="20"/>
+    <p class="!my-2">弹框</p>
+    <b-button class="modal-button">我是弹框</b-button>
+    <b-modal title="I am a Modal~">
+        <div>Some contents...</div>
+        <div>Some contents...</div>
+        <div>Some contents...</div>
+        <div slot="footer" class="flex gap-3">
+            <b-button id="cancel-btn">取消</b-button>
+            <b-button type="primary" id="ok-btn">确认</b-button>
+        </div>
+    </b-modal>
+    <b-button class="bottom">我是弹框</b-button>
+    <b-popup position="bottom">
+        <div style="display: flex; align-items: center; flex-direction: column; gap: 12px;">
+            {Array.from({ length: 100 }).map((_, index) => <div>选项{index + 1}</div>)}
+        </div>
+    </b-popup>
+    <style>
+        b-popup::part(container) {
+            padding: 16px 0;
+            max-height: 300px;
+            overflow-y: auto;
+            background-color: var(--byt-white-color);
+        }
+    </style>
+    <script>
+        const bottomBtn = document.querySelector('.bottom');
+        const bottomPopup:any = document.querySelector('b-popup[position="bottom"]');
+        bottomBtn?.addEventListener('click', () => {
+        bottomPopup.open = true;
+        });
+        bottomPopup?.addEventListener('close', () => {
+        bottomPopup.open = false;
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const button = document.querySelector('.modal-button');
+            const modal:any = document.querySelector('b-modal');
+            const cancelBtn = document.querySelector('#cancel-btn');
+            const okBtn = document.querySelector('#ok-btn');
+            
+            button?.addEventListener('click', () => {
+                modal.open = true;
+            });
+            cancelBtn?.addEventListener('click', () => {
+                modal.open = false;
+            });
+            
+            okBtn?.addEventListener('click', () => {
+                modal.open = false;
+                window.BMessage.success({ content: "OK~" })
+            });
+            
+            modal?.addEventListener('cancel', () => {
+                modal.open = false;
+            });
+        })
+    </script>
+</Layout>

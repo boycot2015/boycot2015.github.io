@@ -67,7 +67,6 @@ img[data-byt-lz-src] {
 .byt-hover {
 	position: relative;
 	transition: all 0.18s ease-in-out;
-
 	&:hover,
 	&.active {
 		color: #fff !important;
@@ -246,7 +245,11 @@ html.is-animating {
 .wl-panel {
 	flex: 1;
 }
-
+b-button[type="default"] {
+	&::part(base) {
+		background-color: var(--byt-white-color);
+	}
+}
 @keyframes byt-init-show {
 	0% {
 		transform: translateY(2rem);

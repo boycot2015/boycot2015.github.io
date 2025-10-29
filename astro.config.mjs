@@ -70,7 +70,7 @@ export default defineConfig({
                         }
                         if (id.includes("node_modules")) {
                             // 将第三方依赖单独打包到 [name]-[hash].js 文件中
-                            let pkgs =['echarts', 'aplayer', 'epubjs', 'localforage', 'sortablejs', 'xml2js', 'lodash', 'dayjs', 'astro', 'waline', 'leancloud-storage', 'vanilla-lazyload', 'jszip']
+                            let pkgs =['wc-ui.min', 'echarts', 'aplayer', 'epubjs', 'localforage', 'sortablejs', 'xml2js', 'lodash', 'dayjs', 'astro', 'waline', 'leancloud-storage', 'vanilla-lazyload', 'jszip']
                             let index = pkgs.findIndex(name => id.includes(name));
                             if (index !== -1) {
                                 return pkgs[index];
