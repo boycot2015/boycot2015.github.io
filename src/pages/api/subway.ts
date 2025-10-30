@@ -1,10 +1,8 @@
 import type { APIContext } from "astro";
-import siteConfig from "@/config";
-import fs from "fs";
+import subways from './json/_subways.json'
 export async function GET(context: APIContext) {
     //   const { request } = context;
     try {
-        let data:any = await fetch(siteConfig.Site + '/assets/json/subways.json').then(res => res.json());
         const destination:any = {
             1: ['罗湖', '机场东', '西乡'],
             2: ['赤湾', '黄贝岭', '小梅沙'],
@@ -21,11 +19,19 @@ export async function GET(context: APIContext) {
             // 13: ['深圳湾口岸', '高新中'],
             // 14: ['沙田', '岗厦北'],
         }
+        let data:any = subways;
         const lines = Object.keys(destination);
         let index = Math.floor(Math.random() * (lines.length));
         const destinationIndex = Math.floor(Math.random() * ((lines[index] || lines[1]).length));
+        
         let current = data.filter((el:any) => el.XLMC == (index+1)).map((el:any) => ({line: el.XLMC, name: el.ZDMZ, id: el.ID, desc: el.ZDJS}));
         let currentIndex = Math.floor(Math.random() * (current.length - 1));
+        // console.log({
+        //     subways: current,
+        //     destination: destination[index+1][destinationIndex],
+        //     line: index+1,
+        //     nextStation: current[currentIndex],
+        // }, 'subways');
         return new Response(JSON.stringify({ status: 200, data: {
             subways: current,
             destination: destination[index+1][destinationIndex],
@@ -34,7 +40,7 @@ export async function GET(context: APIContext) {
         } }))
         
     } catch (error) {
-        console.log(error);
+        console.log(error, 'error');
         return new Response(JSON.stringify({ status: 200, data: {} }))
     }
 }

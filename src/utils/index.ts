@@ -138,7 +138,7 @@ const getWeather = async (location?: string, params?:string) => {
   })
 }
 
-const getBeijingTime = () => {
+const getBeijingTime = (format?: string) => {
   const beijing = new Date().toLocaleString('en-US', {
       timeZone: 'Asia/Shanghai',
       year: 'numeric',
@@ -149,6 +149,9 @@ const getBeijingTime = () => {
       second: '2-digit',
       hour12: true
     });
+    if (format) {
+      return dayjs(beijing).format(format || 'YYYY-MM-DD HH:mm:ss')
+    }
     return beijing;
 }
 const getWeek = (time?: string) => {
@@ -206,7 +209,7 @@ function throttle(fn: { apply: (arg0: any, arg1: IArguments) => void; }, delay: 
   };
 }
 async function getSubway (station?: string) {
-  let data = await fetch(`${SITE_CONFIG.Site}/api/subway?station=${station||''}`).then(res => res.json()).catch(err => {
+  let data = await fetch(`/api/subway?station=${station||''}`).then(res => res.json()).catch(err => {
     console.error("GET request failed:", err);
     return [];
   });

@@ -49,6 +49,7 @@ import ThemeProviderInit from "@/scripts/ThemeProvider";
 import SwiperInit from "@/scripts/Swiper";
 import Anchor from "@/scripts/Anchor";
 import AsideInit from "@/scripts/Aside";
+import SubwayInit from "@/scripts/Subway";
 
 // ============================================================
 
@@ -106,6 +107,7 @@ const indexInit = async (only: boolean = true) => {
   initMobileSidebar();
   Anchor('');
   only && AsideInit();
+  SubwayInit();
 };
 
 export default () => {
