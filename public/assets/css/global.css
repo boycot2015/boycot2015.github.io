@@ -57,12 +57,20 @@
 	--banana-color-primary-active: var(--byt-main-color-66);
 	--banana-modal-background-color: var(--byt-body-bg);
 	--banana-modal-border-radius: var(--byt-box-radius);
-	--banana-color-text: var(--byt-font-color) !important;
+	--banana-color-text: var(--byt-font-color);
 	--banana-modal-close-color: var(--byt-font-66);
 	--banana-modal-close-hover-color: var(--byt-font-56);
 	--banana-button-border-color-default: var(--byt-font-66);
 	--banana-input-background-color: var(--byt-white-color);
 	--banana-input-border-hover-color: var(--byt-main-color-66);
+	--banana-menu-background: var(--byt-white-color);
+	--banana-menu-item-color: var(--byt-font-color);
+	--banana-menu-item-hover-background: var(--byt-main-color-66);
+	--banana-menu-item-hover-color: var(--byt-white-color);
+	--banana-menu-item-active-background: var(--byt-main-color-56);
+	--banana-menu-item-active-color: var(--byt-white-color);
+	--banana-button-border-color-primary: var(--byt-main-color);
+	--banana-button-text-color-primary: var(--byt-white-color);
 }
 
 @layer base {

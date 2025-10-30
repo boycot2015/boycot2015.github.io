@@ -205,4 +205,11 @@ function throttle(fn: { apply: (arg0: any, arg1: IArguments) => void; }, delay: 
     }
   };
 }
-export { $GET, $POST, getDescription, fmtTime, fmtDate, fmtPage, LoadScript, LoadStyle, getIP, getGreat, getScentence, debounce, throttle, getWeather, getWeek, getBeijingTime }
+async function getSubway (station?: string) {
+  let data = await fetch(`${SITE_CONFIG.Site}/api/subway?station=${station||''}`).then(res => res.json()).catch(err => {
+    console.error("GET request failed:", err);
+    return [];
+  });
+  return data;
+}
+export { $GET, $POST, getDescription, fmtTime, fmtDate, fmtPage, LoadScript, LoadStyle, getIP, getGreat, getScentence, debounce, throttle, getWeather, getWeek, getBeijingTime, getSubway }

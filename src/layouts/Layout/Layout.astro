@@ -2,6 +2,7 @@
 const { title, keywords, description, pagecover, activeNav, Home, headings } = Astro.props;
 // 网站配置
 import SITE_INFO from "@/config";
+import { getSubway } from "@/utils/index";
 const { GoogleAds, Theme, HomeBanner, AsideShow } = SITE_INFO;
 const { ad_Client, asideAD_Slot, articleAD_Slot } = GoogleAds;
 // Head 依赖
@@ -32,10 +33,20 @@ if (Astro.slots.has('aside')) {
 	console.log(Astro.slots, 'Astro.slots');
 	aside = await Astro.slots.render('aside', headings);
 }
+
+const railwayStations = await getSubway();
+// console.log(railwayStations, 'railwayStations');
+const railwayStation = {
+	line: railwayStations?.data?.line || '5',
+	destination: railwayStations?.data?.destination || '黄贝岭',
+	nextStation: railwayStations?.data?.nextStation?.name || '深圳北站',
+}
 ---
 
 <html lang="zh-CN">
 	<Head Title={title} Keywords={keywords} Description={description} PageCover={pagecover}>
+		<!-- wc-ui -->
+		<script is:inline src="/assets/js/wc-ui.min.js" defer></script>
 		<!-- 谷歌广告JS加载项 -->
 		{ad_Client && (asideAD_Slot || articleAD_Slot) && <script is:inline async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ad_Client}`} crossorigin="anonymous" />}
 		<!-- 彩旗🎈 -->
@@ -54,6 +65,9 @@ if (Astro.slots.has('aside')) {
 			{HomeBanner.enable && HomeBanner.type !== 'swiper' && <MainHeader />}
 			<section class="main-inner" style={`padding-top:${HomeBanner.enable && HomeBanner.type !== 'swiper' ? "0.88rem" : "calc(66px + 0.68rem)"};flex-direction:${AsideShow.position === 'left' ? 'row-reverse' : 'row'}`}>
 				<section class="main-inner-content">
+					<div class="marquee !mb-4">
+						<b-marquee pause-when-hover fixed style="--banana-marquee-color: var(--byt-main-color);" duration="40" content={`欢迎乘坐${railwayStation.line}号线，本次列车开往${railwayStation.destination}方向，下一站${railwayStation.nextStation}，请要下车的乘客带好您的行李物品准备下车；文明出行，礼让为先`}></b-marquee>
+					</div>
 					<slot />
 				</section>
 				<Aside />

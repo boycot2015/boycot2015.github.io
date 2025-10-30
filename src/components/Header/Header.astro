@@ -23,24 +23,43 @@ import "./Header.less";
 			{
 				Navs.map(i => (
 					i.link?<a class={`nav-link byt-hover${i.link?.includes(activeNav) ? " active" : ""}`} href={i.link} target={i.target ? "_blank" : "_self"}>
-						{i.text}
-						<Svg src={i.icon} />
+						<span class="line-clamp-1">{i.text}</span>
+						<span><Svg src={i.icon} /></span>
 					</a>:
-					i.children?<div class="nav-link byt-hover">
-						<b-dropdown placement="bottomLeft" class="byt-dropdown">
-							<span class="flex gap-2 items-center hover:text-[var(--byt-white-color)] h-full">{i.text}<Svg src={i.icon} /></span>
+					i.children?<a class="nav-link" href="#">
+						<b-dropdown placement="bottomLeft" class="byt-dropdown group" trigger-action="hover">
+							<span class="flex gap-2 items-center h-full"><span class="line-clamp-1">{i.text}</span><span class="group-hover:rotate-z-45 transition-all" ><Svg src={i.icon} /></span></span>
 							<b-menu slot="drop" style="max-width: 200px;">
 								{i.children.map(j => (
-									<b-menu-item><span class="flex items-center gap-2 hover:text-[var(--byt-font-color)]">{j.text}<Svg src={j.icon} /></span></b-menu-item>
+									<b-menu-item class="group/color" value={JSON.stringify(j)}><span class="flex items-center gap-2 group-hover/color:text-[#fff]">{j.text}<Svg src={j.icon} /></span></b-menu-item>
 								))}
 							</b-menu>
 						</b-dropdown>
-					</div>:null
+					</a>:null
 				))
 			}
 		</nav>
-		<span class="nav-link byt-hover search-btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path><path d="M21 21l-6 -6"></path></svg> 搜索</span>
+		<span class="nav-link byt-hover search-btn min-w-[4.8rem]"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path><path d="M21 21l-6 -6"></path></svg> 搜索</span>
 		<span class="nav-link byt-hover menu-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M4 6h16"></path><path d="M7 12h13"></path><path d="M10 18h10"></path></svg></span>
 		<Search />
 	</section>
 </header>
+<script>
+	const menu:any = document.querySelector('b-menu');
+	const dropdown:any = document.querySelector('b-dropdown');
+	menu.addEventListener('select', (event:any) => {
+		try {
+			const item = JSON.parse(event.detail.item.value);
+			if (item.link) {
+				if (item.target === '_self') {
+					window.location.href = item.link;
+				} else {
+					window.open(item.link, '_blank');
+				}
+			}
+		} catch (error) {
+			console.log(error);
+		}
+		dropdown.open = false;
+	});
+</script>
