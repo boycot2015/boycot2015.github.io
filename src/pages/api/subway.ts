@@ -19,23 +19,22 @@ export async function GET(context: APIContext) {
             // 13: ['深圳湾口岸', '高新中'],
             // 14: ['沙田', '岗厦北'],
         }
-        return new Response(JSON.stringify({ status: 200, data: {
-            subways,
-            destination,
-        } }), {
+        return Response.json({
             status: 200,
-            headers: {
-              "Content-Type": "application/json",
-            },
+            data: {
+                subways,
+                destination,
+            }
+        }, {
+            status: 200
         });
-        
     } catch (error) {
         console.log(error, 'error');
-        return new Response(JSON.stringify({ status: 200, data: {} }), {
-            status: 200,
-            headers: {
-              "Content-Type": "application/json",
-            },
+        return Response.json({
+            status: 400,
+            data: {}
+        }, {
+            status: 400
         });
     }
 }
