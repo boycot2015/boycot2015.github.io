@@ -3,7 +3,9 @@ import { fmtDate } from '@/utils/index'
 import { $GET } from '@/utils/index'
 // 图片懒加载
 import LzImgInit from "@/scripts/LazyImg"
-
+// 朋友圈 RSS 初始化
+import FRIENDS_DATA from "@/data/Friends";
+const { api, data, render, combine } = FRIENDS_DATA as { api: string, data: any[], render?: (data: any) => any, combine?: boolean };
 const FriendsInit = async (data: any, render?: (data: any) => any, staticData?: any) => {
 	const friendsDOM = document.querySelector('.main-inner-content>.byt-tools-main>main.friends-main')
 	if (!friendsDOM) return;
@@ -29,8 +31,4 @@ const FriendsInit = async (data: any, render?: (data: any) => any, staticData?: 
 		Toast('获取数据失败')
 	}
 }
-
-// 朋友圈 RSS 初始化
-import FRIENDS_DATA from "@/data/Friends";
-const { api, data, render, combine } = FRIENDS_DATA as { api: string, data: any[], render?: (data: any) => any, combine?: boolean };;
 export default () => FriendsInit(api || data, render, combine ? data : []);

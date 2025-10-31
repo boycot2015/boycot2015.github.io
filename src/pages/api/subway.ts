@@ -19,28 +19,23 @@ export async function GET(context: APIContext) {
             // 13: ['深圳湾口岸', '高新中'],
             // 14: ['沙田', '岗厦北'],
         }
-        let data:any = subways;
-        const lines = Object.keys(destination);
-        let index = Math.floor(Math.random() * (lines.length));
-        const destinationIndex = Math.floor(Math.random() * ((lines[index] || lines[1]).length));
-        
-        let current = data.filter((el:any) => el.XLMC == (index+1)).map((el:any) => ({line: el.XLMC, name: el.ZDMZ, id: el.ID, desc: el.ZDJS}));
-        let currentIndex = Math.floor(Math.random() * (current.length - 1));
-        // console.log({
-        //     subways: current,
-        //     destination: destination[index+1][destinationIndex],
-        //     line: index+1,
-        //     nextStation: current[currentIndex],
-        // }, 'subways');
         return new Response(JSON.stringify({ status: 200, data: {
-            subways: current,
-            destination: destination[index+1][destinationIndex],
-            line: index+1,
-            nextStation: current[currentIndex],
-        } }))
+            subways,
+            destination,
+        } }), {
+            status: 200,
+            headers: {
+              "Content-Type": "application/json",
+            },
+        });
         
     } catch (error) {
         console.log(error, 'error');
-        return new Response(JSON.stringify({ status: 200, data: {} }))
+        return new Response(JSON.stringify({ status: 200, data: {} }), {
+            status: 200,
+            headers: {
+              "Content-Type": "application/json",
+            },
+        });
     }
 }

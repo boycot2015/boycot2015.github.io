@@ -4,7 +4,7 @@ export default {
   // 网站图标
   Favicon: '/favicon.svg',
   // 网站地址
-  Site: import.meta.env.PROD ? 'https://www.boycot.top' : 'http://localhost:4321',
+  Site: !import.meta.env.PROD ? 'https://www.boycot.top' : 'http://localhost:4321',
   // 网站副标题
   Subtitle: '专注于前端开发与相关技术的实战分享',
   // 网站描述
