@@ -19,13 +19,16 @@ export async function GET(context: APIContext) {
   })
 }
 export async function getStaticPaths() {
-    const response = await fetch(siteConfig.Api.replace(/\/v2/g, '')).then(res => res.json());
-    // console.log(response, 'response');
-    const { endpoints, ...data } = response;
-    return endpoints?.map((endpoint:string) => {
-      return {
-        params: { path: endpoint.replace(/\/v2/g, '') || '/' },
-        props: { ...data },
-      };
-    });
-  }
+  const response = await fetch(siteConfig.Api.replace(/\/v2/g, '')).then(res => res.json());
+  // console.log(response, 'response');
+  const { endpoints, ...data } = response;
+  return endpoints.filter((endpoint:string) => endpoint.split('/').length < 4).map((endpoint:string) => {
+    return {
+      params: { path: endpoint.replace(/\/v2/g, '') || '/' },
+      props: { ...data },
+    };
+  }).concat([{
+    params: { path: '/swagger.json' },
+    props: { ...data },
+  }]);
+}

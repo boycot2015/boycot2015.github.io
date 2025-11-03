@@ -18,13 +18,23 @@ export async function GET(context: APIContext) {
     status: res ? 200 : 404,
   })
 }
+
 export async function getStaticPaths() {
     const response = await fetch(Api.replace(/\/api$/g, '/swagger.json')).then(res => res.json());
     const { paths, ...data } = response;
-    return Object.keys(paths).map((endpoint:string) => {
+    // return Object.keys(paths).map((endpoint:string) => {
+    //   return {
+    //     params: { path: endpoint || '/' },
+    //     props: { ...data },
+    //   };
+    // });
+    return Object.keys(paths).filter((endpoint:string) => endpoint.split('/').length < 3).map((endpoint:string) => {
       return {
         params: { path: endpoint || '/' },
         props: { ...data },
       };
-    });
+    }).concat([{
+      params: { path: '/swagger.json' },
+      props: { ...data },
+    }]);
   }
