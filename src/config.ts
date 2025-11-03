@@ -4,7 +4,7 @@ export default {
   // 网站图标
   Favicon: '/favicon.svg',
   // 网站地址
-  Site: !import.meta.env.PROD ? 'https://www.boycot.top' : 'http://localhost:4321',
+  Site: import.meta.env.PROD ? 'https://www.boycot.top' : 'http://localhost:4321',
   // 网站副标题
   Subtitle: '专注于前端开发与相关技术的实战分享',
   // 网站描述
@@ -94,6 +94,7 @@ export default {
       target: '',
       children: [
         { text: '音乐鉴赏', link: 'https://music.boycot.top', icon: 'Nav_music', target: true },
+        { text: '地铁信息', link: '/subway', icon: 'subway' },
         { text: 'API文档', icon: 'Nav_link', link: 'https://doc-api.boycot.top', target: true },
         { text: 'API文档_v2', icon: 'Nav_link', link: 'https://api-v2.boycot.top', target: true },
       ]

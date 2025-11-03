@@ -79,7 +79,7 @@ const LoadStyle = (href: string): Promise<HTMLLinkElement> => {
 // 请求封装
 const $GET = async (url: string, headers: Record<string, string> = {}): Promise<any> => {
   try {
-    const res = await fetch(url, { method: "GET", headers: headers, mode: 'cors' });
+    const res = await fetch(url, { method: "GET", headers: headers });
     if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
     return res.json();
   } catch (error) {
@@ -209,7 +209,7 @@ function throttle(fn: { apply: (arg0: any, arg1: IArguments) => void; }, delay: 
   };
 }
 async function getSubway (station?: string) {
-  let data = await $GET(`/api/subway?station=${station||''}&t=${Date.now()}`, {'Content-Type': 'application/json'}).catch(err => {
+  let data = await $GET(`${SITE_CONFIG.Site}/api/subway?station=${station||''}&t=${Date.now()}`, {'Content-Type': 'application/json'}).catch(err => {
     console.error("GET request failed:", err);
     return [];
   });
