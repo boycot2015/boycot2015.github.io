@@ -26,32 +26,35 @@ export default async () => {
             </div>
         </div>`;
     }
-    if (SITE_CONFIG.AsideShow.BlogsignageShow.weather) {
-
-    }
+    const isMobile = window.innerWidth < 768;
     let repeatArr = ['南山']
     let weatherEl = document.querySelector(".byt-aside .weather");
     let weather = await getWeather(repeatArr.includes(info.district || '') ? info.city : info.district || info.city);
     let forecast = await getWeather(repeatArr.includes(info.district || '') ? info.city : info.district || info.city, 'forecast');
     // console.log(weather, forecast, 'weather');
     let html = `<div class="flex flex-col w-full">`
-    let dailyShow = SITE_CONFIG.AsideShow.BlogsignageShow.weather.dailyShow;
-    let lifeShow = SITE_CONFIG.AsideShow.BlogsignageShow.weather.lifeShow;
-    let hoursShow = SITE_CONFIG.AsideShow.BlogsignageShow.weather.hoursShow;
+    let dailyShow = SITE_CONFIG.AsideShow.BlogsignageShow.weather.dailyShow || isMobile;
+    let lifeShow = SITE_CONFIG.AsideShow.BlogsignageShow.weather.lifeShow || isMobile;
+    let hoursShow = SITE_CONFIG.AsideShow.BlogsignageShow.weather.hoursShow || isMobile;
     let showMore = hoursShow || dailyShow || lifeShow;
     if (weatherEl) {
-        html += `<div class="flex items-center justify-between gap-1 w-full pb-2 ${showMore ? 'border-b' : ''} border-[var(--byt-font-16)]">
-                <span>${weather?.air_quality?.aqi || '-'}&nbsp;${weather?.air_quality?.quality || '-'}</span>
-                <span>
-                <span class="flex items-center justify-between gap-1">
-                    ${weather?.location?.county || weather?.location?.city || '-'}&nbsp;
-                    <img data-byt-lz-src="https://d.scggqx.com/forecast/img/${weather?.weather?.condition || '-'}.png" alt="${weather?.weather?.condition || '-'} " class="w-8 h-8">
-                    ${weather?.weather?.temperature || '25'}℃ ${!weather || ''}</span>
-                </span>
-                <span class="flex items-center gap-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><!-- Icon from Material Symbols by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="currentColor" d="M11.5 20q-1.25 0-2.125-.875T8.5 17h2q0 .425.288.713T11.5 18t.713-.288T12.5 17t-.288-.712T11.5 16H2v-2h9.5q1.25 0 2.125.875T14.5 17t-.875 2.125T11.5 20M2 10V8h13.5q.65 0 1.075-.425T17 6.5t-.425-1.075T15.5 5t-1.075.425T14 6.5h-2q0-1.475 1.013-2.488T15.5 3t2.488 1.013T19 6.5t-1.012 2.488T15.5 10zm16.5 8v-2q.65 0 1.075-.425T20 14.5t-.425-1.075T18.5 13H2v-2h16.5q1.475 0 2.488 1.013T22 14.5t-1.012 2.488T18.5 18"/></svg>
-                    ${weather?.weather?.wind_direction || '-'}&nbsp;
-                </span>
+        html += `<div class="w-full pb-2 ${showMore ? 'border-b' : ''} border-[var(--byt-font-16)]">
+                <div class="flex items-center justify-between gap-1 w-full">
+                    <span>${weather?.air_quality?.aqi || '-'}&nbsp;${weather?.air_quality?.quality || '-'}</span>
+                    <span>
+                        <span class="flex items-center justify-between gap-1">
+                        ${weather?.location?.county || weather?.location?.city || '-'}&nbsp;
+                        <img data-byt-lz-src="https://d.scggqx.com/forecast/img/${weather?.weather?.condition || '-'}.png" alt="${weather?.weather?.condition || '-'} " class="w-8 h-8">
+                        ${weather?.weather?.temperature || '25'}℃ ${!weather || ''}</span>
+                    </span>
+                    <span class="flex items-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><!-- Icon from Material Symbols by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="currentColor" d="M11.5 20q-1.25 0-2.125-.875T8.5 17h2q0 .425.288.713T11.5 18t.713-.288T12.5 17t-.288-.712T11.5 16H2v-2h9.5q1.25 0 2.125.875T14.5 17t-.875 2.125T11.5 20M2 10V8h13.5q.65 0 1.075-.425T17 6.5t-.425-1.075T15.5 5t-1.075.425T14 6.5h-2q0-1.475 1.013-2.488T15.5 3t2.488 1.013T19 6.5t-1.012 2.488T15.5 10zm16.5 8v-2q.65 0 1.075-.425T20 14.5t-.425-1.075T18.5 13H2v-2h16.5q1.475 0 2.488 1.013T22 14.5t-1.012 2.488T18.5 18"/></svg>
+                        ${weather?.weather?.wind_direction || '-'}&nbsp;
+                    </span>
+                </div>
+                <div class="mt-2">
+                    <b-marquee pause-when-hover id="subway" fixed duration="40" content=今天白天到夜间${weather?.weather?.condition}，${weather?.weather?.wind_direction}${weather?.weather?.wind_power}级，${weather?.life_indices[6]?.description}></b-marquee>
+                </div>
             </div>`;
         if (hoursShow) {
             html += `<h3 class="text-md font-bold text-[var(--byt-font-88)] leading-1 border-l-4 pl-2 border-[var(--byt-main-color)] !my-3 flex justify-between items-center">
