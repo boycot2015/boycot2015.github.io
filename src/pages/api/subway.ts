@@ -1,28 +1,104 @@
 import type { APIContext } from "astro";
-import subways from './json/_subways.json'
-export async function GET(context: APIContext) {
+import subwayData from './json/subway/_data.json';
+import sz_subwayData from './json/subway/_sz.json';
+import subwayTimeData from './json/subway/_time.json';
+type Time = {
+    INTERVAL:string,
+    FIRST_SUBWAY_TIME:string,
+    PEAK_INTERVAL:string,
+    LAST_SUBWAY_TIME:string,
+    DRIVING_DIRECTION:string,
+    ID:string,
+    DAY_TYPE:string,
+    SITE_CODE:string,
+    OPER_CODE:string,
+    LINE_CODE:string,
+    BELONG_LINE:string
+}
+export type Subway = {
+    XLMC: string,
+    ZDJS: string,
+    ID: string,
+    isTransfer?: boolean,
+    transfer?: string[],
+    time?: Time,
+    ZDMZ: string
+}
+export type Destination = Record<string, string[]>
+export type Subways = {
+    line: string,
+    destination: string[],
+    subways: Subway[]
+}
+export async function GET(context?: APIContext) {
     //   const { request } = context;
+    
     try {
-        const destination:any = {
-            1: ['罗湖', '机场东', '西乡'],
-            2: ['赤湾', '黄贝岭', '小梅沙'],
-            3: ['福保', '坪地六联'],
+        const destination: Destination = {
+            1: ['罗湖', '机场东'],
+            2: ['赤湾', '莲塘'],
+            3: ['福保', '双龙'],
             4: ['福田口岸', '牛湖'],
-            5: ['赤湾', '黄贝岭', '长岭坡'],
-            6: ['科学馆', '松岗', '深理工', '光明城'],
-            7: ['深大丽湖', '西丽湖', '太安'],
-            8: ['梧桐山南', '盐田路', '小梅沙'],
-            9: ['前湾', '文锦', '孖岭'],
-            10: ['双拥街', '福田口岸', '孖岭'],
-            11: ['华强南', '碧头', '机场'],
-            // 12: ['左炮台东', '松岗', '机场东'],
-            // 13: ['深圳湾口岸', '高新中'],
-            // 14: ['沙田', '岗厦北'],
+            5: ['赤湾', '黄贝岭'],
+            6: ['科学馆', '松岗'],
+            7: ['西丽湖', '太安'],
+            8: ['梧桐山南', '盐田路'],
+            9: ['前湾', '文锦'],
+            10: ['双拥街', '福田口岸'],
+            11: ['福田', '碧头'],
+            12: ['左炮台东', '松岗'],
+            13: ['深圳湾口岸', '高新中'],
+            14: ['沙田', '岗厦北'],
         }
+        const subways = (subwayData.filter((el) => el.ZDJS !== '暂无数据' || (destination[el.XLMC]?.includes(el.ZDMZ)))) as Subway[]
+        const transfers: Destination = {}
+        const list:Subways[] = []
+        Object.keys(destination).forEach(key => {
+            let station = {
+            line: key,
+            destination: destination[key],
+            subways: subways.filter((el, index, self) => index === self.findIndex((item) => item.ZDMZ === el.ZDMZ && item.XLMC === el.XLMC)).filter((item:Subway) => item.XLMC === key).map((item:Subway) => {
+                const isTransfer = (item.ZDJS.includes('换乘') || item.ZDJS.includes('枢纽'))
+                if (isTransfer) {
+                    transfers[key] && (transfers[key] = Array.from(new Set([...transfers[key], item.ZDMZ])))
+                    !transfers[key] && (transfers[key] = [item.ZDMZ])
+                }
+                return {
+                    ...item,
+                    time: subwayTimeData.find((el) => el.BELONG_LINE.includes(item.XLMC) && el.DRIVING_DIRECTION === item.ZDMZ),
+                    isTransfer
+                }
+            })
+          }
+          if (station.subways.length <= 0) {
+            station.subways = sz_subwayData.reverse().filter((el, index, self) => index === self.findIndex((item) => item.sname === el.sname)).filter((el) => el.rname.includes(key)).map((item:any) => ({
+                XLMC: item.rname,
+                ZDJS: item.desc,
+                ID: item.id,
+                isTransfer: false,
+                transfer: [],
+                time: subwayTimeData.find((el) => item.rname.includes(el.BELONG_LINE) && el.DRIVING_DIRECTION === item.ZDMZ),
+                ZDMZ: item.sname.replace(/\(地铁站\)|深圳/g, ''),
+            }))
+          }
+          list.push(station)
+        })
+        list.map(el => {
+            el.subways.forEach(item => {
+                if (item.isTransfer) {
+                    item.transfer = []
+                    for (const key in transfers) {
+                        if (transfers[key].includes(item.ZDMZ) && key !== item.XLMC) {
+                            item.transfer.push(key)
+                        }
+                    }
+                }
+            })
+        })
         return Response.json({
             status: 200,
             data: {
-                subways,
+                subways: list,
                 destination,
             }
         }, {

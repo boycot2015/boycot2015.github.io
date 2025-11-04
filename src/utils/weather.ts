@@ -1112,9 +1112,7 @@ export const weather_echarts_options = {
         showSymbol: true,
         smooth: true,
         itemStyle: {
-          normal: {
-            color: '#ff7f50'
-          }
+          color: '#ff7f50'
         },
         label: {
           show: true,
@@ -1140,9 +1138,7 @@ export const weather_echarts_options = {
         showSymbol: true,
         smooth: true,
         itemStyle: {
-          normal: {
             color: 'skyblue'
-          }
         },
         label: {
           show: true,

@@ -25,7 +25,7 @@ import "./Header.less";
 					i.link?<a class={`nav-link byt-hover${i.link?.includes(activeNav) ? " active" : ""}`} href={i.link} target={i.target ? "_blank" : "_self"}>
 						<span class="line-clamp-1">{i.text}</span>
 						<span><Svg src={i.icon} /></span>
-					</a>:
+					</a>: 
 					i.children?<a class="nav-link" href="#">
 						<b-dropdown placement="bottomLeft" class="byt-dropdown group" trigger-action="hover">
 							<span class="flex gap-2 items-center h-full"><span class="line-clamp-1">{i.text}</span><span class="group-hover:rotate-z-45 transition-all" ><Svg src={i.icon} /></span></span>
@@ -51,10 +51,10 @@ import "./Header.less";
 		try {
 			const item = JSON.parse(event.detail.item.value);
 			if (item.link) {
-				if (item.target === '_self') {
-					window.location.href = item.link;
-				} else {
+				if (item.target === '_blank') {
 					window.open(item.link, '_blank');
+				} else {
+					window.location.href = item.link;
 				}
 			}
 		} catch (error) {

@@ -9,6 +9,7 @@
 	--byt-box-shadow: 0 3px 8px 6px #07111b0d;
 	/* // Body 背景颜色 */
 	--byt-code-bg: rgb(from var(--byt-font-color) r g b / 16%);
+	--byt-border-color: #ccc;
 	--byt-body-bg: #F8F8F8;
 	/* // Back Top 按钮位置 */
 	--byt-back-top: calc((calc(100vw - 2rem) - min((100vw - 2rem), var(--byt-main-max-width))) / 2 + 1rem);
@@ -117,6 +118,14 @@ html[data-theme="dark"]{
 	--byt-body-bg: #111;
 	/* // Font 颜色 */
 	--byt-code-bg: #24292e;
+	--byt-border-color: #333;
+	/* // 字体颜色 */
+	--byt-font-88: rgb(from var(--byt-font-color) r g b / 88%);
+	--byt-font-66: rgb(from var(--byt-font-color) r g b / 66%);
+	--byt-font-56: rgb(from var(--byt-font-color) r g b / 56%);
+	--byt-font-28: rgb(from var(--byt-font-color) r g b / 28%);
+	--byt-font-16: rgb(from var(--byt-font-color) r g b / 16%);
+	--byt-font-6: rgb(from var(--byt-font-color) r g b / 6%);
 
     --waline-white: var(--byt-font-color);
     --waline-light-grey: var(--byt-font-66);

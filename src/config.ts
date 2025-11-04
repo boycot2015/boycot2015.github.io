@@ -93,10 +93,10 @@ export default {
       icon: 'arrow_right',
       target: '',
       children: [
-        { text: '音乐鉴赏', link: 'https://music.boycot.top', icon: 'Nav_music', target: true },
+        { text: '音乐鉴赏', link: 'https://music.boycot.top', icon: 'Nav_music', target: '_blank' },
         { text: '地铁信息', link: '/subway', icon: 'subway' },
-        { text: 'API文档', icon: 'Nav_link', link: 'https://doc-api.boycot.top', target: true },
-        { text: 'API文档_v2', icon: 'Nav_link', link: 'https://api-v2.boycot.top', target: true },
+        { text: 'API文档', icon: 'Nav_link', link: 'https://doc-api.boycot.top', target: '_blank' },
+        { text: 'API文档_v2', icon: 'Nav_link', link: 'https://api-v2.boycot.top', target: '_blank' },
       ]
     },
   ],
@@ -152,7 +152,7 @@ export default {
   },
   Api: 'https://api-v2.boycot.top/v2',
   // 博客音乐组件是否开启
-  musicBoxShow: import.meta.env.PROD,
+  musicBoxShow: !import.meta.env.PROD,
   // 评论组件（只允许同时开启一个）
   Comment: {
     // Twikoo 评论
@@ -170,7 +170,7 @@ export default {
   },
   // Analytics 统计
   Analytics: {
-    enable: true,
+    enable: false,
     server: 'https://boycot.top',
     siteId: 'boycot'
   },

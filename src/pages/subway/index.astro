@@ -1,68 +1,32 @@
 ---
-import { getSubway } from "@/utils/index";
 // 公共 Layout
 import Layout from "@/layouts/Layout/Layout.astro";
-const subway = await getSubway();
-const { subways,  destination } = subway.data;
-type Subway = {
-  XLMC: string,
-  ZDJS: string,
-  ID: string,
-  isTransfer?: boolean,
-  transfer?: string[],
-  ZDMZ: string
-}
-type Subways = {
-    title: string,
-    destination: string[],
-    subways: Subway[]
-}
-const transfers: Record<string, string[]> = {}
-const list:Subways[] = []
-Object.keys(destination).forEach(key => {
-    let station = {
-    title: key + '号线',
-    destination: destination[key],
-    subways: subways.filter((item:Subway) => item.XLMC === key).map((item:Subway) => {
-        const isTransfer = item.ZDJS.includes('换乘')
-        if (isTransfer) {
-            transfers[key] && (transfers[key] = Array.from(new Set([...transfers[key], item.ZDMZ])))
-            !transfers[key] && (transfers[key] = [item.ZDMZ])
-        }
-        return {
-            ...item,
-            isTransfer
-        }
-    })
-  }
-  list.push(station)
-})
-list.map(el => {
-    el.subways.forEach(item => {
-        if (item.isTransfer) {
-            item.transfer = []
-            for (const key in transfers) {
-                if (transfers[key].includes(item.ZDMZ) && key !== item.XLMC) {
-                    item.transfer.push(key)
-                }
-            }
-        }
-    })
-})
-// console.log(list[0].subways, transfers, 'subway');
+import type { Subways, Destination } from "@/pages/api/subway";
+import { GET } from "@/pages/api/subway";
+const subway: Response = await GET();
+const { data } = await subway.json() as { data: {subways: Subways[], destination: Destination} };
+// console.log(data.subways[0].subways.filter(el => el.time)[0], 'subway');
+const { subways } = data;
 ---
 <Layout title={"地铁信息"} description={'深圳市地铁信息'} activeNav={'subway'}>
     {
-        list.map(el=> <div class="my-4"><b-collapse title={el.title + '（终点站： ' + el.destination.join('、') + '）'}>
+        subways?.map(el=> <div class="my-4" id={`subway-${el.line}`}><b-collapse title={el.line + '号线（终点站： ' + el.destination?.join('、') + '）'}>
             {/* grid grid-cols-3 md:grid-cols-4 md:grid-cols-6 */}
             <div class="flex gap-4 flex-wrap">
                 {
-                    el.subways.map(item => (
-                        <div class="byt-subway-item">
-                            <b-tooltip content={item.ZDJS} trigger-action="hover">
-                                <b-button class="byt-subway-name" type={item.transfer?.length ? 'primary' : 'info'}>{item.ZDMZ}{item.transfer?.length ? `（可换乘${item.transfer.join('、')}号线）` : ''}</b-button>
-                            </b-tooltip>
-                            {/* <span class="byt-subway-desc">{item.ZDJS}</span> */}
+                    el.subways?.map(item => (
+                        <div class="byt-subway-item" class:list={!item.ZDJS ? '!flex !gap-2 w-[auto]' : 'w-full flex flex-col md:block'}>
+                            <b-button class="byt-subway-name" type={item.transfer?.length ? 'primary' : 'default'}>{item.ZDMZ}{item.transfer?.length ? `（可换乘${item.transfer.join('、')}号线）` : ''}</b-button>
+                            {/* <b-tooltip content={item.ZDJS} trigger-action="hover" placement="right">
+                            </b-tooltip> */}
+                            {item.time && <span class="byt-subway-time mt-2 pb-2 md:mt-0 md:pb-0 md:ml-2 border-b border-b-[var(--byt-main-color)]">
+                                发车时刻表：
+                                早：<span class="text-[var(--byt-main-color)]">{item.time?.FIRST_SUBWAY_TIME}</span>；
+                                晚：<span class="text-[var(--byt-main-color)]">{item.time?.LAST_SUBWAY_TIME}</span>，
+                                发车间隔：<span class="text-[var(--byt-main-color)]">{item.time?.INTERVAL}</span>；
+                                高峰期：<span class="text-[var(--byt-main-color)]">{item.time?.PEAK_INTERVAL}</span>
+                            </span>}
+                            {item.ZDJS && <p class="byt-subway-desc !mt-3 text-justify">{item.ZDJS}</p>}
                         </div>
                     ))
                 }
@@ -77,9 +41,14 @@ list.map(el => {
             collapse.open = i === index;
           });
         };
-      
         collapses.forEach((collapse:any, index:number) => {
-          collapse.addEventListener('show', () => handleShow(index));
+            collapse.addEventListener('show', () => handleShow(index));
+        });
+        let activeIndex = Number(location.hash.split('-')[1]) - 1;
+        collapses[activeIndex].open = true;
+        window.scrollTo({
+            top: collapses[activeIndex].offsetTop,
+            behavior: 'smooth'
         });
       </script>
 </Layout>

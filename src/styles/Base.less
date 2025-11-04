@@ -245,6 +245,11 @@ html.is-animating {
 .wl-panel {
 	flex: 1;
 }
+b-button[type="default"],b-button[type="info"] {
+	&::part(base) {
+		border-color: var(--byt-border-color);
+	}
+}
 b-button[type="default"] {
 	&::part(base) {
 		background-color: var(--byt-white-color);

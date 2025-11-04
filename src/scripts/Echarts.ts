@@ -10,6 +10,7 @@ import {
     TooltipComponent,
     GridComponent,
     DatasetComponent,
+    LegendComponent,
     TransformComponent,
 } from "echarts/components";
 
@@ -28,6 +29,7 @@ echarts.use([
     LabelLayout,
     UniversalTransition,
     CanvasRenderer,
+    LegendComponent
 ]);
 
 // 导出 ECharts 实例
