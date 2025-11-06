@@ -5,7 +5,7 @@ import type { Subways, Destination } from "@/pages/api/subway";
 import { GET } from "@/pages/api/subway";
 const subway: Response = await GET();
 const { data } = await subway.json() as { data: {subways: Subways[], destination: Destination} };
-// console.log(data.subways[0].subways.filter(el => el.time)[0], 'subway');
+// console.log(data.subways[3].subways, 'subway');
 const { subways } = data;
 ---
 <Layout title={"地铁信息"} description={'深圳市地铁信息'} activeNav={'subway'}>
