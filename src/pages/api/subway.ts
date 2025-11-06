@@ -27,6 +27,7 @@ export type Subway = {
 export type Destination = Record<string, string[]>
 export type Subways = {
     line: string,
+    color: string,
     destination: string[],
     subways: Subway[]
 }
@@ -49,6 +50,24 @@ export async function GET(context?: APIContext) {
             12: ['左炮台东', '松岗'],
             13: ['深圳湾口岸', '高新中'],
             14: ['沙田', '岗厦北'],
+            20: ['会展城', '机场北'],
+        }
+        const colors: Record<string, string> = {
+            1: '#019800',
+            2: '#FE9B1A',
+            3: '#019FDE',
+            4: '#E71619',
+            5: '#694D9A',
+            6: '#1dc5b8',
+            7: '#003c92',
+            8: '#FE9B1A',
+            9: '#85666c',
+            10: '#f67496',
+            11: '#530000',
+            12: '#A794B0',
+            13: '#db850e',
+            14: '#edcc63',
+            20: '#40B5CF',
         }
         const subways = (subwayData.filter((el) => el.ZDJS !== '暂无数据' || (destination[el.XLMC]?.includes(el.ZDMZ)))) as Subway[]
         const transfers: Destination = {}
@@ -56,6 +75,7 @@ export async function GET(context?: APIContext) {
         Object.keys(destination).forEach(key => {
             let station = {
             line: key,
+            color: colors[key] || '#000',
             destination: destination[key],
             subways: subways.filter((el, index, self) => index === self.findIndex((item) => item.ZDMZ === el.ZDMZ && item.XLMC === el.XLMC)).filter((item:Subway) => item.XLMC === key).map((item:Subway) => {
                 const isTransfer = (item.ZDJS.includes('换乘') || item.ZDJS.includes('枢纽'))

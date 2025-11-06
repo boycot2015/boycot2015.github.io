@@ -25,6 +25,7 @@ export default async function GET() {
     let transferText = `，乘客可换乘${subways?.nextStation?.transfer?.join('、')}号线`
     const text = `${nextText}${subways?.nextStation?.transfer?.length ? transferText : ''}`;
     const dir =['左', '右']
+    subway.style.color = current.color;
     subway.content = `欢迎乘坐深圳地铁${subways?.line || '5'}号线，本次列车开往${subways?.destination || '黄贝岭'}方向；${text}，${dir[Math.floor(Math.random() * dir.length)]}侧的车门将会打开，请要下车的乘客带好您的行李物品准备下车；文明出行，礼让为先！`;
     // console.log(new Date(time).toLocaleString(), new Date(firstTime).toLocaleString(), new Date(lastTime).toLocaleString(), 'subway');
     // console.log(firstTime , new Date(time).getTime(), 'lastTime');
