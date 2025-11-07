@@ -36,11 +36,11 @@ const { subways } = data;
                     {
                         el.subways?.map(item => (
                             <div class="byt-subway-item" class:list={!item.ZDJS ? '!flex !gap-2 w-[auto]' : 'w-full flex flex-col md:block'}>
-                                <div class="flex-col md:flex-row flex md:items-center">
-                                    <b-button class="byt-subway-name mr-2" type={'success'}>{item.ZDMZ}{item.transfer?.length ? `（${item.time?'终点站，':''}可换乘${item.transfer.join('、')}号线）` : item.time?'（终点站）':''}</b-button>
+                                <div class="flex-col lg:flex-row flex lg:items-center">
+                                    <b-button class="byt-subway-name lg:mr-2" type={'success'}>{item.ZDMZ}{item.transfer?.length ? `（${item.time?'终点站，':''}可换乘${item.transfer.join('、')}号线）` : item.time?'（终点站）':''}</b-button>
                                     {/* <b-tooltip content={item.ZDJS} trigger-action="hover" placement="right">
                                     </b-tooltip> */}
-                                    {item.time && <span class="byt-subway-time mt-2 pb-2 md:mt-0 md:pb-0 md:ml-2 border-b border-b-[var(--header-bg-color)]">
+                                    {item.time && <span class="byt-subway-time mt-2 pb-2 lg:mt-0 lg:pb-0 lg:ml-2 border-b border-b-[var(--header-bg-color)]">
                                         发车时刻表：
                                         早：<span class="text-[var(--header-bg-color)]">{item.time?.FIRST_SUBWAY_TIME}</span>；
                                         晚：<span class="text-[var(--header-bg-color)]">{item.time?.LAST_SUBWAY_TIME}</span>，

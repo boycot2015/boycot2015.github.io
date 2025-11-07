@@ -1,17 +1,10 @@
-const customConfig = {}
-const env = process.env.NODE_ENV;
-if (env === 'github') {
-  const githubConfig = await import('./github.config.ts');
-  Object.assign(customConfig, githubConfig.default)
-}
-// console.log(customConfig, env, 'customConfig');
 export default {
   // 网站标题
   Title: 'boycot',
   // 网站图标
   Favicon: '/favicon.svg',
   // 网站地址
-  Site: import.meta.env.PROD ? 'https://www.boycot.top' : 'http://localhost:4321',
+  Site: import.meta.env.PROD ? 'https://boycot2015.github.io' : 'http://localhost:4321',
   // 网站副标题
   Subtitle: '专注于前端开发与相关技术的实战分享',
   // 网站描述
@@ -37,7 +30,7 @@ export default {
   // 顶部 Banner 配置
   HomeBanner: {
     enable: true,
-    type: 'swiper', // image | swiper, 默认 image
+    type: 'image', // image | swiper, 默认 image
     swiperOptions: {
       loop: true,
       autoplay: {
@@ -81,7 +74,7 @@ export default {
     // 全局圆角
     "--byt-main-radius": "0.5rem",
     // 主体内容宽度
-    "--byt-main-max-width": "1200px", // 大 1458px 小 1200px
+    "--byt-main-max-width": "1458px", // 大 1458px 小 1200px
   },
   // 导航栏 (新窗口打开 target: true)
   Navs: [
@@ -103,7 +96,7 @@ export default {
         { text: '音乐鉴赏', link: 'https://music.boycot.top', icon: 'Nav_music', target: '_blank' },
         { text: '地铁信息', link: '/subway', icon: 'subway' },
         { text: 'API文档', icon: 'Nav_link', link: 'https://doc-api.boycot.top', target: '_blank' },
-        { text: 'API文档_v2', icon: 'Nav_link', link: 'https://api-v2.boycot.top', target: '_blank' },
+        // { text: 'API文档_v2', icon: 'Nav_link', link: 'https://api-v2.boycot.top', target: '_blank' },
       ]
     },
   ],
@@ -122,7 +115,7 @@ export default {
   Blogsignage: '我在深圳很想你',
   // 侧边栏展示
   AsideShow: {
-    position: 'right', // 侧边栏位置 left | right, 默认 right
+    position: 'left', // 侧边栏位置 left | right, 默认 right
     // 是否展示一言
     ScentenceShow: true,
     // 是否展示欢迎语
@@ -130,9 +123,9 @@ export default {
     // 是否展示个人网站
     WebSitesShow: true,
     // 是否展示分类
-    CategoriesShow: !import.meta.env.PROD,
+    CategoriesShow: true,
     // 是否展示标签
-    TagsShow: true,
+    TagsShow: false,
     // 是否展示博客路牌
     BlogsignageShow: {
       weather: { // 天气路牌
@@ -159,7 +152,7 @@ export default {
   },
   Api: 'https://api-v2.boycot.top/v2',
   // 博客音乐组件是否开启
-  musicBoxShow: !import.meta.env.PROD,
+  musicBoxShow: false,
   // 评论组件（只允许同时开启一个）
   Comment: {
     // Twikoo 评论
@@ -203,6 +196,5 @@ export default {
     paramsName: 'url'
   },
   // 页面阻尼滚动速度
-  ScrollSpeed: 888,
-  ...customConfig
+  ScrollSpeed: 688
 }

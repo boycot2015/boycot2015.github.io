@@ -4,5 +4,5 @@ import { LoadScript } from "@/utils/index";
 declare const SmoothScroll: any;
 export default async () => {
   await LoadScript("/assets/js/smoothscroll.min.js");
-  SmoothScroll({ stepSize: 118, animationTime: SITE_INFO.ScrollSpeed })
+  SmoothScroll({ stepSize: 188, animationTime: SITE_INFO.ScrollSpeed })
 };
