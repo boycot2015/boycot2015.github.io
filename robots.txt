@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.boycot.top/sitemap-index.xml
+Sitemap: http://localhost:4321/sitemap-index.xml
