@@ -4,7 +4,7 @@
 }
 /* @font-face {
     font-family: 'Black';
-    src: url('/assets/font/black.ttf') format("truetype");
+    src: url('./black.ttf') format("truetype");
 } */
 
 @font-face {

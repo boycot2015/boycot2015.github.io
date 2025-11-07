@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://astro-blog.boycot.top/sitemap-index.xml
+Sitemap: https://www.boycot.top/sitemap-index.xml

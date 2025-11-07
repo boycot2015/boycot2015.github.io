@@ -1,0 +1,1 @@
+{"status":200,"data":{"total":2,"currentPage":1,"pageSize":10,"records":[{"username":"test","deleted":"0","id":2,"create_time":"2025-04-27T17:24:09.000Z"},{"username":"boycot","deleted":"0","id":3,"create_time":"2025-04-27T17:24:16.000Z"}]}}
