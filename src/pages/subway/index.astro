@@ -9,49 +9,52 @@ const { data } = await subway.json() as { data: {subways: Subways[], destination
 const { subways } = data;
 ---
 <Layout title={"地铁信息"} description={'深圳市地铁信息'} activeNav={'subway'}>
-    <!-- <style define:vars={{ backgroundColor: '#ccc' }}>
-        b-collapse::part(header) {
-            background-color: var(--backgroundColor) !important;
-        }
-    </style> -->
     {
-        subways?.map(el=> <div class="my-4" id={`subway-${el.line}`}>
-            <b-collapse class:list={`part(header):bg-[${el.color}]`} style={`--header-bg-color: ${el.color};--banana-color-success: ${el.color};--banana-color-success-hover: rgb(from var(--banana-color-success) r g b / 88%);--banana-color-success-active: rgb(from var(--banana-color-success) r g b / 88%)`} title={el.line + '号线（终点站： ' + el.destination?.join('、') + '）'}>
-            {/* grid grid-cols-3 md:grid-cols-4 md:grid-cols-6 */}
-            <div slot="expand-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Material Symbols by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="currentColor" d="M12.6 12L8 7.4L9.4 6l6 6l-6 6L8 16.6z"/></svg>
-            </div>
-            <div slot="collapse-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Material Symbols by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="currentColor" d="m12 15.4l-6-6L7.4 8l4.6 4.6L16.6 8L18 9.4z"/></svg>
-            </div>
-            <style>
-                #subway-${el.line} b-collapse::part(header) {
-                    background-color: var(--header-bg-color);
-                    color: #fff !important;
-                }
-            </style>
-            <div class="flex gap-4 flex-wrap">
-                {
-                    el.subways?.map(item => (
-                        <div class="byt-subway-item" class:list={!item.ZDJS ? '!flex !gap-2 w-[auto]' : 'w-full flex flex-col md:block'}>
-                            <div class="flex-col md:flex-row flex md:items-center">
-                                <b-button class="byt-subway-name mr-2" type={item.transfer?.length ? 'success' : 'default'}>{item.ZDMZ}{item.transfer?.length ? `（可换乘${item.transfer.join('、')}号线）` : ''}</b-button>
-                                {/* <b-tooltip content={item.ZDJS} trigger-action="hover" placement="right">
-                                </b-tooltip> */}
-                                {item.time && <span class="byt-subway-time mt-2 pb-2 md:mt-0 md:pb-0 md:ml-2 border-b border-b-[var(--header-bg-color)]">
-                                    发车时刻表：
-                                    早：<span class="text-[var(--header-bg-color)]">{item.time?.FIRST_SUBWAY_TIME}</span>；
-                                    晚：<span class="text-[var(--header-bg-color)]">{item.time?.LAST_SUBWAY_TIME}</span>，
-                                    发车间隔：<span class="text-[var(--header-bg-color)]">{item.time?.INTERVAL}</span>；
-                                    高峰期：<span class="text-[var(--header-bg-color)]">{item.time?.PEAK_INTERVAL}</span>
-                                </span>}
+        subways?.map(el=> <div class="my-4 subway-line">
+            <b-collapse style={`
+                    --header-bg-color: ${el.color};
+                    --banana-color-success: ${el.color};
+                    --banana-color-success-hover: rgb(from var(--banana-color-success) r g b / 88%);
+                    --banana-color-success-active: rgb(from var(--banana-color-success) r g b / 88%)`
+                } title={el.line + '号线（终点站： ' + el.destination?.join('、') + '）'}>
+                <div slot="expand-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Material Symbols by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="currentColor" d="M12.6 12L8 7.4L9.4 6l6 6l-6 6L8 16.6z"/></svg>
+                </div>
+                <div slot="collapse-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Material Symbols by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="currentColor" d="m12 15.4l-6-6L7.4 8l4.6 4.6L16.6 8L18 9.4z"/></svg>
+                </div>
+                <style>
+                    .subway-line b-collapse::part(header) {
+                        background-color: var(--header-bg-color);
+                        color: #fff !important;
+                    }
+                    .subway-line b-collapse::part(base) {
+                        border-color: var(--header-bg-color);
+                    }
+                </style>
+                <div class="flex gap-4 flex-wrap">
+                    {
+                        el.subways?.map(item => (
+                            <div class="byt-subway-item" class:list={!item.ZDJS ? '!flex !gap-2 w-[auto]' : 'w-full flex flex-col md:block'}>
+                                <div class="flex-col md:flex-row flex md:items-center">
+                                    <b-button class="byt-subway-name mr-2" type={'success'}>{item.ZDMZ}{item.transfer?.length ? `（${item.time?'终点站，':''}可换乘${item.transfer.join('、')}号线）` : item.time?'（终点站）':''}</b-button>
+                                    {/* <b-tooltip content={item.ZDJS} trigger-action="hover" placement="right">
+                                    </b-tooltip> */}
+                                    {item.time && <span class="byt-subway-time mt-2 pb-2 md:mt-0 md:pb-0 md:ml-2 border-b border-b-[var(--header-bg-color)]">
+                                        发车时刻表：
+                                        早：<span class="text-[var(--header-bg-color)]">{item.time?.FIRST_SUBWAY_TIME}</span>；
+                                        晚：<span class="text-[var(--header-bg-color)]">{item.time?.LAST_SUBWAY_TIME}</span>，
+                                        发车间隔：<span class="text-[var(--header-bg-color)]">{item.time?.INTERVAL}</span>；
+                                        高峰期：<span class="text-[var(--header-bg-color)]">{item.time?.PEAK_INTERVAL}</span>
+                                    </span>}
+                                </div>
+                                {item.ZDJS && <p class="byt-subway-desc !mt-3 text-justify">{item.ZDJS}</p>}
                             </div>
-                            {item.ZDJS && <p class="byt-subway-desc !mt-3 text-justify">{item.ZDJS}</p>}
-                        </div>
-                    ))
-                }
-            </div>
-        </b-collapse></div>)
+                        ))
+                    }
+                </div>
+            </b-collapse>
+        </div>)
     }
 	<script>
         const collapses:any = document.querySelectorAll('b-collapse');

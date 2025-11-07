@@ -19,6 +19,7 @@ export type Subway = {
     XLMC: string,
     ZDJS: string,
     ID: string,
+    isGtOperation?: boolean,
     isTransfer?: boolean,
     transfer?: string[],
     time?: Time,
@@ -69,6 +70,7 @@ export async function GET(context?: APIContext) {
             14: '#edcc63',
             20: '#40B5CF',
         }
+        const gtoperation = [4, 13]
         const subways = (subwayData.filter((el) => el.ZDJS !== '暂无数据' || (destination[el.XLMC]?.includes(el.ZDMZ)))) as Subway[]
         const transfers: Destination = {}
         const list:Subways[] = []
@@ -76,6 +78,7 @@ export async function GET(context?: APIContext) {
             let station = {
             line: key,
             color: colors[key] || '#000',
+            isGtOperation: gtoperation.includes(Number(key)),
             destination: destination[key],
             subways: subways.filter((el, index, self) => index === self.findIndex((item) => item.ZDMZ === el.ZDMZ && item.XLMC === el.XLMC)).filter((item:Subway) => item.XLMC === key).map((item:Subway) => {
                 const isTransfer = (item.ZDJS.includes('换乘') || item.ZDJS.includes('枢纽'))
