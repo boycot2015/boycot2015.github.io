@@ -6,11 +6,11 @@ import { GET } from "@/pages/api/subway";
 const subway: Response = await GET();
 const { data } = await subway.json() as { data: {subways: Subways[], destination: Destination} };
 // console.log(data.subways[3].subways, 'subway');
-const { subways } = data;
+const { subways = [] } = data || {};
 ---
 <Layout title={"地铁信息"} description={'深圳市地铁信息'} activeNav={'subway'}>
     {
-        subways?.map(el=> <div class="my-4 subway-line">
+        subways?.map(el=> <div class="my-4 subway-line" class:list={['subway-' + el.line]}>
             <b-collapse style={`
                     --header-bg-color: ${el.color};
                     --banana-color-success: ${el.color};
@@ -57,21 +57,7 @@ const { subways } = data;
         </div>)
     }
 	<script>
-        const collapses:any = document.querySelectorAll('b-collapse');
-      
-        const handleShow = (index:number) => {
-          collapses.forEach((collapse:any, i:number) => {
-            collapse.open = i === index;
-          });
-        };
-        collapses.forEach((collapse:any, index:number) => {
-            collapse.addEventListener('show', () => handleShow(index));
-        });
-        let activeIndex = Number(location.hash.split('-')[1]) - 1;
-        collapses[activeIndex].open = true;
-        window.scrollTo({
-            top: collapses[activeIndex].offsetTop,
-            behavior: 'smooth'
-        });
+        import { toggleShow } from '@/scripts/Subway'
+        toggleShow()
       </script>
 </Layout>

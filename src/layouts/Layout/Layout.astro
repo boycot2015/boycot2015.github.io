@@ -63,12 +63,15 @@ const railwayStation = {
 			{HomeBanner.enable && HomeBanner.type !== 'swiper' && <MainHeader />}
 			<section class="main-inner" style={`padding-top:${HomeBanner.enable && HomeBanner.type !== 'swiper' ? "0.88rem" : "calc(66px + 0.68rem)"};flex-direction:${AsideShow.position === 'left' ? 'row-reverse' : 'row'}`}>
 				<section class="main-inner-content">
-					<div class="marquee flex justify-between items-center text-[var(--byt-main-color)] !mb-4 gap-2 md:gap-4">
-						<span class="flex items-center gap-2">
+					<div class="marquee flex grid grid-cols-2 lg:grid-cols-3 justify-between items-center text-[var(--byt-main-color)] !mb-4 gap-2 md:gap-4 w-full">
+						<span class="flex items-center gap-2 w-[300px]">
 							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><!-- Icon from Feather Icon by Megumi Hano - https://github.com/feathericon/feathericon/blob/master/LICENSE --><path fill="currentColor" fill-rule="evenodd" d="M15.085 4.853a2.501 2.501 0 1 1 2.572 3.142A6 6 0 0 1 18 10v6h1c.55 0 1 .45 1 1s-.45 1-1 1h-4v1a3 3 0 0 1-6 0v-1H5c-.55 0-1-.45-1-1s.45-1 1-1h1v-6a6 6 0 0 1 5-5.917V3a1 1 0 0 1 2 0v1.083a6 6 0 0 1 2.085.77M12 20a1 1 0 0 0 1-1v-1h-2v1a1 1 0 0 0 1 1m-4-4h8v-6a4 4 0 1 0-8 0z"/></svg>
 							<time><span class="hidden md:inline-block">北京时间：</span><span id="bj-time">{getBeijingTime('YYYY-MM-DD HH:mm')}</span></time>
 						</span>
-						<b-marquee class="flex-1" id="subway" data-id={railwayStation.line} fixed style="--banana-marquee-color: var(--byt-main-color);" duration="40" content={`欢迎乘坐${railwayStation.line}号线，本次列车开往${railwayStation.destination}方向，下一站${railwayStation.nextStation}，请要下车的乘客带好您的行李物品准备下车；文明出行，礼让为先`}></b-marquee>
+						<a href={`/subway/#subway-${railwayStation.line}`} class="col-span-1 lg:col-span-2">
+							<b-marquee class="w-full" id="subway" data-id={railwayStation.line} fixed style="--banana-marquee-color: var(--byt-main-color);" duration="40" content={`欢迎乘坐${railwayStation.line}号线，本次列车开往${railwayStation.destination}方向，下一站${railwayStation.nextStation}，请要下车的乘客带好您的行李物品准备下车；文明出行，礼让为先`}></b-marquee>
+						</a>
+						<!-- <b-marquee class="flex-1" id="subway" data-id={railwayStation.line} fixed style="--banana-marquee-color: var(--byt-main-color);" duration="40" content={`欢迎乘坐${railwayStation.line}号线，本次列车开往${railwayStation.destination}方向，下一站${railwayStation.nextStation}，请要下车的乘客带好您的行李物品准备下车；文明出行，礼让为先`}></b-marquee> -->
 					</div>
 					<slot />
 				</section>

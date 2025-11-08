@@ -1,4 +1,6 @@
 import { inRouter, outRouter } from "@/utils/updateRouter";
+// 初始化前
+import BeforeInit from "@/scripts/BeforeInit";
 // Banner 打字效果
 import TypeWriteInit from "@/scripts/TypeWrite";
 // 泡泡🫧效果
@@ -51,6 +53,7 @@ import Anchor from "@/scripts/Anchor";
 import AsideInit from "@/scripts/Aside";
 import SubwayInit from "@/scripts/Subway";
 
+
 // ============================================================
 
 // 页面初始化 Only
@@ -58,6 +61,8 @@ const videoList: any[] = [];
 const MusicList: any[] = [];
 let commentLIst: any = { walineInit: null };
 const indexInit = async (only: boolean = true) => {
+  // 初始化前
+  BeforeInit();
   // 初始化网站运行时间
   only && initWebSiteTime();
   // 初始化滚动组件

@@ -26,16 +26,16 @@ import "./Header.less";
 						<span class="line-clamp-1">{i.text}</span>
 						<span><Svg src={i.icon} /></span>
 					</a>: 
-					i.children?<a class="nav-link" href="#">
+					i.children?<div class="nav-link">
 						<b-dropdown placement="bottomLeft" class="byt-dropdown group" trigger-action="hover">
 							<span class="flex gap-2 items-center h-full"><span class="line-clamp-1">{i.text}</span><span class="group-hover:rotate-z-45 transition-all" ><Svg src={i.icon} /></span></span>
-							<b-menu slot="drop" style="max-width: 200px;">
+							<b-menu slot="drop" style="max-width: 200px;" class="hidden">
 								{i.children.map(j => (
-									<b-menu-item class="group/color" value={JSON.stringify(j)}><span class="flex items-center gap-2 group-hover/color:text-[#fff]">{j.text}<Svg src={j.icon} /></span></b-menu-item>
+									<b-menu-item class="group/color" value={JSON.stringify(j)}><a class="flex items-center gap-2 group-hover/color:!text-[#fff]" href={j.link} target={j.target ? "_blank" : "_self"}>{j.text}<Svg src={j.icon} /></a></b-menu-item>
 								))}
 							</b-menu>
 						</b-dropdown>
-					</a>:null
+					</div>:null
 				))
 			}
 		</nav>
@@ -44,22 +44,3 @@ import "./Header.less";
 		<Search />
 	</section>
 </header>
-<script>
-	const menu:any = document.querySelector('b-menu');
-	const dropdown:any = document.querySelector('b-dropdown');
-	menu.addEventListener('select', (event:any) => {
-		try {
-			const item = JSON.parse(event.detail.item.value);
-			if (item.link) {
-				if (item.target === '_blank') {
-					window.open(item.link, '_blank');
-				} else {
-					window.location.href = item.link;
-				}
-			}
-		} catch (error) {
-			console.log(error);
-		}
-		dropdown.open = false;
-	});
-</script>

@@ -36,6 +36,6 @@ echarts.use([
 export default function (el: HTMLElement, option: any) {
     if (!el) return null;
     const chart = echarts.init(el);
-     chart.setOption(option);
-     return chart;
+    chart.setOption(option);
+    return chart;
 }

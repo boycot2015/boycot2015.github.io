@@ -215,4 +215,36 @@ async function getSubway (station?: string) {
   });
   return data;
 }
-export { $GET, $POST, getDescription, fmtTime, fmtDate, fmtPage, LoadScript, LoadStyle, getIP, getGreat, getScentence, debounce, throttle, getWeather, getWeek, getBeijingTime, getSubway }
+function svgToBase64(svg: string) {
+  // return btoa(unescape(encodeURIComponent(svg)));
+  return new Promise((resolve, reject) => {
+    try {
+      const svgString = svg || `
+        <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100">
+        <text x="10" y="50" font-size="20" fill="black">中文字符</text>
+        </svg>`;
+        const blob = new Blob([svgString], { type: "image/svg+xml" });
+        const reader:any = new FileReader();
+        reader.onloadend = function () {
+          const base64Data = reader.result?.split(",")[1];
+          const dataUri = `data:image/svg+xml;base64,${base64Data}`;
+          // console.log(dataUri);
+          resolve(dataUri);
+        };
+        reader.readAsDataURL(blob);
+    } catch (error) {
+      reject(error);
+    }
+  })
+}
+function svgToObjectURL(svg: string, {color = '#000', type = 'image/svg+xml'}: {color?: string, type?: string}) {
+  return URL.createObjectURL(new Blob([svg.replace(/fill="currentColor"/g, `fill="${color}"`)], {type}));
+}
+export {
+  $GET, $POST,
+  getDescription, fmtTime, fmtDate,
+  fmtPage, LoadScript, LoadStyle, getIP,
+  getGreat, getScentence, debounce, throttle,
+  getWeather, getWeek, getBeijingTime,
+  getSubway, svgToBase64, svgToObjectURL
+}

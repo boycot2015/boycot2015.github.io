@@ -1,4 +1,24 @@
 import { getSubway, getBeijingTime } from '@/utils/index';
+export const toggleShow = () => {
+  const collapses:any = document.querySelectorAll('b-collapse');
+  collapses.forEach((collapse:any, i:number) => {
+    collapse.open = false;
+  });
+  const handleShow = (index:number) => {
+    collapses.forEach((collapse:any, i:number) => {
+      collapse.open = i === index;
+    });
+  };
+  collapses.forEach((collapse:any, index:number) => {
+      collapse.addEventListener('show', () => handleShow(index));
+  });
+  let activeIndex = Number(location.hash.split('-')[1]) - 1;
+  collapses[activeIndex].open = true;
+  window.scrollTo({
+      top: collapses[activeIndex].offsetTop,
+      behavior: 'smooth'
+  });
+};
 export default async function GET() {
     const data = await getSubway();
     const time = getBeijingTime('YYYY-MM-DD HH:mm');
@@ -37,9 +57,10 @@ export default async function GET() {
     } else if (new Date(time).getTime() < firstTime) {
       subway.content = `开往${subways?.destination || '黄贝岭'}方向的列车还未开出，请乘客留意发车时间，合理安排出行`;
     };
-    document.querySelector('#subway')?.addEventListener('click', (e:any) => {
-      location.href = '/subway#subway-' + current.line
-    })
+    // document.querySelector('#subway')?.addEventListener('click', (e:any) => {
+    //   location.href = '/subway#subway-' + current.line
+    //   toggleShow()
+    // })
     return subways;
 }
 
