@@ -28,7 +28,7 @@ import "./Header.less";
 					</a>: 
 					i.children?<div class="nav-link">
 						<b-dropdown placement="bottomLeft" class="byt-dropdown group" trigger-action="hover">
-							<span class="flex gap-2 items-center h-full"><span class="line-clamp-1">{i.text}</span><span class="group-hover:rotate-z-45 transition-all" ><Svg src={i.icon} /></span></span>
+							<span class="gap-2 items-center h-full hidden md:flex"><span class="line-clamp-1">{i.text}</span><span class="group-hover:rotate-z-45 transition-all" ><Svg src={i.icon} /></span></span>
 							<b-menu slot="drop" style="max-width: 200px;" class="hidden">
 								{i.children.map(j => (
 									<b-menu-item class="group/color" value={JSON.stringify(j)}><a class="flex items-center gap-2 group-hover/color:!text-[#fff]" href={j.link} target={j.target ? "_blank" : "_self"}>{j.text}<Svg src={j.icon} /></a></b-menu-item>

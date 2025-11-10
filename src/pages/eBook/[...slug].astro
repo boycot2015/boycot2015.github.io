@@ -314,7 +314,8 @@ const meta = {
 					this.data.objectId && $api.book.saveMark(this.data.objectId, this.bookmarks)
 					this.renderBookMarksPanel()
 				}
-				alert(has ? '书签已存在' : '添加成功')
+				// alert(has ? '书签已存在' : '添加成功')
+				window.BMessage.open({ content: has ? '书签已存在' : '添加成功', type: has ? 'warning' : 'success' });
 				// message.show({ text: has ? '书签已存在' : '添加成功' , type: has ? 'warning' : 'success' })
 			}
 			changeMark (target: any) {
@@ -362,12 +363,14 @@ const meta = {
 				this.bookmarks.splice(index, 1);
 				localforage.setItem('book_marks_' + this.data.data.title, this.bookmarks);
 				this.data.objectId && $api.book.saveMark(this.data.objectId, this.bookmarks);
+				window.BMessage.open({ content: '删除成功', type: 'success' });
 				this.loadMarks();
 			}
 			clearBookmarks() {
 				this.bookmarks = [];
 				localforage.setItem('book_marks_' + this.data.data.title, this.bookmarks);
 				this.data.objectId && $api.book.saveMark(this.data.objectId, this.bookmarks);
+				window.BMessage.open({ content: '清空成功', type: 'success' });
 				this.loadMarks();
 			}
 			renderBookMarksPanel () {

@@ -4,7 +4,7 @@ import { weather_icons, weather_echarts_options } from "@/utils/weather";
 import EchartsInit from "@/scripts/Echarts";
 import SITE_CONFIG from "@/config";
 // 图片懒加载
-import LzImgInit from "@/scripts/LazyImg";
+// import LzImgInit from "@/scripts/LazyImg";
 let timer:any = null;
 export default async () => {
     clearTimeout(timer);
@@ -119,48 +119,47 @@ export default async () => {
             </div>`
         }
         weatherEl.innerHTML = html += '</div>'
-        const setOptions = () => {
-            const color = getComputedStyle(document.documentElement)?.getPropertyValue('--byt-font-88');            
-            weather_echarts_options.xAxis[0].data = forecast.daily_forecast.map((item: any) => new Date(item.date).getDate() +'日');
-            weather_echarts_options.xAxis[1].data = forecast.daily_forecast.map((item: any) => getWeek(item.date));
-            weather_echarts_options.xAxis[0].axisLabel.rich.a.color = color;
-            weather_echarts_options.xAxis[1].axisLabel.rich.a.color = color;
-            forecast.daily_forecast.forEach((item: any, index: number) => {
-                const rich2 = weather_echarts_options.xAxis[2].axisLabel.rich as Record<number, any>;
-                const rich3 = weather_echarts_options.xAxis[3].axisLabel.rich as Record<number, any>;
-                const img = new Image();
-                if (rich2[index]) {
-                    img.src = svgToObjectURL(weather_icons[item.day_condition as keyof typeof weather_icons], { color });
-                    rich2[index].backgroundColor.image = img;
-                }
-                if (rich3[index]) {
-                    img.src = svgToObjectURL(weather_icons[item.night_condition as keyof typeof weather_icons], { color });
-                    rich3[index].backgroundColor.image = img;
-                }
-                weather_echarts_options.xAxis[2].axisLabel.rich.b.color = color;
-                weather_echarts_options.xAxis[3].axisLabel.rich.b.color = color;
+        if (document.getElementById('weather-echarts')) {
+            const setOptions = () => {
+                const color = getComputedStyle(document.documentElement)?.getPropertyValue('--byt-font-88');            
+                weather_echarts_options.xAxis[0].data = forecast.daily_forecast.map((item: any) => new Date(item.date).getDate() +'日');
+                weather_echarts_options.xAxis[1].data = forecast.daily_forecast.map((item: any) => getWeek(item.date));
+                weather_echarts_options.xAxis[2].data = forecast.daily_forecast.map((item: any) => item.day_condition);
+                weather_echarts_options.xAxis[3].data = forecast.daily_forecast.map((item: any) => item.night_condition);
+                weather_echarts_options.series[0].data = forecast.daily_forecast.map((item: any) => item.max_temperature);
+                weather_echarts_options.series[1].data = forecast.daily_forecast.map((item: any) => item.min_temperature);
+                weather_echarts_options.xAxis.map((item: any) => {
+                    const rich = item.axisLabel.rich as Record<string, any>;
+                    if (rich.a) rich.a.color = color
+                });
+                forecast.daily_forecast.forEach((item: any, index: number) => {
+                    const rich2 = weather_echarts_options.xAxis[2].axisLabel.rich as Record<number, any>;
+                    const rich3 = weather_echarts_options.xAxis[3].axisLabel.rich as Record<number, any>;
+                    if (rich2[index]) {
+                        rich2[index].backgroundColor.image = svgToObjectURL(weather_icons[item.day_condition], { color });
+                    }
+                    if (rich3[index]) {
+                        rich3[index].backgroundColor.image = svgToObjectURL(weather_icons[item.night_condition], { color });
+                    }
+                });
+            }
+            setOptions()
+            let weather_echarts = EchartsInit(document.getElementById('weather-echarts') as HTMLElement, weather_echarts_options);
+            window.addEventListener('resize', () => {
+                weather_echarts?.resize();
             });
-            weather_echarts_options.xAxis[2].data = forecast.daily_forecast.map((item: any) => item.day_condition);
-            weather_echarts_options.xAxis[3].data = forecast.daily_forecast.map((item: any) => item.night_condition);
-            weather_echarts_options.series[0].data = forecast.daily_forecast.map((item: any) => item.max_temperature);
-            weather_echarts_options.series[1].data = forecast.daily_forecast.map((item: any) => item.min_temperature);
-        }
-        setOptions()
-        let weather_echarts = EchartsInit(document.getElementById('weather-echarts') as HTMLElement, weather_echarts_options);
-        window.addEventListener('resize', () => {
-            weather_echarts?.resize();
-        });
-        document.addEventListener("theme-change", (e) => {
-            clearTimeout(timer);
-            setOptions();
-            weather_echarts?.setOption(weather_echarts_options, false);
+            document.addEventListener("theme-change", () => {
+                clearTimeout(timer);
+                setOptions();
+                weather_echarts?.setOption(weather_echarts_options, false);
+                timer = setTimeout(() => {
+                    weather_echarts?.resize();
+                }, 100);
+            });
+            // LzImgInit();
             timer = setTimeout(() => {
                 weather_echarts?.resize();
             }, 100);
-        });
-        LzImgInit();
-        timer = setTimeout(() => {
-            weather_echarts?.resize();
-        }, 100);
+        }
     }
 }
