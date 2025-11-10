@@ -1,9 +1,6 @@
 import { getSubway, getBeijingTime } from '@/utils/index';
 export const toggleShow = () => {
   const collapses:any = document.querySelectorAll('b-collapse');
-  collapses.forEach((collapse:any, i:number) => {
-    collapse.open = false;
-  });
   const handleShow = (index:number) => {
     collapses.forEach((collapse:any, i:number) => {
       collapse.open = i === index;
@@ -38,7 +35,9 @@ export default async function GET() {
     let lastTime = new Date(new Date(time).setHours(subways?.time?.LAST_SUBWAY_TIME?.split(':')[0] || 23, subways?.time?.LAST_SUBWAY_TIME?.split(':')[1] || 20, 0, 0)).getTime();
     let firstTime = new Date(new Date(time).setHours(subways?.time?.FIRST_SUBWAY_TIME?.split(':')[0] || 6, subways?.time?.FIRST_SUBWAY_TIME?.split(':')[1] || 20, 0, 0)).getTime();
     // console.log(subways, 'current');
-    let subway:any = document.querySelector('#subway');
+    let a:any = document.querySelector('#subway');
+    a.href = `/subway#subway-${subways?.line || '5'}`;
+    let subway:any = document.querySelector('#subway b-marquee');
     let timeDOM:any = document.querySelector('#bj-time');
     timeDOM.textContent = time;
     let nextText = `下一站${subways?.nextStation?.ZDMZ || '深圳北站'}`
@@ -50,17 +49,21 @@ export default async function GET() {
     subway.content = `欢迎乘坐${isGtOperation ? '港铁深圳' : '深圳地铁'}${subways?.line || '5'}号线，本次列车开往${subways?.destination || '黄贝岭'}方向；${text}，${dir[Math.floor(Math.random() * dir.length)]}侧的车门将会打开，请要下车的乘客带好您的行李物品准备下车；文明出行，礼让为先！`;
     // console.log(new Date(time).toLocaleString(), new Date(firstTime).toLocaleString(), new Date(lastTime).toLocaleString(), 'subway');
     // console.log(firstTime , new Date(time).getTime(), 'lastTime');
-    if (lastTime < new Date(time).getTime() - (subways?.time?.INTERVAL?.substring(0, 1) * 60 *  60 * 1000 || 0)) {
-      subway.content = `开往${subways?.destination || '黄贝岭'}方向的末班车即将开出，请乘客留意发车时间，合理安排出行`;
-    } else if (lastTime < new Date(time).getTime()) {
-      subway.content = `开往${subways?.destination || '黄贝岭'}方向的末班车已经开出，请乘客留意发车时间，合理安排出行`;
-    } else if (new Date(time).getTime() < firstTime) {
-      subway.content = `开往${subways?.destination || '黄贝岭'}方向的列车还未开出，请乘客留意发车时间，合理安排出行`;
-    };
-    // document.querySelector('#subway')?.addEventListener('click', (e:any) => {
-    //   location.href = '/subway#subway-' + current.line
-    //   toggleShow()
-    // })
+    if (lastTime && firstTime) {
+      if (lastTime < new Date(time).getTime() - (subways?.time?.INTERVAL?.substring(0, 1) * 60 *  60 * 1000 || 0)) {
+        subway.content = `开往${subways?.destination || '黄贝岭'}方向的末班车即将开出，请乘客留意发车时间，合理安排出行`;
+      } else if (lastTime < new Date(time).getTime()) {
+        subway.content = `开往${subways?.destination || '黄贝岭'}方向的末班车已经开出，请乘客留意发车时间，合理安排出行`;
+      } else if (new Date(time).getTime() < firstTime) {
+        subway.content = `开往${subways?.destination || '黄贝岭'}方向的列车还未开出，请乘客留意发车时间，合理安排出行`;
+      };
+    }
+    document.querySelector('#subway')?.addEventListener('click', (e:any) => {
+      if (location.pathname == '/subway') {
+        location.href = '/subway#subway-' + current.line
+        toggleShow()
+      }
+    })
     return subways;
 }
 
