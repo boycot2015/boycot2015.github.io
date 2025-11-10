@@ -136,9 +136,9 @@ export default {
     // 是否展示博客路牌
     BlogsignageShow: {
       weather: { // 天气路牌
-        hoursShow: !import.meta.env.PROD,
-        dailyShow: !import.meta.env.PROD,
-        lifeShow: !import.meta.env.PROD,
+        hoursShow: true,
+        dailyShow: true,
+        lifeShow: true,
       }
     },
     // 是否展示推荐文章
