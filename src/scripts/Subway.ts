@@ -1,6 +1,7 @@
 import { getSubway, getBeijingTime } from '@/utils/index';
 export const toggleShow = () => {
   const collapses:any = document.querySelectorAll('b-collapse');
+  if (collapses.length === 0) return;
   const handleShow = (index:number) => {
     collapses.forEach((collapse:any, i:number) => {
       collapse.open = i === index;
@@ -11,9 +12,11 @@ export const toggleShow = () => {
   });
   let activeIndex = Number(location.hash.split('-')[1]) - 1;
   collapses[activeIndex].open = true;
-  window.scrollTo({
-      top: collapses[activeIndex].offsetTop,
-      behavior: 'smooth'
+  Promise.resolve().then(() => {
+    window.scrollTo({
+        top: collapses[activeIndex].offsetTop,
+        behavior: 'smooth'
+    });
   });
 };
 export default async function GET() {

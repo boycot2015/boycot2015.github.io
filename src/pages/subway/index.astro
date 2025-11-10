@@ -10,7 +10,7 @@ const { subways = [] } = data || {};
 ---
 <Layout title={"地铁信息"} description={'深圳市地铁信息'} activeNav={'subway'}>
     {
-        subways?.map(el=> <div class="my-4 subway-line" class:list={['subway-' + el.line]}>
+        subways?.map(el=> <div class="my-4 subway-line" id={'subway-' + el.line}>
             <b-collapse style={`
                     --header-bg-color: ${el.color};
                     --banana-color-success: ${el.color};

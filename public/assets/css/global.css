@@ -72,6 +72,8 @@
 	--banana-menu-item-active-color: var(--byt-white-color);
 	--banana-button-border-color-primary: var(--byt-main-color);
 	--banana-button-text-color-primary: var(--byt-white-color);
+	--banana-message-background-color: var(--byt-body-bg);
+	--banana-message-text-color: var(--byt-font-color);
 }
 
 @layer base {

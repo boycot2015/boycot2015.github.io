@@ -1,6 +1,7 @@
 ---
 import Layout from "@/layouts/ToolLayout/ToolLayout.astro";
 import { getAllbooks } from "@/data/ebook";
+import siteConfig from '@/config'
 const allbooks = await getAllbooks()
 
 const meta = {
@@ -11,6 +12,7 @@ const meta = {
 // console.log(allbooks, 'allbooks');
 const data = allbooks.map(el => el.data)
 const isPro = import.meta.env.PROD
+const isMaxFitContent = siteConfig.Theme["--byt-main-max-width"].includes('1200')
 ---
 
 <Layout frontmatter={meta}>
@@ -23,10 +25,10 @@ const isPro = import.meta.env.PROD
             <input type="file" accept=".epub,.txt" hidden />
         </div> : null
     }
-    <div id="books" class="books grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div id="books" class="books grid grid-cols-2 gap-4" class:list={isMaxFitContent ? 'md:grid-cols-3 lg:grid-cols-4' : 'md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'}>
         {
             data.map((item, index) => <div id={`book${index+1}`} data-id={item.objectId} class="book-item rounded overflow-hidden bg-[var(--byt-white-color)] shadow-[var(--byt-box-shadow)]"><a href={'/eBook/'+item.title}><div class={`w-full  overflow-hidden`}  title={`${item.title}-${item.author}`}>
-            <img transition:name={`img-${item.title}-${item.author}`} data-byt-lz-src={item.img} class="h-[230px] sm:h-[260px] w-full" alt={item.title} />
+            <img transition:name={`img-${item.title}-${item.author}`} data-byt-lz-src={item.img} class="h-[230px] sm:h-[260px] w-full object-cover" alt={item.title} />
             <h3 transition:name={`title-${item.title}`} class="text-center !text-sm !line-clamp-1 mt-2">{item.title}-{item.author.split('.')[0]}</h3></div></a>
             {!isPro ? <div class="flex justify-center my-1"><button class="remove-btn border px-1 rounded-md text-[var(--byt-main-color)] border-[var(--byt-main-color)] cursor-pointer" data-object-id={item.objectId} data-id={`book${index+1}`}>删除</button></div> : null}
             </div>)
