@@ -361,7 +361,7 @@ const meta = {
 					// let location = this.rendition.currentLocation()
 					let location = this.rendition.location
 					this.columnsEl.value = section?.href || location.start?.href
-					location && localforage.setItem('book_current_page_' + this.data.data.title, this.columnsEl.value)
+					location && localforage.setItem('book_current_page_' + this.data.data.title, location.start?.cfi || '')
 				})
 			}
 			deleteBookmark(index: number) {
