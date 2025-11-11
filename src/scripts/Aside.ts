@@ -152,9 +152,9 @@ export default async () => {
                 clearTimeout(timer);
                 setOptions();
                 weather_echarts?.setOption(weather_echarts_options, false);
-                timer = setTimeout(() => {
-                    weather_echarts?.resize();
-                }, 100);
+                // timer = setTimeout(() => {
+                //     weather_echarts?.resize();
+                // }, 100);
             });
             // LzImgInit();
             timer = setTimeout(() => {

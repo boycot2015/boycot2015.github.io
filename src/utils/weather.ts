@@ -855,6 +855,9 @@ const getWeatherRich = () => {
   return { weather, rich }
 }
 export const weather_echarts_options = {
+  textStyle: {
+    fontFamily: 'OPPO, Song, KaiTi, serif'
+  },
   grid: {
     show: true,
     backgroundColor: 'transparent',
