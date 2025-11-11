@@ -1,0 +1,1 @@
+import{A as o}from"../_astro/scripts.psFpu7fM.js";import"../_astro/dayjs.DlUGhJdR.js";import"../_astro/aplayer.Be6-aBBk.js";import"../_astro/vendor.t3tUpFQ-.js";import"../_astro/vanilla-lazyload.CwDt0XVP.js";import"../_astro/echarts.DcxwqiII.js";class s extends HTMLElement{connectedCallback(){const s=JSON.parse(this.dataset.post);o(s)}}customElements.define("astro-anchor",s);
