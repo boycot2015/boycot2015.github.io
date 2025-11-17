@@ -10,7 +10,7 @@ export const toggleShow = () => {
   collapses.forEach((collapse:any, index:number) => {
       collapse.addEventListener('show', () => handleShow(index));
   });
-  let activeIndex = Number(location.hash.split('-')[1]) - 1;
+  let activeIndex = Number(location.hash?.split('-')[1] || 1) - 1;
   collapses[activeIndex].open = true;
   Promise.resolve().then(() => {
     window.scrollTo({

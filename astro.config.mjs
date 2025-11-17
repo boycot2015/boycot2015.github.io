@@ -24,6 +24,9 @@ export default defineConfig({
         // assets: 'static',
         // outDir: 'dist',
     },
+    server: {
+        host: '0.0.0.0',
+    },
     integrations: [swup({
         theme: false,
         animationClass: "byt-animation-",
