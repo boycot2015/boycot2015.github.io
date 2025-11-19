@@ -7,7 +7,7 @@
     src: url('./black.ttf') format("truetype");
 } */
 
-@font-face {
+/* @font-face {
     font-family: 'Song';
     src: url('/assets/font/Song.ttf') format('truetype');
 }
@@ -15,7 +15,7 @@
 @font-face {
     font-family: 'KaiTi';
     src: url('/assets/font/KaiTi.ttf') format('truetype');
-}
+} */
 
 @font-face {
     font-family: 'CangErYuYang';
