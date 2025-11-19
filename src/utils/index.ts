@@ -238,7 +238,7 @@ function svgToBase64(svg: string) {
   })
 }
 function svgToObjectURL(svg: string, {color = '#000', type = 'image/svg+xml'}: {color?: string, type?: string}) {
-  return URL.createObjectURL(new Blob([svg.replace(/fill="currentColor"/g, `fill="${color}"`)], {type}));
+  return URL.createObjectURL(new Blob([svg.replace(/viewBox=\"0 0 30 30\"/g, 'viewBox=\"0 0 34 34\"').replace(/fill="currentColor"/g, `fill="${color}"`)], {type}));
 }
 export {
   $GET, $POST,

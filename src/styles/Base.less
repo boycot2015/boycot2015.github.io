@@ -244,6 +244,14 @@ html.is-animating {
 .wl-panel {
 	flex: 1;
 }
+.blur-bg {
+	box-shadow: 0px 0px 100px var(--byt-body-bg);
+	-webkit-mask-image: linear-gradient(to right, transparent 0%, #fff 10%, #fff 90%, transparent 100%);
+}
+
+html[data-theme="dark"] .blur-bg {
+	-webkit-mask-image: linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
+}
 b-button[type="default"],b-button[type="info"] {
 	&::part(base) {
 		border-color: var(--byt-border-color);

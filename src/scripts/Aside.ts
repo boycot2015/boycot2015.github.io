@@ -55,7 +55,7 @@ export default async () => {
                         ${weather?.weather?.wind_direction || '-'}&nbsp;
                     </span>
                 </div>
-                <div class="mt-2">
+                <div class="mt-2 blur-bg">
                     <b-marquee pause-when-hover id="subway" fixed duration="40" content=今天白天到夜间${weather?.weather?.condition}，${weather?.weather?.wind_direction}${weather?.weather?.wind_power}级，${weather?.life_indices[6]?.description}></b-marquee>
                 </div>
             </div>`;
@@ -78,7 +78,7 @@ export default async () => {
                 forecast?.hourly_forecast?.map((item: { datetime: string; condition: any; temperature: any; }) => {
                    return `<div class="flex flex-col items-center justify-center gap-1 border-r nth-[4n]:border-r-0 mt-[-1px] border-t border-[var(--byt-font-16)] p-2">
                     <span class="text-xs text-[var(--byt-font-88)] line-clamp-1 max-w-[5rem]">${item.datetime.split(' ')[1]}</span>
-                    <span class="w-8 h-8">${weather_icons[item.condition as keyof typeof weather_icons] || ''}</span>
+                    <span class="text-2xl">${weather_icons[item.condition as keyof typeof weather_icons] || ''}</span>
                     <span class="text-sm line-clamp-1">${item.temperature}℃</span>
                    </div>`
                }).join('')
