@@ -37,6 +37,15 @@ type: "about"
 - **边缘计算与全球化部署**，优化分布式应用的性能。
 - **AI 增强开发**，探索 LLM 在代码生成、调试和文档管理中的应用。
 
+## GitHub Contribution stats
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.gitmirror.com/boycot2015/boycot2015/output/github-contribution-grid-snake-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.gitmirror.com/boycot2015/boycot2015/output/github-contribution-grid-snake.svg">
+    <img alt="github contribution grid" src="https://raw.gitmirror.com/boycot2015/boycot2015/output/github-contribution-grid-snake-dark.svg" width="100%">
+  </picture>
+</div>
+
 ## Languages and Tools
 
 <div class="language-tool">
@@ -59,7 +68,9 @@ type: "about"
   <a href="https://www.mysql.com/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/Mysql-003B57?logo=mysql&logoColor=white" alt="mysql" /></a>
   <a href="https://code.visualstudio.com/" target="_blank" rel="noopener nofollow"><Image width="1" height="1" src="/assets/images/lazy-loading.webp" data-byt-lz-src="https://img.shields.io/badge/VS_Code-007ACC?logo=data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj48IS0tIEljb24gZnJvbSBWU0NvZGUgSWNvbnMgYnkgUm9iZXJ0byBIdWVydGFzIC0gaHR0cHM6Ly9naXRodWIuY29tL3ZzY29kZS1pY29ucy92c2NvZGUtaWNvbnMvYmxvYi9tYXN0ZXIvTElDRU5TRSAtLT48cGF0aCBmaWxsPSIjMDA2NWE5IiBkPSJtMjkuMDEgNS4wM2wtNS43NjYtMi43NzZhMS43NCAxLjc0IDAgMCAwLTEuOTg5LjMzOEwyLjM4IDE5LjhhMS4xNjYgMS4xNjYgMCAwIDAtLjA4IDEuNjQ3cS4wMzcuMDQuMDc3LjA3N2wxLjU0MSAxLjRhMS4xNjUgMS4xNjUgMCAwIDAgMS40ODkuMDY2TDI4LjE0MiA1Ljc1QTEuMTU4IDEuMTU4IDAgMCAxIDMwIDYuNjcydi0uMDY3YTEuNzUgMS43NSAwIDAgMC0uOTktMS41NzUiLz48cGF0aCBmaWxsPSIjMDA3YWNjIiBkPSJtMjkuMDEgMjYuOTdsLTUuNzY2IDIuNzc3YTEuNzQ1IDEuNzQ1IDAgMCAxLTEuOTg5LS4zMzhMMi4zOCAxMi4yYTEuMTY2IDEuMTY2IDAgMCAxLS4wOC0xLjY0N3EuMDM3LS4wNC4wNzctLjA3N2wxLjU0MS0xLjRBMS4xNjUgMS4xNjUgMCAwIDEgNS40MSA5LjAxbDIyLjczMiAxNy4yNEExLjE1OCAxLjE1OCAwIDAgMCAzMCAyNS4zMjh2LjA3MmExLjc1IDEuNzUgMCAwIDEtLjk5IDEuNTciLz48cGF0aCBmaWxsPSIjMWY5Y2YwIiBkPSJNMjMuMjQ0IDI5Ljc0N2ExLjc0NSAxLjc0NSAwIDAgMS0xLjk4OS0uMzM4QTEuMDI1IDEuMDI1IDAgMCAwIDIzIDI4LjY4NFYzLjMxNmExLjAyNCAxLjAyNCAwIDAgMC0xLjc0OS0uNzI0YTEuNzQgMS43NCAwIDAgMSAxLjk4OS0uMzM5bDUuNzY1IDIuNzcyQTEuNzUgMS43NSAwIDAgMSAzMCA2LjZ2MTguOGExLjc1IDEuNzUgMCAwIDEtLjk5MSAxLjU3NloiLz48L3N2Zz4=" alt="VS Code" /></a>
 </div>
-
+<div align="center" style="display: flex; justify-content: space-between;margin: 15px 0">
+    <img src="https://stats.boycot.top/api/top-langs/?username=boycot2015&layout=compact&hide_title=true&theme=default" alt="Top Languages" width="100%" />
+</div>
 ## 小站点
 
 |     主&emsp;页      |       <https://boycot2015.github.io>     
