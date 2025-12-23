@@ -7,6 +7,7 @@ const customConfig = {
     url: 'https://api.map.baidu.com',
     key: 'ZOEMtLtuqvNV7uBvRUtDYiG3jBn1GD02',
   },
+  ApiDocs: 'https://doc-api.boycot.top',
   Api: 'https://60s-api.viki.moe/v2',// https://api-v2.boycot.top/v2
 }
 const env = process.env.NODE_ENV;
@@ -112,8 +113,8 @@ export default {
       children: [
         { text: '音乐鉴赏', link: 'https://music.boycot.top', icon: 'Nav_music', target: '_blank' },
         { text: '地铁信息', link: '/subway', icon: 'subway' },
-        { text: 'API文档', icon: 'Nav_link', link: 'https://doc-api.boycot.top', target: '_blank' },
-        { text: 'API文档_v2', icon: 'Nav_link', link: 'https://api-v2.boycot.top', target: '_blank' },
+        { text: 'API文档', icon: 'Nav_link', link: customConfig.ApiDocs, target: '_blank' },
+        { text: 'API文档_v2', icon: 'Nav_link', link: customConfig.Api, target: '_blank' },
       ]
     },
   ],
@@ -125,7 +126,7 @@ export default {
     // 仅支持 SVG 且 SVG 需放在 public/assets/images/svg/ 目录下，填入文件名即可 <不需要文件后缀名>（封装了 SVG 组件 为了极致压缩 SVG）
     // 建议使用 https://tabler.io/icons 直接下载 SVG
     { text: 'Github', link: 'https://github.com/boycot2015', icon: 'WebSite_github' },
-    { text: 'boycotAPI', link: 'https://doc-api.boycot.top', icon: 'WebSite_api' },
+    { text: 'boycotAPI', link: customConfig.ApiDocs, icon: 'WebSite_api' },
     { text: '每日热榜', link: 'https://news.boycot.top', icon: 'WebSite_hot' },
   ],
   // 博客路牌

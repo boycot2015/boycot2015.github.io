@@ -96,7 +96,6 @@ export default {
         { text: '音乐鉴赏', link: 'https://music.boycot.top', icon: 'Nav_music', target: '_blank' },
         { text: '地铁信息', link: '/subway', icon: 'subway' },
         { text: 'API文档', icon: 'Nav_link', link: 'https://doc-api.boycot.top', target: '_blank' },
-        // { text: 'API文档_v2', icon: 'Nav_link', link: 'https://api-v2.boycot.top', target: '_blank' },
       ]
     },
   ],

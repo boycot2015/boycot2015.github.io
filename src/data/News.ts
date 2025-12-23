@@ -1,6 +1,7 @@
+import config from '@/config'
 export default {
     // API 接口请求优先，数据格式保持和 data 一致
-    api: 'https://api-v2.boycot.top',
+    api: config.Api,
     // render: (data: any) => {
     //   return data.data[0]?.map((el:any) => ({
     //     "title": el.title,
