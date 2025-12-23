@@ -1,7 +1,7 @@
 import config from '@/config'
 export default {
     // API 接口请求优先，数据格式保持和 data 一致
-    api: config.Api,
+    api: config['60sApi'],
     // render: (data: any) => {
     //   return data.data[0]?.map((el:any) => ({
     //     "title": el.title,
