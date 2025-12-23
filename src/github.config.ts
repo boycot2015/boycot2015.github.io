@@ -112,7 +112,7 @@ export default {
     { text: '每日热榜', link: 'https://news.boycot.top', icon: 'WebSite_hot' },
   ],
   // 博客路牌
-  Blogsignage: '我在深圳很想你',
+  Blogsignage: '我在Github很想你',  // 博客路牌文案
   // 侧边栏展示
   AsideShow: {
     position: 'left', // 侧边栏位置 left | right, 默认 right
@@ -142,15 +142,6 @@ export default {
     'https://cn.cravatar.com',
     'https://registry.npmmirror.com'
   ],
-  imgApi: 'https://bing.img.run/rand.php',
-  // 博客音乐组件解析接口 metting-js https://api.i-meto.com/meting/api
-  musicApi: 'https://api.i-meto.com/meting/api',
-  // 地图接口
-  mapApi: {
-    url: 'https://api.map.baidu.com',
-    key: 'ZOEMtLtuqvNV7uBvRUtDYiG3jBn1GD02',
-  },
-  Api: 'https://api-v2.boycot.top/v2',
   // 博客音乐组件是否开启
   musicBoxShow: false,
   // 评论组件（只允许同时开启一个）
