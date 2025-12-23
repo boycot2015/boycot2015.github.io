@@ -1,5 +1,5 @@
 import { Toast } from '@/utils/Toast'
-import { fmtDate } from '@/utils/index'
+// import { fmtDate } from '@/utils/index'
 import { $GET } from '@/utils/index'
 // 图片懒加载
 import LzImgInit from "@/scripts/LazyImg"
@@ -10,7 +10,7 @@ const NewsInit = async (data: any, render?: (data: any) => any, staticData?: any
 	try {
 		let res = data;
 		if (typeof data === 'string') {
-			res = await $GET(api + '/v2/60s');
+			res = await $GET(api + '/60s');
 			// console.log(res);
 			// if (render && typeof render === 'function') {
 			// 	res = render(res);
