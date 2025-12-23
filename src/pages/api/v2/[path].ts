@@ -1,8 +1,8 @@
 import type { APIContext } from "astro";
 import siteConfig from '@/config'
+const Api = siteConfig['60sApi']
 export async function GET(context: APIContext) {
   const { request, params } = context;
-  const Api = siteConfig.Api
   let res: any;
   try {
     const hasQuery = !!request.url.split('?')[1]
@@ -19,7 +19,7 @@ export async function GET(context: APIContext) {
   })
 }
 export async function getStaticPaths() {
-  const response = await fetch(siteConfig.Api.replace(/\/v2/g, '')).then(res => res.json());
+  const response = await fetch(Api.replace(/\/v2/g, '')).then(res => res.json());
   // console.log(response, 'response');
   const { endpoints, ...data } = response;
   return endpoints.filter((endpoint:string) => endpoint.split('/').length < 4).map((endpoint:string) => {

@@ -8,7 +8,8 @@ const customConfig = {
     key: 'ZOEMtLtuqvNV7uBvRUtDYiG3jBn1GD02',
   },
   ApiDocs: 'https://doc-api.boycot.top',
-  Api: 'https://60s-api.viki.moe/v2',// https://api-v2.boycot.top/v2
+  '60sApi': 'https://60s-api.viki.moe/v2', // https://api-v2.boycot.top/v2
+  Api: 'https://api.boycot.top/api',// https://api-v2.boycot.top/v2
 }
 const env = process.env.NODE_ENV;
 if (env === 'github') {

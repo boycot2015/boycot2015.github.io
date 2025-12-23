@@ -45,7 +45,7 @@ const WalineFn = async (commentDOM: string, walineInit: any) => {
       const body = new FormData();
       body.append('file', file);
       // https://wp-cdn.4ce.cn/upload
-      const uploadApi = SITE_INFO.Api.replace(/api-v2|v2/g, 'api');
+      const uploadApi = SITE_INFO.Api;
       const res = await fetch(`${uploadApi}/upload`, { method: "POST", body });
       const resJson = await res.json();
       console.log(resJson, 'resJson');

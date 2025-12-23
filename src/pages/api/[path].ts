@@ -1,6 +1,6 @@
 import type { APIContext } from "astro";
 import siteConfig from '@/config'
-const Api = siteConfig.Api.replace(/api-v2|v2/g, 'api');
+const Api = siteConfig.Api;
 export async function GET(context: APIContext) {
   const { request, params } = context;
   let res: any;

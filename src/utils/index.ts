@@ -105,7 +105,7 @@ const getIP = async (req?: Request): Promise<{ip: string, location: string, prov
       location: '北京',
     }
   }
-  let proxyUrl = `${SITE_CONFIG.Api.replace(/api-v2|v2/g, 'api')}/cors?url=`
+  let proxyUrl = `${SITE_CONFIG.Api}/cors?url=`
   let body = await fetch(proxyUrl + 'https://www.ip.cn/').then(response => response.json()).then(data => data.data || data)
   let ticket = body.match(/\_ticket = ([^&]+)/)?.[1]?.split(';')[0].replace(/"/g, '')
   let url = 'https://my.ip.cn/json/?ticket=' + ticket
@@ -130,7 +130,7 @@ const getIP = async (req?: Request): Promise<{ip: string, location: string, prov
   }
 }
 const getWeather = async (location?: string, params?:string) => {
-  return await $GET(`${SITE_CONFIG.Api}/weather/${params||''}?query=${location || '深圳'}`).then((res:any) => {
+  return await $GET(`${SITE_CONFIG['60sApi']}/weather/${params||''}?query=${location || '深圳'}`).then((res:any) => {
     return res.data
   }).catch(err => {
     console.log(err);
