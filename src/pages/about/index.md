@@ -40,9 +40,9 @@ type: "about"
 ## GitHub Contribution stats
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.gitmirror.com/boycot2015/boycot2015/output/github-contribution-grid-snake-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="https://raw.gitmirror.com/boycot2015/boycot2015/output/github-contribution-grid-snake.svg">
-    <img alt="github contribution grid" src="https://raw.gitmirror.com/boycot2015/boycot2015/output/github-contribution-grid-snake-dark.svg" width="100%">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.github.com/boycot2015/boycot2015/output/github-contribution-grid-snake-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.github.com/boycot2015/boycot2015/output/github-contribution-grid-snake.svg">
+    <img alt="github contribution grid" src="https://raw.github.com/boycot2015/boycot2015/output/github-contribution-grid-snake-dark.svg" width="100%">
   </picture>
 </div>
 
